@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TemperoCaseiro1" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Theme.TemperoCaseiro1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#5E6F41</item>
     </style>
 
-    <style name="Theme.TemperoCaseiro1" parent="Base.Theme.TemperoCaseiro1" />
+    <style name="CircleImageStyle" parent="">
+        <item name="cornerSize">50%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
 </resources>
