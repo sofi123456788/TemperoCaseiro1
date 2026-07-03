@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -45,10 +47,9 @@ public class tela_cadastro extends AppCompatActivity {
         radioGroupGenero = findViewById(R.id.radioGroupGenero); // guarda o id do componente marcado
         btnCriarConta = findViewById(R.id.btnCriarConta);
 
-        // após o usuário clicar em criar conta, o sistema pega todas as informações presentes nos campos
         // aqui provavelmente será feita a conexão com o banco de dados + mensagem de confirmação
-
         btnCriarConta.setOnClickListener(v -> { // "quando o usuário clicar no botão cria conta execute o código abaixo"
+            // após o usuário clicar em criar conta, o sistema pega todas as informações presentes nos campos
             String nome = editNomeCompleto.getText().toString();
             String email = editEmailCadastro.getText().toString();
             String senha = editSenhaCadastro.getText().toString();
@@ -67,7 +68,30 @@ public class tela_cadastro extends AppCompatActivity {
                 genero = "";
             }
 
+            // validação dos dados
+            if (nome.trim().isEmpty()) { //conversar com o kdu sobre maneiras mais inteligentes de validar os dados
+                editNomeCompleto.setError("Digite seu nome completo");
+            }
+            else if (email.trim().isEmpty()){
+                editEmailCadastro.setError("Digite seu email");
+            }
+            else if (senha.trim().isEmpty()) {
+                editSenhaCadastro.setError("Digite sua senha");
+            }
+            else if (confsenha.trim().isEmpty()) {
+                editConfirmarSenha.setError("Confirme sua senha");
+            }
+            else if (!senha.equals(confsenha)) {
+                editConfirmarSenha.setError("As senhas não correspondem");
+            }
+            else if (genero.isEmpty()) {
+                Toast.makeText(this, "Selecione uma opção de gênero", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                // envia para API
+            }
         });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
