@@ -41,7 +41,7 @@
             android:paddingTop="34dp"
             android:paddingBottom="24dp">
 
-            <!-- Botão voltar -->
+            <!-- Botão voltar --> <!-- tenho que criar uma variável dentro de tela_cadastro.java chamando esse id-->
             <TextView
                 android:id="@+id/btnVoltar"
                 android:layout_width="match_parent"
@@ -336,7 +336,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Já tem conta -->
+            <!-- Já tem conta, tenho que criaar aqui utilizando o link de entrar uma conexão com a tela de login-->
             <LinearLayout
                 android:id="@+id/containerEntrar"
                 android:layout_width="wrap_content"
