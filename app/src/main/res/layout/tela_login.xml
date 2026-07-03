@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fundo completo -->
+    <ImageView
+        android:id="@+id/imgFundoLogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/login_background"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogoTempero"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_tempero"
+        android:scaleType="fitCenter"
+        android:contentDescription="Logo Tempero Caseiro"
+        app:layout_constraintWidth_percent="0.34"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo E-mail -->
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:background="@drawable/bg_campo_login"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:autofillHints="emailAddress"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_hint"
+        android:textSize="18sp"
+        android:singleLine="true"
+        app:layout_constraintWidth_percent="0.86"
+        app:layout_constraintTop_toBottomOf="@id/imgLogoTempero"
+        android:layout_marginTop="38dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo Senha -->
+    <EditText
+        android:id="@+id/editSenha"
+        android:layout_width="0dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_campo_login"
+        android:hint="Senha"
+        android:inputType="textPassword"
+        android:autofillHints="password"
+        android:paddingStart="18dp"
+        android:paddingEnd="18dp"
+        android:textColor="@color/texto_principal"
+        android:textColorHint="@color/texto_hint"
+        android:textSize="18sp"
+        android:singleLine="true"
+        app:layout_constraintWidth_percent="0.86"
+        app:layout_constraintTop_toBottomOf="@id/editEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Botão Entrar -->
+    <TextView
+        android:id="@+id/btnEntrar"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/bg_botao_verde"
+        android:gravity="center"
+        android:text="Entrar"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintWidth_percent="0.32"
+        app:layout_constraintTop_toBottomOf="@id/editSenha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Esqueceu senha -->
+    <TextView
+        android:id="@+id/txtEsqueceuSenha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Esqueceu sua senha?"
+        android:textColor="@color/verde_oliva"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Divisor esquerdo -->
+    <View
+        android:id="@+id/linhaEsquerda"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginEnd="12dp"
+        android:background="@color/linha_divisoria"
+        app:layout_constraintTop_toTopOf="@id/txtOuEntreCom"
+        app:layout_constraintBottom_toBottomOf="@id/txtOuEntreCom"
+        app:layout_constraintStart_toStartOf="@id/editEmail"
+        app:layout_constraintEnd_toStartOf="@id/txtOuEntreCom" />
+
+    <!-- Texto do divisor -->
+    <TextView
+        android:id="@+id/txtOuEntreCom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="ou entre com"
+        android:textColor="@color/texto_secundario"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/txtEsqueceuSenha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Divisor direito -->
+    <View
+        android:id="@+id/linhaDireita"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="12dp"
+        android:background="@color/linha_divisoria"
+        app:layout_constraintTop_toTopOf="@id/txtOuEntreCom"
+        app:layout_constraintBottom_toBottomOf="@id/txtOuEntreCom"
+        app:layout_constraintStart_toEndOf="@id/txtOuEntreCom"
+        app:layout_constraintEnd_toEndOf="@id/editEmail" />
+
+    <!-- Botão Google -->
+    <LinearLayout
+        android:id="@+id/btnGoogle"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/bg_botao_social"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/txtOuEntreCom"
+        app:layout_constraintStart_toStartOf="@id/editEmail"
+        app:layout_constraintEnd_toStartOf="@id/btnFacebook">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/google_icon"
+            android:scaleType="fitCenter"
+            android:contentDescription="Google" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Google"
+            android:textColor="@color/texto_hint"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- Botão Facebook -->
+    <LinearLayout
+        android:id="@+id/btnFacebook"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_botao_social"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toTopOf="@id/btnGoogle"
+        app:layout_constraintBottom_toBottomOf="@id/btnGoogle"
+        app:layout_constraintStart_toEndOf="@id/btnGoogle"
+        app:layout_constraintEnd_toEndOf="@id/editEmail">
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:src="@drawable/facebook_icon"
+            android:scaleType="fitCenter"
+            android:contentDescription="Facebook" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Facebook"
+            android:textColor="@color/texto_hint"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- Ainda não tem conta -->
+    <TextView
+        android:id="@+id/txtAindaNaoTemConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="Ainda não tem uma conta?"
+        android:textColor="@color/texto_hint"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/btnGoogle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Criar conta -->
+    <TextView
+        android:id="@+id/txtCriarConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Criar conta"
+        android:textColor="@color/verde_oliva"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/txtAindaNaoTemConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

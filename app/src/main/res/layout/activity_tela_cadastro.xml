@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fundo completo da tela -->
+    <ImageView
+        android:id="@+id/imgFundoCadastro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/cadastro_background"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Scroll para garantir adaptação em telas menores -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollCadastro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingStart="28dp"
+            android:paddingEnd="28dp"
+            android:paddingTop="34dp"
+            android:paddingBottom="24dp">
+
+            <!-- Botão voltar -->
+            <TextView
+                android:id="@+id/btnVoltar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="←"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal"
+                android:gravity="start"
+                android:paddingTop="6dp"
+                android:paddingBottom="10dp"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Espaço para não colidir com o enfeite do topo -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
+            <!-- Título -->
+            <TextView
+                android:id="@+id/txtTituloCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Criar conta"
+                android:textColor="@color/texto_principal"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Subtítulo -->
+            <TextView
+                android:id="@+id/txtSubtituloCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Vamos criar sua conta para salvar suas&#10;receitas favoritas!"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/texto_principal"
+                android:textSize="14sp" />
+
+            <!-- Nome completo -->
+            <EditText
+                android:id="@+id/editNomeCompleto"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Nome Completo"
+                android:inputType="textPersonName"
+                android:paddingStart="14dp"
+                android:paddingEnd="16dp"
+                android:drawableStart="@drawable/ic_nome_completo"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/texto_hint"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="16sp"
+                android:singleLine="true" />
+
+            <!-- E-mail -->
+            <EditText
+                android:id="@+id/editEmailCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"
+                android:autofillHints="emailAddress"
+                android:paddingStart="14dp"
+                android:paddingEnd="16dp"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/texto_hint"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="16sp"
+                android:singleLine="true" />
+
+            <!-- Senha -->
+            <EditText
+                android:id="@+id/editSenhaCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:autofillHints="password"
+                android:paddingStart="14dp"
+                android:paddingEnd="16dp"
+                android:drawableStart="@drawable/ic_senha"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/texto_hint"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="16sp"
+                android:singleLine="true" />
+
+            <!-- Confirmar senha -->
+            <EditText
+                android:id="@+id/editConfirmarSenha"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_campo_login"
+                android:hint="Confirmar senha"
+                android:inputType="textPassword"
+                android:paddingStart="14dp"
+                android:paddingEnd="16dp"
+                android:drawableStart="@drawable/ic_confirmar_senha"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/texto_hint"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="16sp"
+                android:singleLine="true" />
+
+            <!-- Divisor gênero -->
+            <LinearLayout
+                android:id="@+id/containerGeneroTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/linha_divisoria" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Como você se identifica?"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/linha_divisoria" />
+            </LinearLayout>
+
+            <!-- Seleção de gênero -->
+            <RadioGroup
+                android:id="@+id/radioGroupGenero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <RadioButton
+                    android:id="@+id/radioMasculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="36dp"
+                    android:text="Masculino"
+                    android:textColor="@color/texto_hint"
+                    android:textSize="15sp"
+                    android:buttonTint="@color/verde_oliva" />
+
+                <RadioButton
+                    android:id="@+id/radioFeminino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:text="Feminino"
+                    android:textColor="@color/texto_hint"
+                    android:textSize="15sp"
+                    android:buttonTint="@color/verde_oliva" />
+            </RadioGroup>
+
+            <!-- Botão criar conta -->
+            <TextView
+                android:id="@+id/btnCriarConta"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="14dp"
+                android:background="@drawable/bg_botao_verde"
+                android:gravity="center"
+                android:text="Criar conta"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <!-- Divisor social -->
+            <LinearLayout
+                android:id="@+id/containerSocialTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/linha_divisoria" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="ou cadastre-se com"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/linha_divisoria" />
+            </LinearLayout>
+
+            <!-- Botões Google e Facebook -->
+            <LinearLayout
+                android:id="@+id/containerSocial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/btnGoogle"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_botao_social"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/google_icon"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Google" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Google"
+                        android:textColor="@color/texto_hint"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnFacebook"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/bg_botao_social"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/facebook_icon"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Facebook" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Facebook"
+                        android:textColor="@color/texto_hint"
+                        android:textSize="15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Já tem conta -->
+            <LinearLayout
+                android:id="@+id/containerEntrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/txtJaTemConta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Já tem uma conta?"
+                    android:textColor="@color/texto_secundario"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtEntrar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Entrar"
+                    android:textColor="@color/verde_oliva"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
