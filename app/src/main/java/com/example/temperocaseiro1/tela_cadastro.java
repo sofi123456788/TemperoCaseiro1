@@ -1,5 +1,6 @@
 package com.example.temperocaseiro1;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,10 @@ import androidx.core.view.WindowInsetsCompat;
 public class tela_cadastro extends AppCompatActivity {
     private TextView btnVoltar;
     private TextView txtEntrar;
+    private EditText editNomeCompleto;
+    private EditText editEmailCadastro;
+    private EditText editSenhaCadastro;
+    private EditText editConfirmarSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,19 @@ public class tela_cadastro extends AppCompatActivity {
         txtEntrar.setOnClickListener(v -> {
             finish();
         });
+
+        editNomeCompleto = findViewById(R.id.editNomeCompleto);
+        String nome = editNomeCompleto.getText().toString();
+
+        editEmailCadastro = findViewById(R.id.editEmailCadastro);
+        String email = editEmailCadastro.getText().toString();
+
+        editSenhaCadastro = findViewById(R.id.editSenhaCadastro);
+        String senha = editSenhaCadastro.getText().toString();
+
+        editConfirmarSenha = findViewById(R.id.editConfirmarSenha);
+        String confsenha = editConfirmarSenha.getText().toString();
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
