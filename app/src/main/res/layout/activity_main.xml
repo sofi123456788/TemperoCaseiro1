@@ -1,304 +1,644 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="#F5EBE0"> <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_above="@id/bottomNavigationView"
-    android:scrollbars="none">
+    android:background="#F3E4CD">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="@dimen/cardview_default_radius"
-        android:padding="20dp">
-
-        <TextView
-            android:id="@+id/tvGreeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Olá, Maria!"
-            android:textColor="#333333"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvSubGreeting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="O que vamos cozinhar hoje?"
-            android:textColor="#555555"
-            android:textSize="16sp" />
+    <!-- Conteúdo rolável -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollHome"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/bg_search_bar"
-            android:elevation="2dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="34dp"
+            android:paddingBottom="24dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@android:drawable/ic_search_category_default"
-                android:tint="#777777" />
+            <!-- Saudação -->
+            <TextView
+                android:id="@+id/txtSaudacao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Olá, Maria!"
+                android:textColor="#3E3935"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="12dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Buscar receitas"
-                android:inputType="text"
-                android:textColorHint="#999999"
-                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/txtSubtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="O que vamos cozinhar hoje?"
+                android:textColor="#3E3935"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Barra de busca -->
+            <LinearLayout
+                android:id="@+id/containerBusca"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="34dp"
+                android:background="@drawable/bg_home_search"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⌕"
+                    android:textColor="#5B5B5B"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:text="Buscar receitas"
+                    android:textColor="#4D4A46"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☷"
+                    android:textColor="#4D4A46"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <!-- Categorias -->
+            <TextView
+                android:id="@+id/txtCategorias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:text="Categorias"
+                android:textColor="#3E3935"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/containerCategorias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <!-- Bolos -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_categoria_circulo"
+                        android:gravity="center"
+                        android:text="🎂"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Bolos"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Doces -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_categoria_circulo"
+                        android:gravity="center"
+                        android:text="🧁"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Doces"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Salgados -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_categoria_circulo"
+                        android:gravity="center"
+                        android:text="🥟"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Salgados"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Rápidas -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_categoria_circulo"
+                        android:gravity="center"
+                        android:text="⚡"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Rápidas"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Vegano -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="58dp"
+                        android:layout_height="58dp"
+                        android:background="@drawable/bg_categoria_circulo"
+                        android:gravity="center"
+                        android:text="🌿"
+                        android:textSize="30sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Vegano"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Receitas recomendadas -->
+            <TextView
+                android:id="@+id/txtReceitasRecomendadas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:text="Receitas recomendadas"
+                android:textColor="#3E3935"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/containerReceitas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <!-- Receita 1 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="86dp"
+                        android:background="@drawable/bg_imagem_receita"
+                        android:clipToOutline="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_bolo_cenoura"
+                        android:contentDescription="Bolo de Cenoura" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="Bolo de Cenoura"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Receita 2 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="86dp"
+                        android:background="@drawable/bg_imagem_receita"
+                        android:clipToOutline="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_brigadeiro"
+                        android:contentDescription="Brigadeiro Gourmet" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="Brigadeiro&#10;Gourmet"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Receita 3 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="86dp"
+                        android:background="@drawable/bg_imagem_receita"
+                        android:clipToOutline="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_pao_queijo"
+                        android:contentDescription="Pão de queijo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:gravity="center"
+                        android:text="Pão de queijo"
+                        android:textColor="#3E3935"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Restaurantes próximos -->
+            <LinearLayout
+                android:id="@+id/headerRestaurantes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Restaurantes próximos"
+                    android:textColor="#3E3935"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtVerMapa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ver no mapa"
+                    android:textColor="#56621F"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Restaurante 1 -->
+            <LinearLayout
+                android:id="@+id/cardRestaurante1"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="78dp"
+                    android:background="@drawable/bg_imagem_restaurante"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_trem_mineiro"
+                    android:contentDescription="Trem Mineiro" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trem Mineiro"
+                        android:textColor="#3E3935"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="250 m"
+                        android:textColor="#3E3935"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4,6 ☆"
+                    android:textColor="#56621F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Restaurante 2 -->
+            <LinearLayout
+                android:id="@+id/cardRestaurante2"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="120dp"
+                    android:layout_height="88dp"
+                    android:background="@drawable/bg_imagem_restaurante"
+                    android:clipToOutline="true"
+                    android:padding="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/img_toca_gril"
+                    android:contentDescription="Toca gril" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Toca gril"
+                        android:textColor="#3E3935"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="350 m"
+                        android:textColor="#3E3935"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4,4 ☆"
+                    android:textColor="#56621F"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Categorias"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+    <!-- Menu inferior fixo -->
+    <LinearLayout
+        android:id="@+id/bottomMenu"
+        android:layout_width="0dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="14dp"
+        android:background="@drawable/bg_bottom_menu"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="#FFFFFF"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:shapeAppearanceOverlay="@style/CircleImageStyle"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bolos"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="#333333"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="#FFFFFF"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:shapeAppearanceOverlay="@style/CircleImageStyle"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Doces"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="#333333"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="#FFFFFF"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:shapeAppearanceOverlay="@style/CircleImageStyle"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Salgados"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="#333333"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:padding="12dp"
-                        android:background="#FFFFFF"
-                        android:src="@android:drawable/ic_menu_gallery"
-                        app:shapeAppearanceOverlay="@style/CircleImageStyle"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rápidas"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp"
-                        android:textColor="#333333"/>
-                </LinearLayout>
-
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Receitas recomendadas"
-            android:textColor="#333333"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <LinearLayout android:layout_width="140dp" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginEnd="16dp">
-                    <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="100dp" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_report_image"/>
-                    </androidx.cardview.widget.CardView>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Bolo de Cenoura" android:textSize="14sp" android:textStyle="bold" android:textColor="#333333" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <LinearLayout android:layout_width="140dp" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginEnd="16dp">
-                    <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="100dp" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_report_image"/>
-                    </androidx.cardview.widget.CardView>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Brigadeiro Gourmet" android:textSize="14sp" android:textStyle="bold" android:textColor="#333333" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <LinearLayout android:layout_width="140dp" android:layout_height="wrap_content" android:orientation="vertical" android:layout_marginEnd="16dp">
-                    <androidx.cardview.widget.CardView android:layout_width="match_parent" android:layout_height="100dp" app:cardCornerRadius="12dp" app:cardElevation="0dp">
-                        <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:scaleType="centerCrop" android:src="@android:drawable/ic_menu_report_image"/>
-                    </androidx.cardview.widget.CardView>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Pão de Queijo" android:textSize="14sp" android:textStyle="bold" android:textColor="#333333" android:layout_marginTop="6dp"/>
-                </LinearLayout>
-            </LinearLayout>
-        </HorizontalScrollView>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Restaurantes próximos"
-                android:textColor="#333333"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="Ver no mapa"
-                android:textColor="#5E6F41"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
+        <!-- Entrar -->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
+            android:id="@+id/menuEntrar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical">
-                <androidx.cardview.widget.CardView android:layout_width="80dp" android:layout_height="80dp" app:cardCornerRadius="12dp">
-                    <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:src="@android:drawable/ic_menu_today" android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Trem Mineiro" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="250 m" android:textSize="14sp" android:textColor="#777777" android:layout_marginTop="4dp"/>
-                </LinearLayout>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4,6 ★" android:textColor="#333333" android:textStyle="bold"/>
-            </LinearLayout>
+                android:text="⌂"
+                android:textColor="#2C2927"
+                android:textSize="25sp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical">
-                <androidx.cardview.widget.CardView android:layout_width="80dp" android:layout_height="80dp" app:cardCornerRadius="12dp">
-                    <ImageView android:layout_width="match_parent" android:layout_height="match_parent" android:src="@android:drawable/ic_menu_today" android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Toca grill" android:textSize="16sp" android:textStyle="bold" android:textColor="#333333"/>
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="350 m" android:textSize="14sp" android:textColor="#777777" android:layout_marginTop="4dp"/>
-                </LinearLayout>
-                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="4,4 ★" android:textColor="#333333" android:textStyle="bold"/>
-            </LinearLayout>
+                android:text="Entrar"
+                android:textColor="#2C2927"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Receitas -->
+        <LinearLayout
+            android:id="@+id/menuReceitas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▤"
+                android:textColor="#2C2927"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Receitas"
+                android:textColor="#2C2927"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Adicionar -->
+        <LinearLayout
+            android:id="@+id/menuAdicionar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⊕"
+                android:textColor="#2C2927"
+                android:textSize="27sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adicionar"
+                android:textColor="#2C2927"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Favoritos -->
+        <LinearLayout
+            android:id="@+id/menuFavoritos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="♡"
+                android:textColor="#2C2927"
+                android:textSize="27sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favoritos"
+                android:textColor="#2C2927"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Perfil -->
+        <LinearLayout
+            android:id="@+id/menuPerfil"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="☻"
+                android:textColor="#2C2927"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:textColor="#2C2927"
+                android:textSize="12sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>
-</ScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="12dp"
-        android:background="@drawable/bg_bottom_navigation"
-        app:elevation="4dp"
-        app:itemIconTint="#333333"
-        app:itemTextColor="#333333"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
