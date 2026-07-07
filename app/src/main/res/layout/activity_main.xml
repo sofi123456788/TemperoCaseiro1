@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="#F3E4CD">
 
-    <!-- Conteúdo rolável -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollHome"
         android:layout_width="0dp"
@@ -28,7 +27,6 @@
             android:paddingTop="34dp"
             android:paddingBottom="24dp">
 
-            <!-- Saudação -->
             <TextView
                 android:id="@+id/txtSaudacao"
                 android:layout_width="wrap_content"
@@ -56,7 +54,7 @@
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
                 android:layout_marginTop="34dp"
-                android:background="@drawable/bg_home_search"
+                android:background="@drawable/bg_search_bar"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingStart="18dp"
@@ -84,10 +82,8 @@
                     android:text="☷"
                     android:textColor="#4D4A46"
                     android:textSize="24sp" />
-
             </LinearLayout>
 
-            <!-- Categorias -->
             <TextView
                 android:id="@+id/txtCategorias"
                 android:layout_width="wrap_content"
@@ -98,6 +94,7 @@
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
+            <!-- Categorias -->
             <LinearLayout
                 android:id="@+id/containerCategorias"
                 android:layout_width="match_parent"
@@ -107,7 +104,6 @@
                 android:orientation="horizontal"
                 android:weightSum="5">
 
-                <!-- Bolos -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -133,7 +129,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Doces -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -159,7 +154,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Salgados -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -185,7 +179,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Rápidas -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -211,7 +204,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Vegano -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -236,10 +228,8 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
             </LinearLayout>
 
-            <!-- Receitas recomendadas -->
             <TextView
                 android:id="@+id/txtReceitasRecomendadas"
                 android:layout_width="wrap_content"
@@ -250,6 +240,7 @@
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
+            <!-- Receitas -->
             <LinearLayout
                 android:id="@+id/containerReceitas"
                 android:layout_width="match_parent"
@@ -258,7 +249,6 @@
                 android:orientation="horizontal"
                 android:weightSum="3">
 
-                <!-- Receita 1 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -271,7 +261,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="86dp"
                         android:background="@drawable/bg_imagem_receita"
-                        android:clipToOutline="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_bolo_cenoura"
                         android:contentDescription="Bolo de Cenoura" />
@@ -287,7 +276,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Receita 2 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -301,7 +289,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="86dp"
                         android:background="@drawable/bg_imagem_receita"
-                        android:clipToOutline="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_brigadeiro"
                         android:contentDescription="Brigadeiro Gourmet" />
@@ -317,7 +304,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <!-- Receita 3 -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -330,7 +316,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="86dp"
                         android:background="@drawable/bg_imagem_receita"
-                        android:clipToOutline="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_pao_queijo"
                         android:contentDescription="Pão de queijo" />
@@ -345,7 +330,6 @@
                         android:textSize="14sp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
             </LinearLayout>
 
             <!-- Restaurantes próximos -->
@@ -388,10 +372,9 @@
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="78dp"
-                    android:background="@drawable/bg_imagem_restaurante"
-                    android:clipToOutline="true"
+                    android:background="@drawable/bg_imagem_receita"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/img_trem_mineiro"
+                    android:src="@drawable/img_bolo_cenoura"
                     android:contentDescription="Trem Mineiro" />
 
                 <LinearLayout
@@ -426,7 +409,6 @@
                     android:textColor="#56621F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <!-- Restaurante 2 -->
@@ -441,11 +423,9 @@
                 <ImageView
                     android:layout_width="120dp"
                     android:layout_height="88dp"
-                    android:background="@drawable/bg_imagem_restaurante"
-                    android:clipToOutline="true"
-                    android:padding="8dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/img_toca_gril"
+                    android:background="@drawable/bg_imagem_receita"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_brigadeiro"
                     android:contentDescription="Toca gril" />
 
                 <LinearLayout
@@ -480,13 +460,12 @@
                     android:textColor="#56621F"
                     android:textSize="16sp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Menu inferior fixo -->
+    <!-- Menu inferior -->
     <LinearLayout
         android:id="@+id/bottomMenu"
         android:layout_width="0dp"
@@ -494,7 +473,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="14dp"
-        android:background="@drawable/bg_bottom_menu"
+        android:background="@drawable/bg_bottom_navigation"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="4dp"
@@ -504,7 +483,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Entrar -->
         <LinearLayout
             android:id="@+id/menuEntrar"
             android:layout_width="0dp"
@@ -531,7 +509,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Receitas -->
         <LinearLayout
             android:id="@+id/menuReceitas"
             android:layout_width="0dp"
@@ -558,7 +535,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Adicionar -->
         <LinearLayout
             android:id="@+id/menuAdicionar"
             android:layout_width="0dp"
@@ -585,7 +561,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Favoritos -->
         <LinearLayout
             android:id="@+id/menuFavoritos"
             android:layout_width="0dp"
@@ -612,7 +587,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Perfil -->
         <LinearLayout
             android:id="@+id/menuPerfil"
             android:layout_width="0dp"
