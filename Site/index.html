@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/stileiras/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Login</title>
+</head>
+<body>
+    <main id="form_conteiner">
+        <img src="src/stileiras/img/logoFundoBranco.png" alt="logo" class="imagem">
+        <div id="form_header">
+            <h1 id="form_titulo">Login</h1>   
+        </div>
+
+        <form action="" id="form">
+            <div id="input_container">
+                <!-- Entrada do nome Completo -->
+                <div class="input-boxL">
+                    <label for="name" class="form-label">Nome Completo</label>
+                    <div class="input-field">
+                        <input type="text" name="name" id="name" class="form-controll" placeholder="Fulano">
+                    </div>
+                </div>
+                <!-- Entrada do Senha -->
+                <div class="input-boxL">
+                    <label for="senha" class="form-label">Senha</label>
+                    <div class="input-field">
+                        <input type="password" name="senha" id="senha" class="form-controll" placeholder="Insira sua senha">
+                    </div>
+                </div>
+                <!-- Esquecou senha-->
+                <div>
+                    <a href="Cadastro.html"  class="littleBotoes">Esqueceu sua senha?</a>
+                </div>
+            </div>
+            <button type="submit" class="btn-default">Logar</button>
+            <a href="Cadastro.html"  class="littleBotoes">Não possui uma conta? Cadastre-se</a>
+        </form>
+
+    </main>
+</body>
+</html>
