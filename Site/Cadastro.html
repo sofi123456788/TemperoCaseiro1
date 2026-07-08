@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/stileiras/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <title>Cadastro</title>
+</head>
+<body>
+    <main id="form_conteiner">
+        <img src="src/stileiras/img/logoFundoBranco.png" alt="logo" class="imagem">
+        <div id="form_header">
+            <h1 id="form_titulo">Criar Conta</h1>   
+        </div>
+
+        <form action="" id="form">
+            <div id="input_container">
+                <!-- Entrada do nome Completo -->
+                <div class="input-box">
+                    <label for="name" class="form-label">Nome Completo</label>
+                    <div class="input-field">
+                        <input type="text" name="name" id="name" class="form-controll" placeholder="Fulano">
+                    </div>
+                </div>
+                <!-- Entrada do Telefone -->
+                <div class="input-box">
+                    <label for="telefone" class="form-label">Número de Telefone</label>
+                    <div class="input-field">
+                        <input type="text" name="telefone" id="telefone" class="form-controll" placeholder="(12)34567-8901">
+                    </div>
+                </div>
+                <!-- Entrada do Email -->
+                <div class="input-box">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-field">
+                        <input type="text" name="email" id="email" class="form-controll" placeholder="usuario@gmail.com">
+                    </div>
+                </div>
+                <!-- Entrada do CPF -->
+                <div class="input-box">
+                    <label for="cpf" class="form-label">CPF</label>
+                    <div class="input-field">
+                        <input type="text" name="cpf" id="cpf" class="form-controll" placeholder="123.456.789-00">
+                    </div>
+                </div>
+                <!-- Entrada do Senha -->
+                <div class="input-box">
+                    <label for="senha" class="form-label">Senha</label>
+                    <div class="input-field">
+                        <input type="password" name="senha" id="senha" class="form-controll" placeholder="Insira sua senha">
+                    </div>
+                </div>
+                <!-- Entrada do Confirmar Senha-->
+                <div class="input-box">
+                    <label for="Csenha" class="form-label">Confrimar Senha</label>
+                    <div class="input-field">
+                        <input type="password" name="Csenha" id="Csenha" class="form-controll" placeholder="Confirme sua senha">
+                    </div>
+                </div>
+                <div class="radio-container">
+                </div>
+                <!-- Entrada do Área Profissional-->
+                <div>
+                    <label for="areaP" class="form-labelA">Área Profissional</label>
+                    <div>
+                        <select name="area" id="area" class="selectTopziera">
+                            <option value="o">     </option>
+                            <option value="oi">Pscologia</option>
+                            <option value="oie">Advocácia</option>
+                            <option value="oiee">Administração</option>
+                        </select>
+                        
+                    </div>
+                </div>
+                <button type="submit" class="btn-defaultED">Escolher Documentos</button>
+                <div class="radio-container">
+                </div>
+                
+            </div>
+            <button type="submit" class="btn-default">Criar Conta</button>
+        </form>
+
+    </main>
+</body>
+</html>
