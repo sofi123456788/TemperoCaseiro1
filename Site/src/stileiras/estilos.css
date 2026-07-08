@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    top: 6px;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    min-height: 100vh;
+    background-color: #F5E7D2;
+}
+
+#form_conteiner{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+    background-color: #fcfcfc;
+    padding: 20px;
+    border-radius: 28px;
+    box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.5);
+}
+
+/* Geral */
+#form_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#form_titulo{
+    font-weight: 500;
+    color: #51541C;
+    position: relative;
+}
+
+#form_titulo::after{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    border-radius: 30px;
+    background-color: #51541C;
+    left: 0;
+    bottom: 0;
+}
+
+.btn-default{
+    background-color: #51541C;
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 38px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fcfcfc;
+    cursor: pointer;
+    justify-content: center;
+    gap: 8px;
+    height: fit-content;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 10px 10px -3px rgba(0,0,0,0.5);
+}
+
+.btn-default:hover{
+    background-color: #696d24;
+}
+
+#form{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+}
+
+#input_container{
+    display: grid;
+    gap: 24px;
+}
+
+.form-label{
+    font-size: 12px;
+    color: #404044;
+    font-weight: 500;
+}
+
+.input-field{
+    display: flex;
+    align-items: center;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px -3px rgba(0,0,0,0.5);
+}
+
+.form-controll{
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.input-field .password-icon:hover{
+    cursor: pointer;
+    color:#404044;
+}
+
+.form-controll:focus{
+    outline: none;
+}
+
+.input-box .input-field:focus-within{
+    outline: 2px solid #51541C;
+}
+
+.radio-container{
+    grid-column: span 2;
+}
+
+.imagem{
+    height: 150px;
+    width: 155px;
+    justify-content: center;
+    align-self: center;
+}
+
+
+/* Expecífico do Login */
+.input-boxL{
+    width: 300px;
+}
+
+.input-boxL .input-field:focus-within{
+    outline: 2px solid #51541C;
+}
+
+.littleBotoes{
+    justify-content: center;
+    align-self: center;
+    font-size: 13px;
+    color: #202022;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    top: -15px;
+}
+
+.littleBotoes:hover{
+    color: #4a4a50;
+}
+
+.selectTopziera{
+    display: flex;
+    align-items: center;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0px 10px 10px -3px rgba(0,0,0,0.5);
+    width: 150px;
+    position: relative;
+    top: -20px;
+}
+
+.form-labelA{
+    font-size: 12px;
+    color: #404044;
+    font-weight: 500;
+    position: relative;
+    top: -20px;
+}
+
+.btn-defaultED{
+    background-color: #51541C;
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fcfcfc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 10px 10px -3px rgba(0,0,0,0.5);
+}
+
+.btn-defaultED:hover{
+    background-color: #696d24;
+}
