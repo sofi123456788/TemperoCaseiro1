@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E4CD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥨 Receitas de Salgados"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#3E3935"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Salgados deliciosos para qualquer momento do dia!"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="20dp"/>
+
+
+        <!-- COXINHA -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_coxinha"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coxinha"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 1 hora"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍗 Rendimento: 25 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 2 xícaras de farinha de trigo
+
+• 2 xícaras de caldo de frango
+
+• 1 colher de manteiga
+
+• 500g de frango desfiado
+
+• Temperos a gosto
+
+• Farinha de rosca para empanar"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Prepare a massa com o caldo e a farinha.
+
+2. Cozinhe até desgrudar da panela.
+
+3. Recheie com frango temperado.
+
+4. Modele as coxinhas.
+
+5. Empane e frite até dourar."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- EMPADA -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_empada"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Empada de Frango"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 50 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥧 Rendimento: 15 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 3 xícaras de farinha de trigo
+
+• 200g de manteiga
+
+• 1 ovo
+
+• 400g de frango desfiado
+
+• Requeijão a gosto
+
+• Temperos"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Misture farinha, manteiga e ovo até formar a massa.
+
+2. Forre as formas.
+
+3. Adicione o recheio.
+
+4. Cubra com mais massa.
+
+5. Asse até dourar."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- ESFIHA DE CARNE -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_esfiha"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Esfiha de Carne"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 1 hora"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥩 Rendimento: 20 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 500g de farinha de trigo
+
+• 10g de fermento biológico
+
+• 1 xícara de água morna
+
+• 2 colheres de óleo
+
+• 300g de carne moída
+
+• Cebola e temperos a gosto"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Misture os ingredientes da massa e deixe descansar.
+
+2. Prepare o recheio com a carne temperada.
+
+3. Abra pequenas porções da massa.
+
+4. Coloque o recheio e modele as esfihas.
+
+5. Asse até ficarem douradas."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>

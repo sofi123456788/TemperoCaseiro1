@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E4CD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Receitas Rápidas"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#3E3935"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Receitas fáceis e rápidas para facilitar o seu dia!"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="20dp"/>
+
+
+
+        <!-- MIOJO CREMOSO -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_miojo_cremoso"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Miojo Cremoso"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 15 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍜 Rendimento: 1 porção"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 pacote de macarrão instantâneo
+
+• 200ml de leite
+
+• 1 colher de requeijão
+
+• Queijo ralado
+
+• Temperos a gosto"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Cozinhe o macarrão normalmente.
+
+2. Escorra parte da água.
+
+3. Adicione leite e requeijão.
+
+4. Misture até ficar cremoso.
+
+5. Finalize com queijo ralado."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- SANDUÍCHE NATURAL -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_sanduiche_natural"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sanduíche Natural"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 10 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥪 Rendimento: 2 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 4 fatias de pão de forma
+
+• Frango desfiado
+
+• Alface
+
+• Tomate
+
+• Maionese
+
+• Cenoura ralada"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Misture o frango com a maionese.
+
+2. Passe o recheio no pão.
+
+3. Adicione os vegetais.
+
+4. Feche o sanduíche.
+
+5. Sirva gelado."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- PANQUECA -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_panqueca"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Panqueca Simples"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 20 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🥞 Rendimento: 8 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 xícara de farinha de trigo
+
+• 1 xícara de leite
+
+• 1 ovo
+
+• 1 colher de óleo
+
+• Sal a gosto
+
+• Recheio de sua preferência"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Bata todos os ingredientes no liquidificador.
+
+2. Coloque pequenas porções em uma frigideira.
+
+3. Doure dos dois lados.
+
+4. Recheie e enrole.
+
+5. Sirva quente."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
