@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgReceita"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_pao_queijo"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pão de Queijo"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#D2691E"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 40 minutos"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧀 Rendimento: 30 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#D2691E"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 500 g de polvilho doce&#10;&#10;• 250 ml de leite&#10;&#10;• 100 ml de óleo&#10;&#10;• 1 colher (chá) de sal&#10;&#10;• 2 ovos&#10;&#10;• 200 g de queijo minas ralado"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo de Preparo"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#D2691E"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Ferva o leite com o óleo e o sal.&#10;&#10;2. Despeje essa mistura sobre o polvilho e mexa bem.&#10;&#10;3. Espere amornar e acrescente os ovos.&#10;&#10;4. Adicione o queijo ralado e misture até formar uma massa homogênea.&#10;&#10;5. Faça bolinhas e coloque em uma assadeira untada.&#10;&#10;6. Asse em forno preaquecido a 180°C por aproximadamente 25 a 30 minutos ou até dourar."
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

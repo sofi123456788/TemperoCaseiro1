@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgReceita"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_bolo_cenoura"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bolo de Cenoura"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#FF6F00"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 50 minutos"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍰 Rendimento: 12 porções"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#FF9800"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 3 cenouras médias\n\n• 4 ovos\n\n• 1 xícara de óleo\n\n• 2 xícaras de açúcar\n\n• 2 e 1/2 xícaras de farinha de trigo\n\n• 1 colher (sopa) de fermento em pó"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo de Preparo"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#FF9800"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Bata no liquidificador as cenouras, os ovos e o óleo.\n\n2. Acrescente o açúcar e bata por mais alguns minutos.\n\n3. Despeje a mistura em uma tigela e adicione a farinha de trigo.\n\n4. Misture delicadamente.\n\n5. Acrescente o fermento.\n\n6. Coloque em uma forma untada.\n\n7. Asse em forno preaquecido a 180°C por aproximadamente 40 minutos.\n\n8. Espere esfriar e sirva."
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
