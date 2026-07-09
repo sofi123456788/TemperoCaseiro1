@@ -3,9 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/stileiras/estilosG.css">
     <title>Tela Inicial</title>
 </head>
 <body>
-    <p>helo word</p>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <button onclick="window.location.href='telaInicial.html'">
+                <img src="src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <button onclick="window.location.href='relatorios.html'">
+                <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span><!---->
+            </button>
+
+            <button onclick="window.location.href='mensagens.html'">
+                <img src="src/stileiras/img/chat.png" alt="Mensagens">
+                <span>Mensagens</span>
+            </button>
+
+            <button onclick="window.location.href='perfil.html'">
+                <img src="src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+
+        <h1>Bem-Vinda, Dra. <span id="nomePsicologa"></span>!</h1>
+
+        <!-- Cards -->
+        <section class="cards">
+
+            <div class="card">
+                <h2>Solicitações de Atendimento</h2>
+                <span>0</span>
+            </div>
+
+            <div class="card">
+                <h2>Mensagens não lidas</h2>
+                <span>4</span>
+            </div>
+
+            <div class="card">
+                <h2>Agenda de Atendimentos</h2>
+                <span>4</span>
+            </div>
+
+        </section>
+
+        <!-- Botões -->
+        <section class="acoes">
+
+            <button>Adicionar um canal de apoio</button>
+            <button>Editar meu canal de apoio</button>
+
+            <button>Adicionar centro de apoio</button>
+            <button>Editar info. dos centros de apoio</button>
+
+            <button>Registrar Atendimento</button>
+            <button>Lista de Atendimentos</button>
+
+        </section>
+
+        <!-- Tabela -->
+        <section class="tabela">
+
+            <h2>Atendimentos de hoje</h2>
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Horário</th>
+                        <th>Paciente</th>
+                        <th>Tipo</th>
+                        <th>Nível</th>
+                    </tr>
+                </thead>
+
+                <tbody id="listaAtendimentos">
+
+                    <tr>
+                        <td>11:00</td>
+                        <td>Anônimo</td>
+                        <td>Via Chat</td>
+                        <td>Urgente</td>
+                    </tr>
+
+                    <tr>
+                        <td>13:00</td>
+                        <td>Ana Silva</td>
+                        <td>Chamada de vídeo</td>
+                        <td>Médio</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+    <script src="telaInicial.js"></script>
 </body>
 </html>

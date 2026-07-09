@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/stileiras/estilos.css">
+    <link rel="stylesheet" href="src/stileiras/estilosLoginCadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <title>Cadastro</title>
 </head>
@@ -20,7 +20,7 @@
                 <div class="input-box">
                     <label for="name" class="form-label">Nome Completo</label>
                     <div class="input-field">
-                        <input type="text" name="name" id="name" class="form-controll" placeholder="Fulano">
+                        <input type="text" name="nome_completo" id="nome_completo" class="form-controll" placeholder="Fulano">
                     </div>
                 </div>
                 <!-- Entrada do Telefone -->
@@ -64,16 +64,18 @@
                 <div>
                     <label for="areaP" class="form-labelA">Área Profissional</label>
                     <div>
-                        <select name="area" id="area" class="selectTopziera">
-                            <option value="o">     </option>
-                            <option value="oi">Pscologia</option>
-                            <option value="oie">Advocácia</option>
-                            <option value="oiee">Administração</option>
+                        <select name="area_profissional" id="area_profissional" class="selectTopziera">
+                            <option value="nulo">     </option>
+                            <option value="Pscologia">Pscologia</option>
+                            <option value="Advocacia">Advocacia</option>
+                            <option value="Administração">Administração</option>
                         </select>
                         
                     </div>
                 </div>
-                <button type="submit" class="btn-defaultED">Escolher Documentos</button>
+                <input type="file" id="documento" accept=".pdf,.jpg,.png" hidden>
+                <button type="button" onclick="document.getElementById('documento').click()" class="btn-default">Adicionar Arquivo</button>
+                <span id="nomeArquivo"></span>
                 <div class="radio-container">
                 </div>
                 
@@ -82,5 +84,7 @@
         </form>
 
     </main>
+    <script src="cadastro.js"></script>
+
 </body>
 </html>
