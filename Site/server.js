@@ -66,6 +66,25 @@ app.post("/cadastro", async (req, res) => {
 
 });
 
+//Rota para o login
+app.post("/login", async (req, res) => {
+
+    const { email, senha } = req.body;
+
+    // consulta no banco
+    const usuario = buscarUsuario(email);
+
+    if (!usuario) {
+        return res.status(401).send("Usuário não encontrado");
+    }else if (usuario.senha !== senha) {
+        return res.status(401).send("Senha incorreta");
+    }else{
+        window.location.href = "telainicial.html";
+    }
+
+    res.send("Login realizado com sucesso!");
+});
+
 pool.connect()
     .then(() => {
         console.log("Banco conectado!");

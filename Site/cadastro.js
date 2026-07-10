@@ -57,8 +57,8 @@ document.getElementById("form").addEventListener("submit", async (event) => {
         if (resposta.ok) {
             window.location.href = "index.html";
         }
-    } catch (error) {
-        console.error("Erro:", error);
+    } catch (erro) {
+        console.erro("Erro:", erro);
     }
     
 
