@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/stileiras/estilosG.css">
+
     <title>Perfil</title>
 </head>
 <body>
@@ -35,6 +36,54 @@
         </nav>
     </aside>
 
-    
+    <main class="conteudo">
+
+        <h1>Bem-Vinda ao seu Perfil!</h1>
+
+        <!-- Cards -->
+        <section class="cardsP">
+            <h2>Identificação</h2>
+            <div class="cardP identificacao">
+                <div class="fotoAcoes">
+                    <img src="src/stileiras/img/SemFotoPerfil.jpg" alt="Foto de perfil" class="fotoPerfil">
+                    <img src="src/stileiras/img/camera.png" alt="camera" class="img">
+                    <a href="" class="littleBotoes">Alterar foto?</a>
+                </div>
+                <h2 id="nomePerfil"></h2>
+            </div>
+            
+            <h2>Informações</h2>
+            <div class="cardP">
+                <div class="info identificacao">
+                    <span>Nome:</span>
+                    <p id="nome"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>CPF:</span>
+                    <p id="cpf"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Email:</span>
+                    <p id="email"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Telefone:</span>
+                    <p id="telefone"></p>
+                </div>
+                <section class="acoesP">
+                    <button>Aterar Informações</button>
+                </section>
+            </div>
+        </section>
+        <section class="acoesP">
+            <button onclick="excluirConta()">Apagar Conta</button>
+        </section>
+        
+        
+    </main>
+    <script src="perfil.js"></script>
 </body>
 </html>

@@ -11,6 +11,24 @@ body{
     min-height: 100vh;
 }
 
+/* IMAGENS */
+.fotoPerfil{
+    width: 80px;
+}
+
+.fotoAcoes{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.img{
+    position: relative;
+    top: -30px;
+    left: 30px;
+    width: 30px;
+}
+
 /* MENU LATERAL */
 
 .sidebar{
@@ -45,6 +63,9 @@ body{
 
 /* CONTEÚDO */
 
+.lugar{
+    grid-column: span 2;
+}
 .conteudo{
     flex: 1;
     padding: 30px;
@@ -55,8 +76,32 @@ h1{
     margin-bottom: 20px;
 }
 
-/* CARDS */
+.dadosPerfil{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.identificacao{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.info{
+    margin-bottom: 15px;
+}
+
+.info span{
+    font-weight: bold;
+    color: #5c5a1e;
+}
+
+.info p{
+    margin-top: 3px;
+}
+
+/* CARDS Tela Inicial*/
 .cards{
     display: flex;
     gap: 20px;
@@ -81,13 +126,35 @@ h1{
     font-weight: bold;
 }
 
+/* CARDS Tela de Perfil*/
+.cardsP{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cardP{
+    background-color: white;
+    padding: 15px;
+    border-radius: 15px;
+    width: auto;
+    box-shadow: 2px 3px 5px rgba(0,0,0,0.2);
+}
+
+
+.cardP span{
+    font-size: 1rem;
+    color: #5c5a1e;
+    font-weight: bold;
+}
+
 /* BOTÕES */
 
 .acoes{
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .acoes button{
@@ -103,6 +170,41 @@ h1{
 
 .acoes button:hover{
     background-color: #4f4e14;
+}
+
+.acoesP{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.acoesP button{
+    background-color: #64631c;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 15px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.acoesP button:hover{
+    background-color: #4f4e14;
+}
+
+.littleBotoes{
+    justify-content: center;
+    align-self: center;
+    color: #64631c;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    position: relative;
+    right: 30px;
+}
+
+.littleBotoes:hover{
+    color: #4f4e14;
 }
 
 /* TABELA */

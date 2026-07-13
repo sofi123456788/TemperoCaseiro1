@@ -1,27 +1,36 @@
-document.getElementById("form").addEventListener("submit", async (e) => {
+document.getElementById("formLogin").addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    //Pega as informações
+    // Pega os dados digitados
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
 
-    //Manda as infos. pro server
-    const resposta = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ email, senha })
-    });
+    try {
+        // Envia para o servidor
+        const resposta = await fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, senha })
+        });
 
-    alert(await resposta.text());
+        const mensagem = await resposta.text();
+
+        // Se o login deu certo
+        if (resposta.ok) {
+            alert(mensagem);
+            localStorage.setItem("emailUsuario", email);
+
+            // Vai para a tela inicial
+            window.location.href = "telaInicial.html";
+        } else {
+            alert(mensagem);
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+
 });
-
-/*
-document.getElementById("form").addEventListener("submit", function(event){
-
-    event.preventDefault();
-
-    window.location.href = "telaInicial.html";
-
-});*/

@@ -33,21 +33,12 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
     try {
         console.log("Enviando dados...");
-        const resposta = await fetch(
-            "http://localhost:3000/cadastro",
-            {
+        const resposta = await fetch("http://localhost:3000/cadastro",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({
-                    nome_completo,
-                    telefone,
-                    email,
-                    cpf,
-                    senha,
-                    area_profissional
-                })
+                body: JSON.stringify({nome_completo, telefone, email, cpf, senha, area_profissional})
             }
         );
         const texto = await resposta.text();

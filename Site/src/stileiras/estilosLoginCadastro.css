@@ -133,6 +133,15 @@ body{
 
 
 /* Expecífico do Login */
+
+#formLogin{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
+}
+
 .input-boxL{
     width: 300px;
 }
