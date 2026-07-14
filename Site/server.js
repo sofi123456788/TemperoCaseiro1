@@ -141,23 +141,24 @@ app.get("/perfil/:email", async (req, res) => {
 });
 
 //Rota para Deletar
+
 app.delete("/excluirConta/:id", async (req, res) => {
 
-    const id = req.params.id;
+    const idpp = req.params.id;
 
     try {
         await pool.query("BEGIN");
 
         // Salva o id na tabela de excluídos
         await pool.query(
-            "INSERT INTO excluidos (usuario_id, motivo, excluido_em) VALUES ($1, 'Conta removida pelo usuário', NOW())",
-            [id]
+            "INSERT INTO exclusoes_conta (usuario_id, motivo, excluido_em) VALUES ($1, 'Conta removida pelo usuário', NOW())",
+            [idpp]
         );
 
         // Remove da tabela psicologos
         await pool.query(
             "DELETE FROM psicologos WHERE id = $1",
-            [id]
+            [idpp]
         );
 
         await pool.query("COMMIT");

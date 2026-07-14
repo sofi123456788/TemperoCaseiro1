@@ -15,17 +15,19 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             body: JSON.stringify({ email, senha })
         });
 
-        const mensagem = await resposta.text();
+
+        const dados = await resposta.json();
 
         // Se o login deu certo
         if (resposta.ok) {
-            alert(mensagem);
+            alert(dados.mensagem);
             localStorage.setItem("emailUsuario", email);
+            localStorage.setItem("id", dados.id);
 
             // Vai para a tela inicial
             window.location.href = "telaInicial.html";
         } else {
-            alert(mensagem);
+            alert(dados.mensagem);
         }
 
     } catch (erro) {
