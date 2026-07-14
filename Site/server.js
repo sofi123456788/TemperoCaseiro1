@@ -50,7 +50,7 @@ app.post("/cadastro", async (req, res) => {
         } = req.body;
 
         await pool.query(
-            `INSERT INTO psicologos(
+            `INSERT INTO profissionais(
                 nome_completo,
                 telefone,
                 email,
@@ -87,7 +87,7 @@ app.post("/login", async (req, res) => {
 
         // consulta no banco
         const resultado = await pool.query(
-        "SELECT * FROM psicologos WHERE email = $1",
+        "SELECT * FROM profissionais WHERE email = $1",
         [email]);
 
         //Guarda as infos
@@ -120,7 +120,7 @@ app.get("/perfil/:email", async (req, res) => {
         const email = req.params.email;
 
         const resultado = await pool.query(
-            "SELECT * FROM psicologos WHERE email = $1",
+            "SELECT * FROM profissionais WHERE email = $1",
             [email]
         );
 
@@ -151,13 +151,13 @@ app.delete("/excluirConta/:id", async (req, res) => {
 
         // Salva o id na tabela de excluídos
         await pool.query(
-            "INSERT INTO exclusoes_conta (usuario_id, motivo, excluido_em) VALUES ($1, 'Conta removida pelo usuário', NOW())",
+            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW()), 'Conta removida pelo usuário'",
             [idpp]
         );
 
-        // Remove da tabela psicologos
+        // Remove da tabela profissionais
         await pool.query(
-            "DELETE FROM psicologos WHERE id = $1",
+            "DELETE FROM profissionais WHERE id = $1",
             [idpp]
         );
 
