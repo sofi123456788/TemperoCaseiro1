@@ -24,8 +24,13 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             localStorage.setItem("emailUsuario", email);
             localStorage.setItem("id", dados.id);
 
-            // Vai para a tela inicial
-            window.location.href = "telaInicial.html";
+            // Vai para a tela inicial Respectiva a área
+            if(dados.area === "Psicologia" || dados.area === "Advocacia"){
+                window.location.href = "telaInicial.html";
+            }else if(dados.area === "Administração"){
+                window.location.href = "telaInicialA.html";
+            }
+            
         } else {
             alert(dados.mensagem);
         }

@@ -273,3 +273,119 @@ tbody tr:hover{
     width: 20px;
     height: 20px;
 }
+
+/* ÁREA PRINCIPAL */
+
+.conteudo-form{
+    flex: 1;
+    padding: 40px;
+}
+
+/* CABEÇALHO */
+
+#form_header{
+    margin-bottom: 30px;
+}
+
+#form_header h1{
+    color: #5c5a1e;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+#form_header h2{
+    color: #222;
+    font-size: 22px;
+}
+
+/* FORMULÁRIO */
+
+#container{
+    width: 100%;
+}
+
+#input_container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.input-box{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label{
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-controll{
+    width: 100%;
+    height: 45px;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px;
+
+    background: white;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.form-controll:focus{
+    outline: none;
+    border: 2px solid #5c5a1e;
+}
+
+/* SELECT */
+
+.selectTopziera{
+    width: 100%;
+    height: 45px;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px;
+
+    background: white;
+
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+    cursor: pointer;
+}
+
+/* BOTÃO */
+
+.btn-default{
+    margin-top: 30px;
+
+    width: 220px;
+    height: 55px;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+    background-color: #5c5a1e;
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btn-default:hover{
+    background-color: #4a4818;
+    transform: scale(1.05);
+}

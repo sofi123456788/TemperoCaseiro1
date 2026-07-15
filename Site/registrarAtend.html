@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/stileiras/estilosG.css">
+    <title>Registrar Atendimento</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <button onclick="window.location.href='telaInicial.html'">
+                <img src="src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <button onclick="window.location.href='relatorios.html'">
+                <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span><!---->
+            </button>
+
+            <button onclick="window.location.href='mensagens.html'">
+                <img src="src/stileiras/img/chat.png" alt="Mensagens">
+                <span>Mensagens</span>
+            </button>
+
+            <button onclick="window.location.href='perfil.html'">
+                <img src="src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Cadastro do Centro de Apoio-->
+    <div class="conteudo-form">
+
+        <div id="form_header">
+            <h1>Registrar Atendimento</h1>
+            <h2>Informações da sessão</h2>
+        </div>
+
+        <form id="container">
+            <div id="input_container">
+                <div class="input-box">
+                    <label for="nome" class="form-label">Nome do Pasciente</label>
+                    <input type="text" id="nome" class="form-controll" placeholder="Insira o nome">
+                </div>
+                <div class="input-box">
+                    <label for="data" class="form-label">Data do Atendimento</label>
+                    <input type="date" id="data" class="form-controll" placeholder="01/01/2026">
+                </div>
+                <div class="input-box">
+                    <label for="tempo" class="form-label">Tempo de sessão</label>
+                    <input type="text" id="tempo" class="form-controll" placeholder="ex.:1h">
+                </div>
+                <div class="input-box">
+                    <label for="consideracoes" class="form-label">Considerações</label>
+                    <input type="text" id="consideracoes" class="form-controll" placeholder="consideracoes">
+                </div>
+                <label for="modo" class="form-label">Modo de Atendimento</label>
+                <select name="modo" id="modo" class="selectTopziera">
+                    <option value="nulo">     </option>
+                    <option value="Chamada de vídeo">Chamada de vídeo</option>
+                    <option value="Chamada de áudio">Chamada de áudio</option>
+                    <option value="Chat de texto">Chat de Texto</option>
+                    <option value="Presencial">Presencial</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-default">Adicionar</button>
+        </form>  
+    </div>
+    <script src="registrarAtend.js"></script>
+</body>
+</html>

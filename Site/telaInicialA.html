@@ -14,22 +14,20 @@
             <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
         </div>
         <nav class="menu-lateral"><!--Navegação-->
-            <button onclick="window.location.href='telaInicial.html'">
+            <!--Botão Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
                 <img src="src/stileiras/img/home.png" alt="Home">
                 <span>Início</span>
             </button>
 
-            <button onclick="window.location.href='relatorios.html'">
+            <!--//Botão Relatórios-->
+            <button onclick="window.location.href='relatoriosA.html'">
                 <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
                 <span>Relatórios</span><!---->
             </button>
 
-            <button onclick="window.location.href='mensagens.html'">
-                <img src="src/stileiras/img/chat.png" alt="Mensagens">
-                <span>Mensagens</span>
-            </button>
-
-            <button onclick="window.location.href='perfil.html'">
+            <!--//Perfil-->
+            <button onclick="window.location.href='perfilA.html'">
                 <img src="src/stileiras/img/perfil.png" alt="Perfil">
                 <span>Perfil</span>
             </button>
@@ -41,24 +39,24 @@
     <!-- Conteúdo principal -->
     <main class="conteudo">
 
-        <h1>Bem-Vinda, Dra. <span id="nomePsicologa"></span>!</h1>
+        <h1>Bem-Vinda, <span id="nome"></span>!</h1>
 
         <!-- Cards -->
         <section class="cards">
 
             <div class="card">
-                <h2>Solicitações de Atendimento</h2>
-                <span>0</span>
+                <h2>Restaurantes Cadastrados</h2>
+                <span id="nRestau"></span>
             </div>
 
             <div class="card">
-                <h2>Mensagens não lidas</h2>
-                <span>4</span>
+                <h2>Solicitações de Parceria</h2>
+                <span id="parcerias"></span>
             </div>
 
             <div class="card">
-                <h2>Agenda de Atendimentos</h2>
-                <span>4</span>
+                <h2>Cidades Atendidas</h2>
+                <span id="nCidades"></span>
             </div>
 
         </section>
@@ -66,21 +64,18 @@
         <!-- Botões -->
         <section class="acoes">
 
-            <button id="addCanal">Adicionar um canal de apoio</button>
-            <button>Editar meu canal de apoio</button>
+            <button id="addR">Adicionar Restaurante</button>
+            <button id="edtR">Editar  Restaurante</button>
 
             <button id="addC">Adicionar centro de apoio</button>
-            <button>Editar info. dos centros de apoio</button>
-
-            <button id="resgisA">Registrar Atendimento</button>
-            <button>Lista de Atendimentos</button>
+            <button id="edtC">Editar info. dos centros de apoio</button>
 
         </section>
 
         <!-- Tabela -->
         <section class="tabela">
 
-            <h2>Atendimentos de hoje</h2>
+            <h2>Restaurantes cadastrados</h2>
 
             <table>
 
@@ -116,6 +111,6 @@
         </section>
 
     </main>
-    <script src="telaInicial.js"></script>
+    <script src="telaInicialA.js"></script>
 </body>
 </html>

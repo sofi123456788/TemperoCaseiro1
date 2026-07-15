@@ -37,37 +37,19 @@ app.listen(3000, () => {
 app.post("/cadastro", async (req, res) => {
     try {
 
-        console.log("REQUISIÇÃO RECEBIDA");
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
 
-        const {
-            nome_completo,
-            telefone,
-            email,
-            cpf,
-            senha,
-            area_profissional
-        } = req.body;
+        const {nome_completo, telefone, email, cpf, senha, area_profissional} = req.body;
 
+        //Mandando para o banco de dados
         await pool.query(
-            `INSERT INTO profissionais(
-                nome_completo,
-                telefone,
-                email,
-                cpf,
-                senha,
-                area_profissional) VALUES($1,$2,$3,$4,$5,$6)
-            `,
-            [
-                nome_completo,
-                telefone,
-                email,
-                cpf,
-                senha,
-                area_profissional
-            ]
+            `INSERT INTO profissionais(nome_completo, telefone, email, cpf, senha, area_profissional) 
+            VALUES($1,$2,$3,$4,$5,$6)`,
+            [nome_completo, telefone, email, cpf, senha, area_profissional]
         );
 
+        console.log("Cadastro Feito");
         res.json({
             mensagem: "Cadastro realizado!"
         });
@@ -102,7 +84,8 @@ app.post("/login", async (req, res) => {
 
         res.json({
             mensagem: "Login realizado com sucesso!",
-            id: usuario.id
+            id: usuario.id,
+            area: usuario.area_profissional
         });
 
     } catch (error) {
@@ -141,7 +124,6 @@ app.get("/perfil/:email", async (req, res) => {
 });
 
 //Rota para Deletar
-
 app.delete("/excluirConta/:id", async (req, res) => {
 
     const idpp = req.params.id;
@@ -151,7 +133,7 @@ app.delete("/excluirConta/:id", async (req, res) => {
 
         // Salva o id na tabela de excluídos
         await pool.query(
-            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW()), 'Conta removida pelo usuário'",
+            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW(), 'Conta removida pelo usuário')",
             [idpp]
         );
 
@@ -170,4 +152,116 @@ app.delete("/excluirConta/:id", async (req, res) => {
         console.error(erro);
         res.status(500).send("Erro ao excluir conta.");
     }
+});
+
+//Rota para Adicionar Restaurante
+app.post("/addRestaurante", async (req, res) => {
+    try {
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {nome, telefone, cep, rua, logradouro, bairro, cidade, estado, horaA, horaF} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO restaurantes(nome, telefone, cep, rua, logradouro, bairro, cidade, estado, horario_abertura, horario_fechamento) 
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
+            [nome, telefone, cep, rua, logradouro, bairro, cidade, estado, horaA, horaF]
+        );
+
+        console.log("Restaurante Adicionado!");
+        res.json({
+            mensagem: "Restaurante Adcionado!"
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
+});
+
+//Rota para Adicionar Centro de Apoio
+app.post("/addCentroApoio", async (req, res) => {
+    try {
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, tipo} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO centroApoio(nome, telefone, email, rua, logradouro, bairro, cidade, estado, horario_abertura, horario_fechamento, tipo) 
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10, $11)`,
+            [nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, tipo]
+        );
+
+        console.log("Centro Adicionado!");
+        res.json({
+            mensagem: "Centro Adcionado!"
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
+});
+
+//Rota para Adicionar Canal de Apoio
+app.post("/addCanal", async (req, res) => {
+    try {
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO canalApoio(nome, telefone, email, rua, logradouro, bairro, cidade, estado, horario_abertura, horario_fechamento, modo) 
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10, $11)`,
+            [nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo]
+        );
+
+        console.log("Canal Adicionado!");
+        res.json({
+            mensagem: "Canal Adcionado!"
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
+});
+
+//Rota para Registrar Atendimentos
+app.post("/registrarAtend", async (req, res) => {
+    try {
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {nome, data, tempo, consideracoes, modo} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO atendimento(nomepaciente, dataatendimento, duracao, consideracoes, modo) 
+            VALUES($1,$2,$3,$4,$5)`,
+            [nome, data, tempo, consideracoes, modo]
+        );
+
+        console.log("Atendimento Registrado!");
+        res.json({
+            mensagem: "Atendimento Registrado!"
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
 });
