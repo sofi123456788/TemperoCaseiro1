@@ -1,10 +1,11 @@
-// Adicionar restaurante
+// Registrar Atendimento
 document.getElementById("container").addEventListener("submit", async (event) => {
 
     event.preventDefault();
 
     console.log("Formulário enviado")
 
+    //Pega as informações
     const nome = document.getElementById("nome").value;
     const data = document.getElementById("data").value;
     const tempo = document.getElementById("tempo").value;
@@ -13,6 +14,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
     try {
         console.log("Enviando dados...");
+        //anda as infos para o server
         const resposta = await fetch("http://localhost:3000/registrarAtend",{
                 method: "POST",
                 headers: {
@@ -25,8 +27,8 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
         console.log(texto);
 
+        //Confirma que deu certo
         if (resposta.ok) {
-            texto.mensagem;
             window.location.reload();
         }
     } catch (erro) {

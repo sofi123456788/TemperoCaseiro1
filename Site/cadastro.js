@@ -18,6 +18,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
     console.log("Formulário enviado")
 
+    //Pega As Infos
     const nome_completo = document.getElementById("nome_completo").value;
     const telefone = document.getElementById("telefone").value;
     const email = document.getElementById("email").value;
@@ -26,6 +27,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
     const Csenha = document.getElementById("Csenha").value;
     const area_profissional = document.getElementById("area_profissional").value;
 
+    //Confirma se as senhas estão iguais
     if (senha !== Csenha) {
         alert("As senhas não coincidem.");
         return;
@@ -33,6 +35,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
     try {
         console.log("Enviando dados...");
+        //Manda as infos coletadas para o server
         const resposta = await fetch("http://localhost:3000/cadastro",{
                 method: "POST",
                 headers: {
@@ -45,12 +48,12 @@ document.getElementById("form").addEventListener("submit", async (event) => {
 
         console.log(texto);
 
+        //Confirma que deu tudo certo
         if (resposta.ok) {
             window.location.href = "index.html";
         }
     } catch (erro) {
         console.erro("Erro:", erro);
     }
-    
 
 });
