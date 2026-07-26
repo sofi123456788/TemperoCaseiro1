@@ -15,6 +15,7 @@
         <activity android:name=".ReceitaBoloCenouraActivity" />
         <activity android:name=".ReceitaBrigadeiroActivity" />
         <activity android:name=".ReceitaPaoDeQueijoActivity" />
+        <activity android:name=".BolosActivity" />
 
         <activity
             android:name=".MainActivity"
