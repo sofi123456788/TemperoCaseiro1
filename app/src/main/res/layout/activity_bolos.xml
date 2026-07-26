@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3E4CD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍰 Receitas de Bolos"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#3E3935"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bolos deliciosos para deixar seus momentos mais especiais!"
+            android:textSize="16sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="20dp"/>
+
+
+        <!-- BOLO DE CHOCOLATE -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_bolo_chocolate"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bolo de Chocolate"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 50 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍫 Rendimento: 12 pedaços"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 3 ovos
+
+• 2 xícaras de açúcar
+
+• 1 xícara de chocolate em pó
+
+• 2 xícaras de farinha de trigo
+
+• 1 xícara de leite
+
+• 1 colher (sopa) de fermento"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Misture os ovos, açúcar e leite.
+
+2. Adicione o chocolate e a farinha.
+
+3. Misture o fermento delicadamente.
+
+4. Coloque em uma forma untada.
+
+5. Asse por aproximadamente 40 minutos."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- BOLO DE FUBÁ -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_bolo_fuba"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bolo de Fubá"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 45 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🌽 Rendimento: 10 pedaços"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 2 xícaras de fubá
+
+• 1 xícara de farinha de trigo
+
+• 2 xícaras de açúcar
+
+• 3 ovos
+
+• 1 xícara de leite
+
+• 1 colher de fermento"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Bata os ovos com açúcar.
+
+2. Acrescente os ingredientes secos.
+
+3. Misture até formar uma massa uniforme.
+
+4. Coloque em uma forma untada.
+
+5. Asse até dourar."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+
+        <!-- BOLO DE LARANJA -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:src="@drawable/img_bolo_laranja"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bolo de Laranja"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#5D4037"
+            android:layout_marginTop="12dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 40 minutos"
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍊 Rendimento: 12 pedaços"
+            android:textSize="18sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 3 ovos
+
+• Suco de 3 laranjas
+
+• 2 xícaras de açúcar
+
+• 3 xícaras de farinha de trigo
+
+• 1 colher de fermento
+
+• Meia xícara de óleo"
+            android:textSize="17sp"
+            android:layout_marginBottom="15dp"/>
+
+
+        <TextView
+            android:text="Modo de preparo"
+            android:textStyle="bold"
+            android:textSize="22sp"
+            android:textColor="#795548"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Bata os ovos, óleo e suco de laranja.
+
+2. Adicione açúcar e farinha.
+
+3. Misture o fermento.
+
+4. Coloque em uma forma untada.
+
+5. Asse por cerca de 35 minutos."
+            android:textSize="17sp"
+            android:layout_marginBottom="30dp"/>
+
+
+    </LinearLayout>
+
+</ScrollView>
