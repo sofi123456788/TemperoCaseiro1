@@ -112,25 +112,29 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <!-- Categoria -->
             <TextView
                 android:id="@+id/txtLabelCategoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="28dp"
                 android:text="Categoria"
                 android:textColor="#1E1A17"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <Spinner
-                android:id="@+id/spinnerCategoria"
+            <EditText
+                android:id="@+id/editCategoria"
                 android:layout_width="match_parent"
-                android:layout_height="68dp"
+                android:layout_height="38dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/bg_campo_receita"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp" />
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:textColor="#1E1A17"
+                android:textColorHint="#8F8F8F"
+                android:textSize="15sp"
+                android:singleLine="true"
+                android:inputType="textCapSentences" />
 
             <!-- Ingredientes -->
             <TextView

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.ImageView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.LinearLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -34,11 +35,49 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        // Bloco do menu Adicionar Receita
+        LinearLayout menuAdicionar = findViewById(R.id.menuAdicionar);
+        menuAdicionar.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AdicionarReceita.class);
+            startActivity(intent);
         });
+
+        // Categoria Bolos
+        LinearLayout layoutBolos = findViewById(R.id.layoutBolos);
+        layoutBolos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BolosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Veganos
+        LinearLayout layoutVeganos = findViewById(R.id.layoutVeganos);
+        layoutVeganos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, VeganosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Salgados
+        LinearLayout layoutSalgados = findViewById(R.id.layoutSalgados);
+        layoutSalgados.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SalgadosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Rápidas
+        LinearLayout layoutRapidas = findViewById(R.id.layoutRapidas);
+        layoutRapidas.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RapidasActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Doces
+        LinearLayout layoutDoces = findViewById(R.id.layoutDoces);
+        layoutDoces.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DocesActivity.class);
+            startActivity(intent);
+        });
+
+
+
     }
 }

@@ -15,7 +15,12 @@
         <activity android:name=".ReceitaBoloCenouraActivity" />
         <activity android:name=".ReceitaBrigadeiroActivity" />
         <activity android:name=".ReceitaPaoDeQueijoActivity" />
+        <activity android:name=".AdicionarReceita" />
         <activity android:name=".BolosActivity" />
+        <activity android:name=".VeganosActivity" />
+        <activity android:name=".SalgadosActivity" />
+        <activity android:name=".RapidasActivity" />
+        <activity android:name=".DocesActivity" />
 
         <activity
             android:name=".MainActivity"
