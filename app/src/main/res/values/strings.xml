@@ -1,3 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">TemperoCaseiro1</string>
+
+    <string-array name="categorias_receita">
+        <item>Selecione uma categoria</item>
+        <item>🍰 Doces</item>
+        <item>🎂 Bolos</item>
+        <item>🥐 Salgados</item>
+        <item>🥗 Veganas</item>
+        <item>⚡ Receitas Rápidas</item>
+    </string-array>
+
 </resources>
