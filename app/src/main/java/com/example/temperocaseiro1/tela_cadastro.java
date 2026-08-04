@@ -13,6 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.temperocaseiro1.api.ApiClient;
+import com.example.temperocaseiro1.api.AuthApi;
+import com.example.temperocaseiro1.model.CadastroRequest;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class tela_cadastro extends AppCompatActivity {
     private TextView btnVoltar;
     private TextView txtEntrar;
@@ -39,7 +46,7 @@ public class tela_cadastro extends AppCompatActivity {
             finish();
         });
 
-        // conexão com os componentes
+        // 1. encontra os campos do xml pelo id
         editNomeCompleto = findViewById(R.id.editNomeCompleto);
         editEmailCadastro = findViewById(R.id.editEmailCadastro);
         editSenhaCadastro = findViewById(R.id.editSenhaCadastro);
@@ -47,9 +54,8 @@ public class tela_cadastro extends AppCompatActivity {
         radioGroupGenero = findViewById(R.id.radioGroupGenero); // guarda o id do componente marcado
         btnCriarConta = findViewById(R.id.btnCriarConta);
 
-        // aqui provavelmente será feita a conexão com o banco de dados + mensagem de confirmação
         btnCriarConta.setOnClickListener(v -> { // "quando o usuário clicar no botão cria conta execute o código abaixo"
-            // após o usuário clicar em criar conta, o sistema pega todas as informações presentes nos campos
+            // 2. Captura os dados digitados nos campos
             String nome = editNomeCompleto.getText().toString();
             String email = editEmailCadastro.getText().toString();
             String senha = editSenhaCadastro.getText().toString();
@@ -68,7 +74,7 @@ public class tela_cadastro extends AppCompatActivity {
                 genero = "";
             }
 
-            // validação dos dados
+            // 3. validação dos dados
             if (nome.trim().isEmpty()) { //conversar com o kdu sobre maneiras mais inteligentes de validar os dados
                 editNomeCompleto.setError("Digite seu nome completo");
             }
@@ -88,7 +94,7 @@ public class tela_cadastro extends AppCompatActivity {
                 Toast.makeText(this, "Selecione uma opção de gênero", Toast.LENGTH_SHORT).show();
             }
             else {
-                // envia para API
+                enviarCadastroParaApi(nome, email, senha, genero); //
             }
         });
 
@@ -98,6 +104,36 @@ public class tela_cadastro extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+    }
+
+    private void enviarCadastroParaApi(String nome, String email, String senha, String genero) { // esse metodo recebe os dados validados
+
+        CadastroRequest cadastroRequest = new CadastroRequest( // cria um objeto CadastroRequest com eles
+                nome,
+                email,
+                senha,
+                genero
+        );
+
+        AuthApi authApi = ApiClient.getRetrofit().create(AuthApi.class); // cria uma conexão com a API
+
+        Call<String> call = authApi.cadastrar(cadastroRequest); // prepara uma chamada HTTP para o cadastro do usuário
+
+        call.enqueue(new Callback<String>() { // executa de forma assíncrona para nn travar a tela do app
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) { //API respondeu
+                if (response.isSuccessful()) {
+                    Toast.makeText(tela_cadastro.this, response.body(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(tela_cadastro.this, "Erro no cadastro", Toast.LENGTH_SHORT).show(); // deu erro em alguma parte do cadastro
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) { // API nn respondeu
+                Toast.makeText(tela_cadastro.this, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
         });
     }
 }

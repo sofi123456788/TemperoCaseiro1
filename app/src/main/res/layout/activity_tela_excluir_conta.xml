@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fundo da tela -->
+    <ImageView
+        android:id="@+id/imgFundoExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/cadastro_background"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogoExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_tempero"
+        android:scaleType="fitCenter"
+        android:contentDescription="Logo Tempero Caseiro"
+        app:layout_constraintWidth_percent="0.52"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/txtDesejaExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Deseja excluir sua conta?"
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imgLogoExcluirConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.82"
+        android:layout_marginTop="36dp" />
+
+    <!-- Aviso -->
+    <TextView
+        android:id="@+id/txtAvisoExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Isso irá excluir a sua conta para sempre!"
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txtDesejaExcluirConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.72"
+        android:layout_marginTop="58dp" />
+
+    <!-- Botão excluir conta -->
+    <Button
+        android:id="@+id/btnExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Excluir conta"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        app:layout_constraintTop_toBottomOf="@id/txtAvisoExcluirConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_marginTop="60dp" />
+
+    <!-- Botão cancelar -->
+    <Button
+        android:id="@+id/btnCancelarExclusao"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Cancelar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        app:layout_constraintTop_toBottomOf="@id/btnExcluirConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_marginTop="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
