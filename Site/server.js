@@ -124,7 +124,7 @@ app.get("/perfil/:email", async (req, res) => {
     }
 });
 
-//Rota para Deletar
+//Rota para Deletar Conta
 app.delete("/excluirConta/:id", async (req, res) => {
 
     const idpp = req.params.id;
@@ -132,7 +132,7 @@ app.delete("/excluirConta/:id", async (req, res) => {
     try {
         await pool.query("BEGIN");
 
-        // Salva o id na tabela de excluídos
+        // Salva na tabela de excluídos
         await pool.query(
             "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW(), 'Conta removida pelo usuário')",
             [idpp]
@@ -170,7 +170,9 @@ app.post("/addRestaurante", async (req, res) => {
             [nome, telefone, cep, rua, logradouro, bairro, cidade, estado, horaA, horaF]
         );
 
+        //Avisa para o usuário que funcionou
         console.log("Restaurante Adicionado!");
+        res.send("Restaurante Adcionado!");
         res.json({
             mensagem: "Restaurante Adcionado!"
         });
@@ -198,7 +200,9 @@ app.post("/addCentroApoio", async (req, res) => {
             [nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, tipo]
         );
 
+        //Avisa para o usuário que funcionou
         console.log("Centro Adicionado!");
+        res.send("Centro Adicionado!");
         res.json({
             mensagem: "Centro Adcionado!"
         });
@@ -226,7 +230,9 @@ app.post("/addCanal", async (req, res) => {
             [nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo]
         );
 
+        //Avisa para o usuário que funcionou
         console.log("Canal Adicionado!");
+        res.send("Canal Adicionado!");
         res.json({
             mensagem: "Canal Adcionado!"
         });
@@ -254,7 +260,9 @@ app.post("/registrarAtend", async (req, res) => {
             [nome, data, tempo, consideracoes, modo]
         );
 
+        //Avisa para o usuário que funcionou
         console.log("Atendimento Registrado!");
+        res.send("Atendimento Registrado!");
         res.json({
             mensagem: "Atendimento Registrado!"
         });

@@ -3,10 +3,12 @@ window.addEventListener("load", async () => {
 
     const email = localStorage.getItem("emailUsuario");
 
+    //Manda para o server o email do usuário para pegar as demais infos
     const resposta = await fetch(
         `http://localhost:3000/perfil/${email}`
     );
 
+    //Expõe as infos
     const usuario = await resposta.json();
 
     document.getElementById("nomePerfil").textContent = usuario.nome_completo;
@@ -22,6 +24,7 @@ window.addEventListener("load", async () => {
     document.getElementById("area").textContent = usuario.area_profissional;
 });
 
+//Excluir Conta
 document.getElementById("btnD").addEventListener("submit", async (e) => {
     e.preventDefault();
     //Confirma se é desejo do usuário

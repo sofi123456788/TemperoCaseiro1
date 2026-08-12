@@ -5,6 +5,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
     console.log("Formulário enviado")
 
+    //Pega as Informações
     const nome = document.getElementById("nome").value;
     const telefone = document.getElementById("telefone").value;
     const cep = document.getElementById("cep").value;
@@ -18,6 +19,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
     try {
         console.log("Enviando dados...");
+        //Manda as infos coletadas para o server
         const resposta = await fetch("http://localhost:3000/addRestaurante",{
                 method: "POST",
                 headers: {
@@ -30,8 +32,8 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
         console.log(texto);
 
+        //Confirma que deu tudo certo
         if (resposta.ok) {
-            texto.mensagem;
             window.location.href = "addRestaurante.html";
         }
     } catch (erro) {

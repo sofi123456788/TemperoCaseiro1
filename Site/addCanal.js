@@ -1,10 +1,11 @@
-// Adicionar restaurante
+// Adicionar Canal de Apoio
 document.getElementById("container").addEventListener("submit", async (event) => {
 
     event.preventDefault();
 
     console.log("Formulário enviado")
 
+    //Pega as Informações
     const nome = document.getElementById("nome").value;
     const telefone = document.getElementById("telefone").value;
     const email = document.getElementById("email").value;
@@ -19,6 +20,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
     try {
         console.log("Enviando dados...");
+        //Manda as infos coletadas para o server
         const resposta = await fetch("http://localhost:3000/addCanal",{
                 method: "POST",
                 headers: {
@@ -31,8 +33,8 @@ document.getElementById("container").addEventListener("submit", async (event) =>
 
         console.log(texto);
 
+        //Confirma que deu tudo certo
         if (resposta.ok) {
-            texto.mensagem;
             window.location.reload();
         }
     } catch (erro) {

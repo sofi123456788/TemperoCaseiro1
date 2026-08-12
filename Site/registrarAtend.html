@@ -14,21 +14,22 @@
             <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
         </div>
         <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela Inicial-->
             <button onclick="window.location.href='telaInicial.html'">
                 <img src="src/stileiras/img/home.png" alt="Home">
                 <span>Início</span>
             </button>
-
+            <!--Relatórios-->
             <button onclick="window.location.href='relatorios.html'">
                 <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
                 <span>Relatórios</span><!---->
             </button>
-
+            <!--Mensagens-->
             <button onclick="window.location.href='mensagens.html'">
                 <img src="src/stileiras/img/chat.png" alt="Mensagens">
                 <span>Mensagens</span>
             </button>
-
+            <!--Perfil-->
             <button onclick="window.location.href='perfil.html'">
                 <img src="src/stileiras/img/perfil.png" alt="Perfil">
                 <span>Perfil</span>
@@ -48,22 +49,27 @@
 
         <form id="container">
             <div id="input_container">
+                <!--Nome do Paciente-->
                 <div class="input-box">
                     <label for="nome" class="form-label">Nome do Pasciente</label>
                     <input type="text" id="nome" class="form-controll" placeholder="Insira o nome">
                 </div>
+                <!--Data do Atendimento-->
                 <div class="input-box">
                     <label for="data" class="form-label">Data do Atendimento</label>
                     <input type="date" id="data" class="form-controll" placeholder="01/01/2026">
                 </div>
+                <!--Tempo-->
                 <div class="input-box">
                     <label for="tempo" class="form-label">Tempo de sessão</label>
                     <input type="text" id="tempo" class="form-controll" placeholder="ex.:1h">
                 </div>
+                <!--Considerações-->
                 <div class="input-box">
                     <label for="consideracoes" class="form-label">Considerações</label>
                     <input type="text" id="consideracoes" class="form-controll" placeholder="consideracoes">
                 </div>
+                <!--Modo de Atendimento-->
                 <label for="modo" class="form-label">Modo de Atendimento</label>
                 <select name="modo" id="modo" class="selectTopziera">
                     <option value="nulo">     </option>
