@@ -55,9 +55,6 @@ document.getElementById("btnD").addEventListener("submit", async (e) => {
             alert("Não foi possível conectar ao servidor.");
         }
     }
-
-    
-
 });
 
 
@@ -73,25 +70,49 @@ async function excluirConta() {
     if (!resposta) {
         return;
     }
-        try {
-            //Pega o id e manda para o server
-            const id = localStorage.getItem("id");
+    try {
+        //Pega o id e manda para o server
+        const id = localStorage.getItem("id");
 
-            const requisicao = await fetch(
-                `http://localhost:3000/excluirConta/${id}`,{
-                    method: "DELETE"
-                }
-            );
-
-            const mensagem = await requisicao.text();
-
-            alert(mensagem);
-
-            if (requisicao.ok) {
-                localStorage.clear();
-                window.location.href = "index.html";
+        const requisicao = await fetch(
+            `http://localhost:3000/excluirConta/${id}`,{
+                method: "DELETE"
             }
+        );
 
+        const mensagem = await requisicao.text();
+
+        alert(mensagem);
+
+        if (requisicao.ok) {
+            localStorage.clear();
+            window.location.href = "index.html";
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+    
+}
+
+//Função para deslogar conta
+async function deslogar() {
+
+    //Confirma se é desejo do usuário
+    const resposta = confirm(
+        "Tem certeza que deseja sair de sua conta?"
+    );
+
+    //Caso seja negativo não acontece nada
+    if (!resposta) {
+        return;
+    }
+        try {
+            //Limpa todas as infos pegas
+            localStorage.clear();
+            //Volta para a tela de login
+            window.location.href = "index.html";
         } catch (erro) {
             console.error(erro);
             alert("Não foi possível conectar ao servidor.");

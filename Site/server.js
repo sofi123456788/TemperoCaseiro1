@@ -12,13 +12,14 @@ const pool = new Pool({
     user: "neondb_owner",
     host: "ep-late-art-acgy0zej.sa-east-1.aws.neon.tech",
     database: "neondb",
-    password: "npg_Y0FCBzXtv6eG",
+    password: "npg_xiIfpA96WRqu",
     port: 5432,
     ssl: {
     rejectUnauthorized: false
     }
 });
 
+//Confirma se deu certinho
 pool.connect()
     .then(() => {
         console.log("Banco conectado!");
@@ -83,9 +84,9 @@ app.post("/login", async (req, res) => {
         }
 
         res.json({
-            mensagem: "Login realizado com sucesso!",
             id: usuario.id,
-            area: usuario.area_profissional
+            area: usuario.area_profissional,
+            verifi: usuario.verificacao
         });
 
     } catch (error) {

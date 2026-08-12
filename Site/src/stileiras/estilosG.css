@@ -11,6 +11,27 @@ body{
     min-height: 100vh;
 }
 
+#form_titulo{
+    font-weight: 500;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    color: #4e473b;
+    position: relative;
+
+}
+
+#form_titulo::after{
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 3px;
+    border-radius: 30px;
+    background-color: #9e927f;
+    left: 0;
+    bottom: 0;
+}
+
 /* IMAGENS */
 .fotoPerfil{
     width: 80px;
@@ -57,7 +78,27 @@ body{
     font-weight: bold;
 }
 
-.sidebar li:hover{
+/* LISTAS */
+
+.sidebarLista{
+    width: 360px;
+    margin-top: 135px;
+    background-color: #c9bba5;
+    max-height: 100hv;
+    border-right: 1px solid #ccc;
+}
+.sidebarLista ul{
+    list-style: none;
+}
+
+.sidebarLista li{
+    padding: 15px;
+    cursor: pointer;
+    color: #5c5a1e;
+    font-weight: bold;
+}
+
+.sidebarLista li:hover{
     background-color: #ddd;
 }
 

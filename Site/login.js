@@ -25,12 +25,17 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             localStorage.setItem("id", dados.id);
 
             // Vai para a tela inicial Respectiva a área
-            if(dados.area === "Psicologia" || dados.area === "Advocacia"){
-                window.location.href = "telaInicial.html";
-            }else if(dados.area === "Administração"){
-                window.location.href = "telaInicialA.html";
+            if(dados.verifi){
+                alert("Login realizado com sucesso!");
+                if(dados.area === "Pscologia" || dados.area === "Advocacia"){
+                    window.location.href = "telaInicial.html";
+                }else if(dados.area === "Administração"){
+                    window.location.href = "telaInicialA.html";
+                }
+            }else{
+                alert("Sua conta passa por verificação ou não foi aprovada.");
             }
-            
+                       
         } else {
             alert(dados.mensagem);
         }
