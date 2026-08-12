@@ -60,7 +60,6 @@ document.getElementById("btnD").addEventListener("submit", async (e) => {
     }
 });
 
-
 //Função para apagar conta
 async function excluirConta() {
 
@@ -77,16 +76,13 @@ async function excluirConta() {
         //Pega o id e manda para o server
         const id = localStorage.getItem("id");
 
-        const requisicao = await fetch(
-            `http://localhost:3000/excluirConta/${id}`,{
-                method: "DELETE"
-            }
-        );
+        const requisicao = await fetch(`http://localhost:3000/excluirConta/${id}`,{method: "DELETE"});
 
         const mensagem = await requisicao.text();
 
         alert(mensagem);
 
+        //Limpa as infos que estavam guardadas temporariamente
         if (requisicao.ok) {
             localStorage.clear();
             window.location.href = "index.html";

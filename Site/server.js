@@ -124,6 +124,40 @@ app.get("/perfil/:email", async (req, res) => {
     }
 });
 
+//Pega só o nome
+app.get("/editarCanal", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT nome FROM canalapoio");
+
+        //Guarda as infos no array list
+        const nomeC = resultado.rows;
+
+        res.json(nomeC)
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos dos canais 
+app.get("/editarCanal/:nome", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM canalapoio WHERE nome = $1", [nome]);
+
+        //Guarda as infos no array list
+        const canal = resultado.rows;
+
+        res.json(canal)
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
 //Rota para Deletar Conta
 app.delete("/excluirConta/:id", async (req, res) => {
 
