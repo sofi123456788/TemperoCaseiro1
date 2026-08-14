@@ -35,13 +35,13 @@ public class tela_excluir_conta extends AppCompatActivity {
         btnExcluirConta = findViewById(R.id.btnExcluirConta);
         btnCancelarExclusao = findViewById(R.id.btnCancelarExclusao);
 
-        emailUsuario = getIntent().getStringExtra("emailUsuario");
+        emailUsuario = getIntent().getStringExtra("emailUsuario"); // recupera o email enviado pela tela de configurações
 
-        btnExcluirConta.setOnClickListener(v -> {
+        btnExcluirConta.setOnClickListener(v -> { // verifica se de fato o email foi enviado
             if (emailUsuario == null || emailUsuario.trim().isEmpty()) {
                 Toast.makeText(this, "Erro: usuário não identificado", Toast.LENGTH_SHORT).show();
             } else {
-                exclusaoAPI(emailUsuario);
+                exclusaoAPI(emailUsuario); // caso o usuário tenha sido identificado, chamada a API
             }
 
         });
@@ -56,7 +56,7 @@ public class tela_excluir_conta extends AppCompatActivity {
             return insets;
         });
     }
-    private void exclusaoAPI(String email) {
+    private void exclusaoAPI(String email) { // metodo que recebe o email enviado e cria um objeto requisição
 
         ExcluirContaRequest excluirContaRequest = new ExcluirContaRequest(email);
 
@@ -77,7 +77,11 @@ public class tela_excluir_conta extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(tela_excluir_conta.this, "Erro ao excluir conta", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(
+                            tela_excluir_conta.this,
+                            "Erro ao excluir conta. Código: " + response.code(),
+                            Toast.LENGTH_LONG
+                    ).show();
                 }
             }
 

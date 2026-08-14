@@ -151,6 +151,7 @@
                 android:background="@drawable/bg_campo_login"
                 android:hint="Confirmar senha"
                 android:inputType="textPassword"
+                android:autofillHints="password"
                 android:paddingStart="14dp"
                 android:paddingEnd="16dp"
                 android:drawableStart="@drawable/ic_confirmar_senha"

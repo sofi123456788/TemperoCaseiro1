@@ -24,15 +24,17 @@ public class tela_configuracoes extends AppCompatActivity {
 
         btnAbrirExcluirConta = findViewById (R.id.btnAbrirExcluirConta);
         btnVoltarConfiguracoes = findViewById (R.id.btnVoltarConfiguracoes);
-        emailUsuario = getIntent().getStringExtra("emailUsuario");
+        emailUsuario = getIntent().getStringExtra("emailUsuario"); // recupera o email enviado pela tela anterior
 
         btnVoltarConfiguracoes.setOnClickListener(v -> {
+            Intent intent = new Intent(tela_configuracoes.this, tela_login.class);
+            startActivity(intent);
             finish(); // fecha a tela atual e volta para a anterior
         });
 
         btnAbrirExcluirConta.setOnClickListener(v -> {
             Intent intent = new Intent(tela_configuracoes.this, tela_excluir_conta.class);
-            intent.putExtra("emailUsuario", emailUsuario);
+            intent.putExtra("emailUsuario", emailUsuario); // a tela anterior envia o email logado
             startActivity(intent);
         });
 

@@ -23,7 +23,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".tela_cadastro"
             android:exported="false"
@@ -38,6 +37,14 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".tela_conta_excluida"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".model.tela_recuperar_conta"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".model.tela_codigo_recuperacao"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
