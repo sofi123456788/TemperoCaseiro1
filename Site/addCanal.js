@@ -8,7 +8,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
     //Pega as Informações
     const nome = document.getElementById("nome").value;
     const telefone = document.getElementById("telefone").value;
-    const email = document.getElementById("email").value;
+    const emailC = document.getElementById("emailC").value;
     const rua = document.getElementById("rua").value;
     const logradouro = document.getElementById("logradouro").value;
     const bairro = document.getElementById("bairro").value;
@@ -19,22 +19,22 @@ document.getElementById("container").addEventListener("submit", async (event) =>
     const modo = document.getElementById("modo").value;
 
     try {
+        const email = localStorage.getItem("emailUsuario");
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const resposta = await fetch("http://localhost:3000/addCanal",{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF,modo})
+        const resposta = await fetch(`http://localhost:3000/addCanal/${email}`,{method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({nome, telefone, emailC, rua, logradouro, bairro, cidade, estado, horaA, horaF,modo})
             }
         );
+        
         const texto = await resposta.text();
 
         console.log(texto);
 
         //Confirma que deu tudo certo
         if (resposta.ok) {
+            alert("Canal Adicionado com Sucesso!");
             window.location.reload();
         }
     } catch (erro) {

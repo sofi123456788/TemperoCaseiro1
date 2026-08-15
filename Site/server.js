@@ -125,16 +125,14 @@ app.get("/perfil/:email", async (req, res) => {
 });
 
 //Pega só o nome
-app.get("/editarCanal", async (req, res) => {
+app.get("/editarCanal/:email", async (req, res) => {
     try {
+        const email = req.params.email;
         //Pega as infos no bd
-        const resultado = await pool.query("SELECT nome FROM canalapoio");
-
+        const resultado = await pool.query(`SELECT id, nome FROM canalApoio WHERE dono = $1`, [email]);
         //Guarda as infos no array list
         const nomeC = resultado.rows;
-
         res.json(nomeC)
-
     } catch (erro) {
         console.error(erro);
         res.status(500).send("Erro no servidor");
@@ -142,20 +140,38 @@ app.get("/editarCanal", async (req, res) => {
 });
 
 //Rota para pegar as infos dos canais 
-app.get("/editarCanal/:nome", async (req, res) => {
+app.get("/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
     try {
+        const id = req.params.idCanal;
+        const nome = req.params.nomeCanal;
         //Pega as infos no bd
-        const resultado = await pool.query("SELECT * FROM canalapoio WHERE nome = $1", [nome]);
+        const resultado = await pool.query(`SELECT * FROM canalApoio WHERE id = $1 AND nome = $2`, [id, nome]);
 
         //Guarda as infos no array list
-        const canal = resultado.rows;
+        const canalEscolhido = resultado.rows[0];
 
-        res.json(canal)
+        res.json(canalEscolhido);
 
     } catch (erro) {
         console.error(erro);
         res.status(500).send("Erro no servidor");
     }
+});
+
+//Rota para atualizar o Canal
+app.post("/editarCanal/:idC", async (req, res) =>{
+    const id = req.params.idC;
+
+    const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+        bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo} = req.body;
+    
+    const resposta = await pool.query(
+        `UPDATE canalApoio SET 
+        nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
+        bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
+        horario_fechamento = $10, modo = $11 WHERE id = $12`, 
+        [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+        bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo,id]);
 });
 
 //Rota para Deletar Conta
@@ -250,18 +266,19 @@ app.post("/addCentroApoio", async (req, res) => {
 });
 
 //Rota para Adicionar Canal de Apoio
-app.post("/addCanal", async (req, res) => {
+app.post("/addCanal/:email", async (req, res) => {
     try {
+        const email = req.params.email;
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
 
-        const {nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo} = req.body;
+        const {nome, telefone, emailC, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo} = req.body;
 
         //Mandando para o banco de dados
         await pool.query(
-            `INSERT INTO canalApoio(nome, telefone, email, rua, logradouro, bairro, cidade, estado, horario_abertura, horario_fechamento, modo) 
-            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10, $11)`,
-            [nome, telefone, email, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo]
+            `INSERT INTO canalApoio(nome, telefone, email, rua, logradouro, bairro, cidade, estado, horario_abertura, horario_fechamento, modo, dono) 
+            VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10, $11, $12)`,
+            [nome, telefone, emailC, rua, logradouro, bairro, cidade, estado, horaA, horaF, modo, email]
         );
 
         //Avisa para o usuário que funcionou

@@ -4,9 +4,7 @@ window.addEventListener("load", async () => {
     const email = localStorage.getItem("emailUsuario");
 
     //Manda para o server o email do usuário para pegar as demais infos
-    const resposta = await fetch(
-        `http://localhost:3000/perfil/${email}`
-    );
+    const resposta = await fetch(`http://localhost:3000/perfil/${email}`);
 
     //Expõe as infos
     const usuario = await resposta.json();
