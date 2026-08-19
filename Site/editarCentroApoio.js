@@ -16,7 +16,7 @@ async function mostrarNomeCentro() {
             listaCentro.appendChild(itemLI);
         }
     } catch (error) {
-        
+        alert("Não foi possível encontrar os centro de apoio");
     }
 }
 
@@ -94,4 +94,4 @@ async function alterarInfosCentro() {
 }
 
 //Roda a função
-document.addEventListener("DOMContentLoaded", mostrarNomeCentro());
+document.addEventListener("DOMContentLoaded", mostrarNomeCentro);

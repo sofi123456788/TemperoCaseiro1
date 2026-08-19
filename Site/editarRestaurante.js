@@ -1,81 +1,79 @@
-async function mostrarNomeRest() {
-    const listaRest = document.getElementById("listaRests");
+async function mostrarNomeRestaurantes() {
+    const listaRestaurante = document.getElementById("listaRestaurantes");
     try {
         //Manda para o server o email do usuário para pegar as demais infos
-        const resposta = await fetch(`http://localhost:3000/editarRestaurantes`);
+        const resposta = await fetch(`http://localhost:3000/editarRestaurante`);
         const rests = await resposta.json();
 
         // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)
-        listaCentro.innerHTML = '';
+        listaRestaurante.innerHTML = '';
         for (let i = 0; i < rests.length; i++) {
-            const nomeCentro = rests[i];
+            const nomeRestaurante = rests[i];
             const itemLI = document.createElement('li');
-            itemLI.dataset.id = nomeCentro.id;
-            itemLI.dataset.nome = nomeCentro.nome;
-            itemLI.textContent = `${nomeCentro.nome}`;
-            listaCentro.appendChild(itemLI);
+            itemLI.dataset.id = nomeRestaurante.id;
+            itemLI.dataset.nome = nomeRestaurante.nome;
+            itemLI.textContent = `${nomeRestaurante.nome}`;
+            listaRestaurante.appendChild(itemLI);
         }
     } catch (error) {
-        
+        alert("Não foi possível encontrar os restaurantes");
     }
 }
 
-async function pegarInfosRests() {
+async function pegarInfosRestaurantes() {
     try {
-        const listaRest = document.getElementById("listaRests");
-        const idRest = event.target.dataset.id;
-        const nomeCentro = event.target.dataset.nome;
-        idRestSelecionado = event.target.dataset.id;
+        const listaRestaurante = document.getElementById("listaRestaurantes");
+        const idRestaurante = event.target.dataset.id;
+        const nomeRestaurante = event.target.dataset.nome;
+        idRestauranteSelecionado = event.target.dataset.id;
 
         //Manda para o banco para pegar as infos
-        const resposta = await fetch(`http://localhost:3000/editarCentroApoio/${idRest}/${nomeCentro}`);
-        const infoCentro = await resposta.json();
+        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}/${nomeRestaurante}`);
+        const infoRestaurante = await resposta.json();
 
         //Mostra as infos para o profissional
-        document.getElementById("nomeCentro").value = infoCentro.nome;
-        document.getElementById("telefoneCentro").value = infoCentro.telefone;
-        document.getElementById("emailCentro").value = infoCentro.email;
-        document.getElementById("ruaCentro").value = infoCentro.rua;
-        document.getElementById("logradouroCentro").value = infoCentro.logradouro;
-        document.getElementById("bairroCentro").value = infoCentro.bairro;
-        document.getElementById("cidadeCentro").value = infoCentro.cidade;
-        document.getElementById("estadoCentro").value = infoCentro.estado;
-        document.getElementById("horaACentro").value = infoCentro.horario_abertura;
-        document.getElementById("horaFCentro").value = infoCentro.horario_fechamento;
-        document.getElementById("tipoCentro").value = infoCentro.tipo;
+        document.getElementById("nomeRestaurante").value = infoRestaurante.nome;
+        document.getElementById("telefoneRestaurante").value = infoRestaurante.telefone;
+        document.getElementById("cepRestaurante").value = infoRestaurante.cep;
+        document.getElementById("ruaRestaurante").value = infoRestaurante.rua;
+        document.getElementById("logradouroRestaurante").value = infoRestaurante.logradouro;
+        document.getElementById("bairroRestaurante").value = infoRestaurante.bairro;
+        document.getElementById("cidadeRestaurante").value = infoRestaurante.cidade;
+        document.getElementById("estadoRestaurante").value = infoRestaurante.estado;
+        document.getElementById("horaARestaurante").value = infoRestaurante.horario_abertura;
+        document.getElementById("horaFRestaurante").value = infoRestaurante.horario_fechamento;
     } catch (error) {
-        alert("Erro ao recolher informações do Centro!")
+        alert("Erro ao recolher informações do Restaurante!")
     }
     
 }
 
-async function alterarInfosCentro() {
+async function alterarInfosRestaurante(event) {
     event.preventDefault();
 
     //Pega as infos nos campos
-    const nomeNovo = document.getElementById("nomeCentro").value;
-    const telefoneNovo = document.getElementById("telefoneCentro").value;
-    const emailNovo = document.getElementById("emailCentro").value;
-    const ruaNovo = document.getElementById("ruaCentro").value;
-    const logradouroNovo = document.getElementById("logradouroCentro").value;
-    const bairroNovo = document.getElementById("bairroCentro").value;
-    const cidadeNovo = document.getElementById("cidadeCentro").value;
-    const estadoNovo = document.getElementById("estadoCentro").value;
-    const horaaNovo = document.getElementById("horaACentro").value;
-    const horafNovo = document.getElementById("horaFCentro").value;
-    const tipoNovo = document.getElementById("tipoCentro").value;
+    const nomeNovo = document.getElementById("nomeRestaurante").value;
+    const telefoneNovo = document.getElementById("telefoneRestaurante").value;
+    const cepNovo = document.getElementById("cepRestaurante").value;
+    const ruaNovo = document.getElementById("ruaRestaurante").value;
+    const logradouroNovo = document.getElementById("logradouroRestaurante").value;
+    const bairroNovo = document.getElementById("bairroRestaurante").value;
+    const cidadeNovo = document.getElementById("cidadeRestaurante").value;
+    const estadoNovo = document.getElementById("estadoRestaurante").value;
+    const horaaNovo = document.getElementById("horaARestaurante").value;
+    const horafNovo = document.getElementById("horaFRestaurante").value;
 
     //Envia as alterações pára o banco
     try {
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const idRest = idRestSelecionado;
-        const resposta = await fetch(`http://localhost:3000/editarCentroApoio/${idRest}`,{
+        const idRestaurante = idRestauranteSelecionado;
+        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}`,{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo})
+                body: JSON.stringify({nomeNovo, telefoneNovo,cepNovo,ruaNovo,logradouroNovo,bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo})
             }
         );
         const texto = await resposta.text();
@@ -84,7 +82,7 @@ async function alterarInfosCentro() {
 
         //Confirma que deu tudo certo
         if (resposta.ok) {
-            alert("Centro alterado com sucesso!");
+            alert("Restaurante alterado com sucesso!");
             window.location.reload();
         }
     } catch (erro) {
@@ -93,5 +91,5 @@ async function alterarInfosCentro() {
     }
 }
 
-//Roda a função
-document.addEventListener("DOMContentLoaded", mostrarNomeCentro());
+//Roda a função automáticamente
+document.addEventListener("DOMContentLoaded", mostrarNomeRestaurantes);

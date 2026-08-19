@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/stileiras/estilosG.css">
+    <title>Editar Restaurantes</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
+                <img src="src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <!--Relatórios-->
+            <button onclick="window.location.href='relatoriosA.html'">
+                <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span>
+            </button>
+
+            <!--Perfil-->
+            <button onclick="window.location.href='perfilA.html'">
+                <img src="src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Lista de canais-->
+    <aside class="sidebarLista">
+        <h1 id="form_titulo">Escolha o canal</h1>
+        <ul id="listaRestaurantes" onclick="pegarInfosRestaurantes(event)"></ul>
+    </aside>
+
+    <div class="conteudo-form">
+        <div id="form_header">
+            <h1>Editar Restaurante</h1>
+            <h2>Informações do Restaurante</h2>
+        </div>
+        <form id="container">
+            <div id="input_container">
+                <!--Nome-->
+                <div class="input-box">
+                    <label for="nome" class="form-label">Nome do Restaurante</label>
+                    <input type="text" id="nomeRestaurante" class="form-controll" placeholder="Insira o nome do estabelecimento">
+                </div>
+                <!--Telefone-->
+                <div class="input-box">
+                    <label for="telefone" class="form-label">Telefone para Contato</label>
+                    <input type="text" id="telefoneRestaurante" class="form-controll" placeholder="(12)34567-8901">
+                </div>
+                <!--CEP-->
+                <div class="input-box">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" id="cepRestaurante" class="form-controll" placeholder="12.345-678">
+                </div>
+                <!--Rua-->
+                <div class="input-box">
+                    <label for="rua" class="form-label">Rua</label>
+                    <input type="text" id="ruaRestaurante" class="form-controll" placeholder="Nome da rua">
+                </div>
+                <!--Logradouro-->
+                 <div class="input-box">
+                    <label for="logradouro" class="form-label">Logradouro</label> 
+                    <input type="text" id="logradouroRestaurante" class="form-controll" placeholder="1234">
+                </div>  
+                <!--Bairro-->
+                <div class="input-box">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" id="bairroRestaurante" class="form-controll" placeholder="Insira o nome do bairro">
+                </div>
+                <!--Cidade-->
+                <div class="input-box">
+                    <label for="cidade" class="form-label">Cidade</label>
+                    <input type="text" id="cidadeRestaurante" class="form-controll" placeholder="Insira o nome da cidade">
+                </div>
+                <!--Estado-->
+                <div class="input-box">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select name="estado" id="estadoRestaurante" class="selectTopziera">
+                        <option value="nulo">     </option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="AP">Amapá</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espirito Santo</option>
+                        <option value="GO">Goiás</option>
+                        <option value="MA">Maranhão</option>
+                        <option value="MT">Mato Grosso</option>
+                        <option value="MS">Mato grosso do sul</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PR">Paraná</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="RO">Rondônia</option>
+                        <option value="RR">Roraima</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                        <option value="SE">Sergipe</option>
+                        <option value="CE">Ceará</option>
+                        <option value="TO">Tocantins</option>
+                    </select>
+                </div>
+                <!--Horário de Abertura-->
+                <div class="input-box">
+                    <label for="horaA" class="form-label">Horário de Abertura</label>
+                    <input type="time" id="horaARestaurante" class="form-controll" placeholder="07:00">
+                </div>
+                <!--Horário de Encerramento-->
+                <div class="input-box">
+                    <label for="horaF" class="form-label">Horário de Encerramento</label>
+                    <input type="time" id="horaFRestaurante" class="form-controll" placeholder="17:00">
+                </div>
+                <button type="submit" class="btn-default" onclick="alterarInfosRestaurante()">Alterar Restaurante</button>
+                <button type="submit" class="btn-default">Apagar Canal</button>
+        </form>  
+    </div>
+    <script src="editarRestaurante.js"></script>
+</body>
+</html>

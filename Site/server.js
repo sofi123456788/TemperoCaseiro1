@@ -19,6 +19,7 @@ const pool = new Pool({
     }
 });
 
+
 //Confirma se deu certinho
 pool.connect()
     .then(() => {
@@ -29,10 +30,12 @@ pool.connect()
         console.error(error);
     });
 
+
 //Fala se ta funcionando Top
 app.listen(3000, () => {
     console.log("Servidor rodando!");
 });
+
 
 //Rota para cadastro
 app.post("/cadastro", async (req, res) => {
@@ -62,6 +65,7 @@ app.post("/cadastro", async (req, res) => {
     }
 
 });
+
 
 //Rota para o login
 app.post("/login", async (req, res) => {
@@ -98,6 +102,7 @@ app.post("/login", async (req, res) => {
 
 });
 
+
 //Pega todas as infos do usuário para a página do perfil
 app.get("/perfil/:email", async (req, res) => {
     try {
@@ -119,6 +124,7 @@ app.get("/perfil/:email", async (req, res) => {
         res.status(500).send("Erro no servidor");
     }
 });
+
 
 //Rota para alterar o Canal de Apoio
 //Pega só o nome
@@ -177,6 +183,7 @@ app.put("/editarCanal/:idC", async (req, res) =>{
     }
 });
 
+
 //Rota para alterar Centro de apoio
 //Pega só o nome
 app.get("/editarCentroApoio", async (req, res) => {
@@ -234,34 +241,35 @@ app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
     }
 });
 
+
 //Rota para alterar Restaurantes
 //Pega só o nome
-app.get("/editarCentroApoio", async (req, res) => {
+app.get("/editarRestaurante", async (req, res) => {
     try {
         //Pega as infos no bd
-        const resultado = await pool.query(`SELECT id, nome FROM centroApoio`);
+        const resultado = await pool.query(`SELECT id, nome FROM restaurantes`);
         
         //Guarda as infos no array list
-        const nomeCentro = resultado.rows;
-        res.json(nomeCentro)
+        const nomeRestaurante = resultado.rows;
+        res.json(nomeRestaurante)
     } catch (erro) {
         console.error(erro);
         res.status(500).send("Erro no servidor");
     }
 });
 
-//Rota para pegar as infos dos centros 
-app.get("/editarCentroApoio/:idCentro/:nomeCentro", async (req, res) => {
+//Rota para pegar as infos dos Restaurantes 
+app.get("/editarRestaurante/:idRestaurante/:nomeRestaurante", async (req, res) => {
     try {
-        const id = req.params.idCentro;
-        const nome = req.params.nomeCentro;
+        const id = req.params.idRestaurante;
+        const nome = req.params.nomeRestaurante;
         //Pega as infos no bd
-        const resultado = await pool.query("SELECT * FROM centroApoio WHERE id = $1 AND nome = $2", [id, nome]);
+        const resultado = await pool.query("SELECT * FROM restaurantes WHERE id = $1 AND nome = $2", [id, nome]);
 
         //Guarda as infos no array list
-        const centroEscolhido = resultado.rows[0];
+        const restauranteEscolhido = resultado.rows[0];
 
-        res.json(centroEscolhido);
+        res.json(restauranteEscolhido);
 
     } catch (erro) {
         console.error(erro);
@@ -269,25 +277,25 @@ app.get("/editarCentroApoio/:idCentro/:nomeCentro", async (req, res) => {
     }
 });
 
-//Rota para atualizar o Centro
-app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
+//Rota para atualizar o Restaurante
+app.put("/editarRestaurante/:idRestaurante", async (req, res) =>{
     try {
-        const id = req.params.idCentro;
+        const id = req.params.idRestaurante;
 
-        const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
-            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo} = req.body;
+        const {nomeNovo, telefoneNovo,cepNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo} = req.body;
     
         const resposta = await pool.query(
-            `UPDATE centroApoio SET 
-            nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
+            `UPDATE restaurantes SET 
+            nome = $1, telefone = $2, cep = $3, rua = $4, logradouro = $5,
             bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
-            horario_fechamento = $10, tipo = $11 WHERE id = $12`, 
-            [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
-            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo,id]);
+            horario_fechamento = $10 WHERE id = $11`, 
+            [nomeNovo, telefoneNovo,cepNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo, id]);
 
         res.json(resposta);
     } catch (error) {
-        console.erro("Erro:", erro);   
+        console.error("Erro:", error);   
     }
 });
 
