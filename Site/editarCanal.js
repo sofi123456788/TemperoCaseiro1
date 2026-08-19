@@ -11,6 +11,8 @@ async function mostrarNomeCanal() {
         for (let i = 0; i < canais.length; i++) {
             const nomeC= canais[i];
             const itemLI = document.createElement('li');
+            itemLI.dataset.id = nomeC.id;
+            itemLI.dataset.nome = nomeC.nome;
             itemLI.textContent = `${nomeC.nome}`;
             listaCanal.appendChild(itemLI);
         }
@@ -24,23 +26,24 @@ async function pegarInfos() {
         const listaCanal = document.getElementById("listaCanais");
         const idCanal = event.target.dataset.id;
         const nomeCanal = event.target.dataset.nome;
+        idCanalSelecionado = event.target.dataset.id;
 
         //Manda para o banco para pegar as infos
         const resposta = await fetch(`http://localhost:3000/editarCanal/${idCanal}/${nomeCanal}`);
         const infoCanal = await resposta.json();
 
         //Mostra as infos para o profissional
-        document.getElementById("nomeCanal").textContent = infoCanal.nome;
-        document.getElementById("telefoneCanal").textContent = infoCanal.telefone;
-        document.getElementById("emailCanal").textContent = infoCanal.email;
-        document.getElementById("ruaCanal").textContent = infoCanal.rua;
-        document.getElementById("logradouroCanal").textContent = infoCanal.logradouro;
-        document.getElementById("bairroCanal").textContent = infoCanal.bairro;
-        document.getElementById("cidadeCanal").textContent = infoCanal.cidade;
-        document.getElementById("estadoCanal").textContent = infoCanal.estado;
-        document.getElementById("horaACanal").textContent = infoCanal.horario_abertura;
-        document.getElementById("horaFCanal").textContent = infoCanal.horario_fechamento;
-        document.getElementById("modoCanal").textContent = infoCanal.modo;
+        document.getElementById("nomeCanal").value = infoCanal.nome;
+        document.getElementById("telefoneCanal").value = infoCanal.telefone;
+        document.getElementById("emailCanal").value = infoCanal.email;
+        document.getElementById("ruaCanal").value = infoCanal.rua;
+        document.getElementById("logradouroCanal").value = infoCanal.logradouro;
+        document.getElementById("bairroCanal").value = infoCanal.bairro;
+        document.getElementById("cidadeCanal").value = infoCanal.cidade;
+        document.getElementById("estadoCanal").value = infoCanal.estado;
+        document.getElementById("horaACanal").value = infoCanal.horario_abertura;
+        document.getElementById("horaFCanal").value = infoCanal.horario_fechamento;
+        document.getElementById("modoCanal").value = infoCanal.modo;
     } catch (error) {
         alert("Erro ao recolher informações do canal!")
     }
@@ -67,9 +70,9 @@ async function alterarInfos() {
     try {
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const idC = localStorage.getItem(nomeC.id);
+        const idC = idCanalSelecionado;
         const resposta = await fetch(`http://localhost:3000/editarCanal/${idC}`,{
-                method: "UPDATE",
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -86,7 +89,8 @@ async function alterarInfos() {
             window.location.reload();
         }
     } catch (erro) {
-        console.erro("Erro:", erro);
+        console.error("Erro:", erro);
+        alert("Nã foi possível realizar essas alterações!");
     }
 }
 

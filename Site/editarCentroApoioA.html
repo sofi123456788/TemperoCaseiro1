@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/stileiras/estilosG.css">
-    <title>Editar Canal de Apoio</title>
+    <title>Editar Centro de Apoio</title>
 </head>
 <body>
     <!-- Menu lateral -->
@@ -14,21 +14,19 @@
             <img src="src/stileiras/img/logoFundoBranco.png" alt="logo">
         </div>
         <nav class="menu-lateral"><!--Navegação-->
-            <button onclick="window.location.href='telaInicial.html'">
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
                 <img src="src/stileiras/img/home.png" alt="Home">
                 <span>Início</span>
             </button>
 
+            <!--Relatórios-->
             <button onclick="window.location.href='relatorios.html'">
                 <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
-                <span>Relatórios</span><!---->
+                <span>Relatórios</span>
             </button>
 
-            <button onclick="window.location.href='mensagens.html'">
-                <img src="src/stileiras/img/chat.png" alt="Mensagens">
-                <span>Mensagens</span>
-            </button>
-
+            <!--Perfil-->
             <button onclick="window.location.href='perfil.html'">
                 <img src="src/stileiras/img/perfil.png" alt="Perfil">
                 <span>Perfil</span>
@@ -37,51 +35,52 @@
         </nav>
 
     </aside>
+
     <!--Lista de canais-->
     <aside class="sidebarLista">
         <h1 id="form_titulo">Escolha o canal</h1>
-        <ul id="listaCanais" onclick="pegarInfos()"></ul>
+        <ul id="listaCentros" onclick="pegarInfosCentro()"></ul>
     </aside>
 
     <!--Edição do Canal de Apoio-->
     <div class="conteudo-form">
         <div id="form_headerL">
-            <h1>Alterar Canal de Apoio</h1>
-            <h2>Informações do Canal</h2>
+            <h1>Alterar Centro de Apoio</h1>
+            <h2>Informações do Centro</h2>
         </div>
         <form id="container">
             <div id="input_container">
                 <div class="input-box">
-                    <label for="nome" class="form-label">Nome do Canal de Apoio</label>
-                    <input type="text" id="nomeCanal" class="form-controll" placeholder="Insira o nome">
+                    <label for="nome" class="form-label">Nome do Centro de Apoio</label>
+                    <input type="text" id="nomeCentro" class="form-controll" placeholder="Insira o nome">
                 </div>
                 <div class="input-box">
                     <label for="telefone" class="form-label">Telefone para Contato</label>
-                    <input type="text" id="telefoneCanal" class="form-controll" placeholder="(12)34567-8901">
+                    <input type="text" id="telefoneCentro" class="form-controll" placeholder="(12)34567-8901">
                 </div>
                 <div class="input-box">
                     <label for="email" class="form-label">Email para Contato</label>
-                    <input type="text" id="emailCanal" class="form-controll" placeholder="local@gmail.com">
+                    <input type="text" id="emailCentro" class="form-controll" placeholder="local@gmail.com">
                 </div>
                 <div class="input-box">
                     <label for="rua" class="form-label">Rua</label>
-                    <input type="text" id="ruaCanal" class="form-controll" placeholder="Nome da rua">
+                    <input type="text" id="ruaCentro" class="form-controll" placeholder="Nome da rua">
                 </div>
                  <div class="input-box">
                     <label for="logradouro" class="form-label">Logradouro</label> 
-                    <input type="text" id="logradouroCanal" class="form-controll" placeholder="1234">
+                    <input type="text" id="logradouroCentro" class="form-controll" placeholder="1234">
                 </div>  
                 <div class="input-box">
                     <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" id="bairroCanal" class="form-controll" placeholder="Insira o nome do bairro">
+                    <input type="text" id="bairroCentro" class="form-controll" placeholder="Insira o nome do bairro">
                 </div>
                 <div class="input-box">
                     <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" id="cidadeCanal" class="form-controll" placeholder="Insira o nome da cidade">
+                    <input type="text" id="cidadeCentro" class="form-controll" placeholder="Insira o nome da cidade">
                 </div>
                 <div class="input-box">
                     <label for="estado" class="form-label">Estado</label>
-                    <select name="estado" id="estadoCanal" class="selectTopziera">
+                    <select name="estado" id="estadoCentro" class="selectTopziera">
                         <option value="nulo">     </option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -114,25 +113,25 @@
                 </div>
                 <div class="input-box">
                     <label for="horaA" class="form-label">Horário de Abertura</label>
-                    <input type="time" id="horaACanal" class="form-controll" placeholder="07:00">
+                    <input type="time" id="horaACentro" class="form-controll" placeholder="07:00">
                 </div>
                 <div class="input-box">
                     <label for="horaF" class="form-label">Horário de Encerramento</label>
-                    <input type="time" id="horaFCanal" class="form-controll" placeholder="17:00">
+                    <input type="time" id="horaFCentro" class="form-controll" placeholder="17:00">
                 </div>
                 <label for="modo" class="form-label">Modo de Atendimento</label>
-                <select name="modo" id="modoCanal" class="selectTopziera">
+                <!--Tipo de Centro-->
+                <select name="tipo" id="tipoCentro" class="selectTopziera">
                     <option value="nulo">     </option>
-                    <option value="Chamada de vídeo">Chamada de vídeo</option>
-                    <option value="Chamada de áudio">Chamada de áudio</option>
-                    <option value="Chat de texto">Chat de Texto</option>
-                    <option value="Todos">Todos</option>
+                    <option value="Casa de Acolhimento">Casa de Acolhimento</option>
+                    <option value="Delegacia da Mulher">Delegacia da Mulher</option>
+                    <option value="Centro de Apoio a Mulher">Centro de Apoio a Mulher</option>
                 </select>
             </div>
-            <button type="submit" class="btn-default" onclick="alterarInfos()">Alterar Canal</button>
+            <button type="submit" class="btn-default" onclick="alterarInfosCentro()">Alterar Centro</button>
             <button type="submit" class="btn-default">Apagar Csnal</button>
         </form>  
     </div>
-    <script src="editarCanal.js"></script>
+    <script src="editarCentroApoio.js"></script>
 </body>
 </html>

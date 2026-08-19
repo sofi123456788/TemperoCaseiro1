@@ -102,11 +102,7 @@ app.post("/login", async (req, res) => {
 app.get("/perfil/:email", async (req, res) => {
     try {
         const email = req.params.email;
-
-        const resultado = await pool.query(
-            "SELECT * FROM profissionais WHERE email = $1",
-            [email]
-        );
+        const resultado = await pool.query("SELECT * FROM profissionais WHERE email = $1",[email]);
 
         //Guarda as infos "pessoais"
         const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele email
@@ -124,6 +120,7 @@ app.get("/perfil/:email", async (req, res) => {
     }
 });
 
+//Rota para alterar o Canal de Apoio
 //Pega só o nome
 app.get("/editarCanal/:email", async (req, res) => {
     try {
@@ -145,7 +142,7 @@ app.get("/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
         const id = req.params.idCanal;
         const nome = req.params.nomeCanal;
         //Pega as infos no bd
-        const resultado = await pool.query(`SELECT * FROM canalApoio WHERE id = $1 AND nome = $2`, [id, nome]);
+        const resultado = await pool.query("SELECT * FROM canalApoio WHERE id = $1 AND nome = $2", [id, nome]);
 
         //Guarda as infos no array list
         const canalEscolhido = resultado.rows[0];
@@ -159,19 +156,139 @@ app.get("/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
 });
 
 //Rota para atualizar o Canal
-app.post("/editarCanal/:idC", async (req, res) =>{
-    const id = req.params.idC;
+app.put("/editarCanal/:idC", async (req, res) =>{
+    try {
+        const id = req.params.idC;
 
-    const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
-        bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo} = req.body;
+        const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo} = req.body;
     
-    const resposta = await pool.query(
-        `UPDATE canalApoio SET 
-        nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
-        bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
-        horario_fechamento = $10, modo = $11 WHERE id = $12`, 
-        [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
-        bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo,id]);
+        const resposta = await pool.query(
+            `UPDATE canalApoio SET 
+            nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
+            bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
+            horario_fechamento = $10, modo = $11 WHERE id = $12`, 
+            [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,modoNovo,id]);
+
+        res.json(resposta);
+    } catch (error) {
+        console.erro("Erro:", erro);   
+    }
+});
+
+//Rota para alterar Centro de apoio
+//Pega só o nome
+app.get("/editarCentroApoio", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query(`SELECT id, nome FROM centroApoio`);
+        
+        //Guarda as infos no array list
+        const nomeCentro = resultado.rows;
+        res.json(nomeCentro)
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos dos centros 
+app.get("/editarCentroApoio/:idCentro/:nomeCentro", async (req, res) => {
+    try {
+        const id = req.params.idCentro;
+        const nome = req.params.nomeCentro;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM centroApoio WHERE id = $1 AND nome = $2", [id, nome]);
+
+        //Guarda as infos no array list
+        const centroEscolhido = resultado.rows[0];
+
+        res.json(centroEscolhido);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para atualizar o Centro
+app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
+    try {
+        const id = req.params.idCentro;
+
+        const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo} = req.body;
+    
+        const resposta = await pool.query(
+            `UPDATE centroApoio SET 
+            nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
+            bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
+            horario_fechamento = $10, tipo = $11 WHERE id = $12`, 
+            [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo,id]);
+
+        res.json(resposta);
+    } catch (error) {
+        console.erro("Erro:", erro);   
+    }
+});
+
+//Rota para alterar Restaurantes
+//Pega só o nome
+app.get("/editarCentroApoio", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query(`SELECT id, nome FROM centroApoio`);
+        
+        //Guarda as infos no array list
+        const nomeCentro = resultado.rows;
+        res.json(nomeCentro)
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos dos centros 
+app.get("/editarCentroApoio/:idCentro/:nomeCentro", async (req, res) => {
+    try {
+        const id = req.params.idCentro;
+        const nome = req.params.nomeCentro;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM centroApoio WHERE id = $1 AND nome = $2", [id, nome]);
+
+        //Guarda as infos no array list
+        const centroEscolhido = resultado.rows[0];
+
+        res.json(centroEscolhido);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para atualizar o Centro
+app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
+    try {
+        const id = req.params.idCentro;
+
+        const {nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo} = req.body;
+    
+        const resposta = await pool.query(
+            `UPDATE centroApoio SET 
+            nome = $1, telefone = $2, email = $3, rua = $4, logradouro = $5,
+            bairro = $6, cidade = $7, estado = $8, horario_abertura = $9,
+            horario_fechamento = $10, tipo = $11 WHERE id = $12`, 
+            [nomeNovo, telefoneNovo,emailNovo,ruaNovo,logradouroNovo,
+            bairroNovo,cidadeNovo,estadoNovo,horaaNovo,horafNovo,tipoNovo,id]);
+
+        res.json(resposta);
+    } catch (error) {
+        console.erro("Erro:", erro);   
+    }
 });
 
 //Rota para Deletar Conta

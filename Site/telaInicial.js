@@ -4,7 +4,7 @@ document.getElementById("addCanal").addEventListener("click", ()=>{
     window.location.href = "addCanal.html";
 });
 
-//Adicionar canal de apoio
+//Editar canal de apoio
 document.getElementById("editarCanal").addEventListener("click", ()=>{
     window.location.href = "editarCanal.html";
 });
@@ -13,6 +13,12 @@ document.getElementById("editarCanal").addEventListener("click", ()=>{
 document.getElementById("addC").addEventListener("click", ()=>{
     window.location.href = "addCentroApoioPA.html";
 });
+
+//Editar centro de apoio
+document.getElementById("editarCentro").addEventListener("click", ()=>{
+    window.location.href = "editarCentroApoioPA.html";
+});
+
 
 //Registrar Atendimento
 document.getElementById("resgisA").addEventListener("click", ()=>{
