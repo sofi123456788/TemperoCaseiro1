@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -75,6 +76,20 @@ public class MainActivity extends AppCompatActivity {
         layoutDoces.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, DocesActivity.class);
             startActivity(intent);
+        });
+
+        // Botão "Receitas" do rodapé
+        LinearLayout menuReceitas = findViewById(R.id.menuReceitas);
+
+// Ao clicar, abre a tela com todas as receitas do banco
+        menuReceitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, ReceitasBD.class);
+                startActivity(intent);
+
+            }
         });
 
 

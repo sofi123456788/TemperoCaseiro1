@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:padding="18dp"
+    android:background="@drawable/bg_campo_receita">
+
+    <!-- Nome da receita -->
+    <TextView
+        android:id="@+id/txtTituloCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nome da receita"
+        android:textColor="#1E1A17"
+        android:textSize="21sp"
+        android:textStyle="bold" />
+
+    <!-- Categoria -->
+    <TextView
+        android:id="@+id/txtCategoriaCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Categoria"
+        android:textColor="#1E1A17"
+        android:textSize="15sp" />
+
+    <!-- Tempo de preparo -->
+    <TextView
+        android:id="@+id/txtTempoCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Tempo de preparo"
+        android:textColor="#1E1A17"
+        android:textSize="15sp" />
+
+    <!-- Rendimento -->
+    <TextView
+        android:id="@+id/txtRendimentoCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Rendimento"
+        android:textColor="#1E1A17"
+        android:textSize="15sp" />
+
+</LinearLayout>

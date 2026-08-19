@@ -22,6 +22,7 @@
         <activity android:name=".SalgadosActivity" />
         <activity android:name=".RapidasActivity" />
         <activity android:name=".DocesActivity" />
+        <activity android:name=".ReceitasBD" />
 
         <activity
             android:name=".MainActivity"
