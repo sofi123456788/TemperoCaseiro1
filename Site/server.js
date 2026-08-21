@@ -259,17 +259,22 @@ app.get("/editarRestaurante", async (req, res) => {
 });
 
 //Rota para pegar as infos dos Restaurantes 
-app.get("/editarRestaurante/:idRestaurante/:nomeRestaurante", async (req, res) => {
+app.get("/editarRestaurante/:idRestaurante", async (req, res) => {
     try {
         const id = req.params.idRestaurante;
-        const nome = req.params.nomeRestaurante;
         //Pega as infos no bd
-        const resultado = await pool.query("SELECT * FROM restaurantes WHERE id = $1 AND nome = $2", [id, nome]);
+        const resultado = await pool.query("SELECT * FROM restaurantes WHERE id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Restaurante não encontrado"
+            });
+        }
 
         //Guarda as infos no array list
         const restauranteEscolhido = resultado.rows[0];
 
-        res.json(restauranteEscolhido);
+        return res.json(restauranteEscolhido);
 
     } catch (erro) {
         console.error(erro);
@@ -298,6 +303,7 @@ app.put("/editarRestaurante/:idRestaurante", async (req, res) =>{
         console.error("Erro:", error);   
     }
 });
+
 
 //Rota para Deletar Conta
 app.delete("/excluirConta/:id", async (req, res) => {
@@ -330,6 +336,99 @@ app.delete("/excluirConta/:id", async (req, res) => {
     }
 });
 
+
+//Rotas para deletar as infos:
+//Rota para deletar Canal de apoio
+app.delete("/excluirCanal/:idCanal", async (req, res) => {
+
+    const idDeletar = req.params.idCanal;
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        // Salva na tabela de excluídos
+        /*await pool.query(
+            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW(), 'Conta removida pelo usuário')",
+            [idpp]
+        );
+        */
+        // Remove da tabela profissionais
+        await client.query("DELETE FROM canalApoio WHERE id = $1",[idDeletar]);
+
+        await client.query("COMMIT");
+
+        res.send("Canal excluído com sucesso!");
+
+    } catch (erro) {
+        await pool.query("ROLLBACK");
+        console.error(erro);
+        res.status(500).send("Erro ao excluir Canal.");
+    }
+});
+
+//Rota para deletar Centro de apoio
+app.delete("/excluirCentro/:idCentro", async (req, res) => {
+
+    const idDeletar = req.params.idCentro;
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        // Salva na tabela de excluídos
+        /*await pool.query(
+            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW(), 'Conta removida pelo usuário')",
+            [idpp]
+        );
+        */
+        // Remove da tabela profissionais
+        await client.query("DELETE FROM centroApoio WHERE id = $1",[idDeletar]);
+
+        await client.query("COMMIT");
+
+        res.send("Centro excluído com sucesso!");
+
+    } catch (erro) {
+        await pool.query("ROLLBACK");
+        console.error(erro);
+        res.status(500).send("Erro ao excluir centro.");
+    }
+});
+
+//Rota para deletar Restaurantes
+app.delete("/excluirRestaurante/:idRestaurante", async (req, res) => {
+
+    const idDeletar = req.params.idRestaurante;
+    const client = await pool.connect();
+
+    try {
+        await client.query("BEGIN");
+
+        // Salva na tabela de excluídos
+        /*await pool.query(
+            "INSERT INTO exclusoes_cp (profissionaisId, excluido_em, motivo) VALUES ($1, NOW(), 'Conta removida pelo usuário')",
+            [idpp]
+        );
+        */
+        // Remove da tabela profissionais
+        await client.query(
+            "DELETE FROM restaurantes WHERE id = $1",
+            [idDeletar]
+        );
+
+        await client.query("COMMIT");
+
+        res.send("Restaurante excluído com sucesso!");
+
+    } catch (erro) {
+        await pool.query("ROLLBACK");
+        console.error(erro);
+        res.status(500).send("Erro ao excluir restaurante.");
+    }
+});
+
+
 //Rota para Adicionar Restaurante
 app.post("/addRestaurante", async (req, res) => {
     try {
@@ -359,6 +458,7 @@ app.post("/addRestaurante", async (req, res) => {
     }
 
 });
+
 
 //Rota para Adicionar Centro de Apoio
 app.post("/addCentroApoio", async (req, res) => {
@@ -390,6 +490,7 @@ app.post("/addCentroApoio", async (req, res) => {
 
 });
 
+
 //Rota para Adicionar Canal de Apoio
 app.post("/addCanal/:email", async (req, res) => {
     try {
@@ -420,6 +521,7 @@ app.post("/addCanal/:email", async (req, res) => {
     }
 
 });
+
 
 //Rota para Registrar Atendimentos
 app.post("/registrarAtend", async (req, res) => {

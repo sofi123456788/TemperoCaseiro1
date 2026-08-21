@@ -94,5 +94,40 @@ async function alterarInfos() {
     }
 }
 
+//Função para apagar canal
+async function excluirCanal() {
+
+    //Confirma se é desejo do usuário
+    const resposta = confirm(
+        "Tem certeza que deseja excluir esse Canal?"
+    );
+
+    //Caso seja negativo não acontece nada
+    if (!resposta) {
+        return;
+    }
+    try {
+        //Pega o id e manda para o server
+        const idCanal = idCanalSelecionado;
+
+        const requisicao = await fetch(`http://localhost:3000/excluirCanal/${idCanal}`,{method: "DELETE"});
+
+        const mensagem = await requisicao.text();
+
+        alert(mensagem);
+
+        //Limpa as infos que estavam guardadas temporariamente
+        if (requisicao.ok) {
+            localStorage.clear();
+            window.location.reload();
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+    
+}
+
 //Roda a função
 document.addEventListener("DOMContentLoaded", mostrarNomeCanal);

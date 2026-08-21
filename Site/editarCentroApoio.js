@@ -93,5 +93,40 @@ async function alterarInfosCentro() {
     }
 }
 
+//Função para apagar centro
+async function excluirCentro() {
+
+    //Confirma se é desejo do usuário
+    const resposta = confirm(
+        "Tem certeza que deseja excluir esse Centro?"
+    );
+
+    //Caso seja negativo não acontece nada
+    if (!resposta) {
+        return;
+    }
+    try {
+        //Pega o id e manda para o server
+        const idCentro = idCentroSelecionado;
+
+        const requisicao = await fetch(`http://localhost:3000/excluirCentro/${idCentro}`,{method: "DELETE"});
+
+        const mensagem = await requisicao.text();
+
+        alert(mensagem);
+
+        //Limpa as infos que estavam guardadas temporariamente
+        if (requisicao.ok) {
+            localStorage.clear();
+            window.location.reload();
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+    
+}
+
 //Roda a função
 document.addEventListener("DOMContentLoaded", mostrarNomeCentro);

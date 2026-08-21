@@ -20,15 +20,18 @@ async function mostrarNomeRestaurantes() {
     }
 }
 
-async function pegarInfosRestaurantes() {
+async function pegarInfosRestaurantes(event) {
     try {
-        const listaRestaurante = document.getElementById("listaRestaurantes");
         const idRestaurante = event.target.dataset.id;
-        const nomeRestaurante = event.target.dataset.nome;
-        idRestauranteSelecionado = event.target.dataset.id;
+        idRestauranteSelecionado = idRestaurante;
 
         //Manda para o banco para pegar as infos
-        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}/${nomeRestaurante}`);
+        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}`);
+
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+
         const infoRestaurante = await resposta.json();
 
         //Mostra as infos para o profissional
@@ -89,6 +92,41 @@ async function alterarInfosRestaurante(event) {
         console.error("Erro:", erro);
         alert("Não foi possível realizar essas alterações!");
     }
+}
+
+//Função para apagar restaurante
+async function excluirRestaurante() {
+
+    //Confirma se é desejo do usuário
+    const resposta = confirm(
+        "Tem certeza que deseja excluir esse restaurante?"
+    );
+
+    //Caso seja negativo não acontece nada
+    if (!resposta) {
+        return;
+    }
+    try {
+        //Pega o id e manda para o server
+        const idRestaurante = idRestauranteSelecionado;
+
+        const requisicao = await fetch(`http://localhost:3000/excluirRestaurante/${idRestaurante}`,{method: "DELETE"});
+
+        const mensagem = await requisicao.text();
+
+        alert(mensagem);
+
+        //Limpa as infos que estavam guardadas temporariamente
+        if (requisicao.ok) {
+            localStorage.clear();
+            window.location.reload();
+        }
+
+    } catch (erro) {
+        console.error(erro);
+        alert("Não foi possível conectar ao servidor.");
+    }
+    
 }
 
 //Roda a função automáticamente
