@@ -24,6 +24,7 @@ public class tela_recuperar_conta extends AppCompatActivity {
         setContentView(R.layout.activity_tela_recuperar_conta);
 
         editEmailRecuperacao = findViewById(R.id.editEmailRecuperacao);
+        btnConfirmarEmailRecuperacao = findViewById(R.id.btnConfirmarEmailRecuperacao);
 
         btnConfirmarEmailRecuperacao.setOnClickListener (v -> {
         String emailRec = editEmailRecuperacao.getText().toString();
