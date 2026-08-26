@@ -38,7 +38,7 @@ app.listen(3000, () => {
 
 
 //Rota para cadastro
-app.post("/cadastro", async (req, res) => {
+app.post("/Cadastros/cadastro", async (req, res) => {
     try {
 
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
@@ -68,7 +68,7 @@ app.post("/cadastro", async (req, res) => {
 
 
 //Rota para o login
-app.post("/login", async (req, res) => {
+app.post("/Cadastros/login", async (req, res) => {
     try {
          const { email, senha } = req.body;
 
@@ -104,7 +104,7 @@ app.post("/login", async (req, res) => {
 
 
 //Pega todas as infos do usuário para a página do perfil
-app.get("/perfil/:email", async (req, res) => {
+app.get("/Cadastros/perfil/:email", async (req, res) => {
     try {
         const email = req.params.email;
         const resultado = await pool.query("SELECT * FROM profissionais WHERE email = $1",[email]);
@@ -128,7 +128,7 @@ app.get("/perfil/:email", async (req, res) => {
 
 //Rota para alterar o Canal de Apoio
 //Pega só o nome
-app.get("/editarCanal/:email", async (req, res) => {
+app.get("/PsiAdv/editarCanal/:email", async (req, res) => {
     try {
         const email = req.params.email;
         //Pega as infos no bd
@@ -143,7 +143,7 @@ app.get("/editarCanal/:email", async (req, res) => {
 });
 
 //Rota para pegar as infos dos canais 
-app.get("/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
+app.get("/PsiAdv/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
     try {
         const id = req.params.idCanal;
         const nome = req.params.nomeCanal;
@@ -162,7 +162,7 @@ app.get("/editarCanal/:idCanal/:nomeCanal", async (req, res) => {
 });
 
 //Rota para atualizar o Canal
-app.put("/editarCanal/:idC", async (req, res) =>{
+app.put("/PsiAdv/editarCanal/:idC", async (req, res) =>{
     try {
         const id = req.params.idC;
 
@@ -244,7 +244,7 @@ app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
 
 //Rota para alterar Restaurantes
 //Pega só o nome
-app.get("/editarRestaurante", async (req, res) => {
+app.get("/Adm/editarRestaurante", async (req, res) => {
     try {
         //Pega as infos no bd
         const resultado = await pool.query(`SELECT id, nome FROM restaurantes`);
@@ -259,7 +259,7 @@ app.get("/editarRestaurante", async (req, res) => {
 });
 
 //Rota para pegar as infos dos Restaurantes 
-app.get("/editarRestaurante/:idRestaurante", async (req, res) => {
+app.get("/Adm/editarRestaurante/:idRestaurante", async (req, res) => {
     try {
         const id = req.params.idRestaurante;
         //Pega as infos no bd
@@ -283,7 +283,7 @@ app.get("/editarRestaurante/:idRestaurante", async (req, res) => {
 });
 
 //Rota para atualizar o Restaurante
-app.put("/editarRestaurante/:idRestaurante", async (req, res) =>{
+app.put("/Adm/editarRestaurante/:idRestaurante", async (req, res) =>{
     try {
         const id = req.params.idRestaurante;
 
@@ -339,7 +339,7 @@ app.delete("/excluirConta/:id", async (req, res) => {
 
 //Rotas para deletar as infos:
 //Rota para deletar Canal de apoio
-app.delete("/excluirCanal/:idCanal", async (req, res) => {
+app.delete("/PsiAdv/excluirCanal/:idCanal", async (req, res) => {
 
     const idDeletar = req.params.idCanal;
     const client = await pool.connect();
@@ -397,7 +397,7 @@ app.delete("/excluirCentro/:idCentro", async (req, res) => {
 });
 
 //Rota para deletar Restaurantes
-app.delete("/excluirRestaurante/:idRestaurante", async (req, res) => {
+app.delete("/Adm/excluirRestaurante/:idRestaurante", async (req, res) => {
 
     const idDeletar = req.params.idRestaurante;
     const client = await pool.connect();
@@ -430,7 +430,7 @@ app.delete("/excluirRestaurante/:idRestaurante", async (req, res) => {
 
 
 //Rota para Adicionar Restaurante
-app.post("/addRestaurante", async (req, res) => {
+app.post("/Adm/addRestaurante", async (req, res) => {
     try {
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
@@ -492,7 +492,7 @@ app.post("/addCentroApoio", async (req, res) => {
 
 
 //Rota para Adicionar Canal de Apoio
-app.post("/addCanal/:email", async (req, res) => {
+app.post("/PsiAdv/addCanal/:email", async (req, res) => {
     try {
         const email = req.params.email;
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
@@ -524,7 +524,7 @@ app.post("/addCanal/:email", async (req, res) => {
 
 
 //Rota para Registrar Atendimentos
-app.post("/registrarAtend", async (req, res) => {
+app.post("/PsiAdv/registrarAtend", async (req, res) => {
     try {
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);

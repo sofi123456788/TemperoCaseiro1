@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/stileiras/estilosG.css">
-    <title>Adicionar Centro de Apoio</title>
+    <title>Editar Centro de Apoio</title>
 </head>
 <body>
     <!-- Menu lateral -->
@@ -20,7 +20,7 @@
                 <span>Início</span>
             </button>
 
-            <!-- Relatórios-->
+            <!--Relatórios-->
             <button onclick="window.location.href='relatoriosA.html'">
                 <img src="src/stileiras/img/Grafico.png" alt="Relatórios">
                 <span>Relatórios</span>
@@ -37,59 +37,56 @@
                 <img src="src/stileiras/img/solicitacoes.png" alt="solicitacoes">
                 <span>Solicitações</span>
             </button>
-            
+
         </nav>
 
     </aside>
 
-    <!--Cadastro do Centro de Apoio-->
+    <!--Lista de canais-->
+    <aside class="sidebarLista">
+        <h1 id="form_titulo">Escolha o canal</h1>
+        <ul id="listaCentros" onclick="pegarInfosCentro()"></ul>
+    </aside>
+
+    <!--Edição do Canal de Apoio-->
     <div class="conteudo-form">
-        <div id="form_header">
-            <h1>Adicionar Centro de Apoio</h1>
+        <div id="form_headerL">
+            <h1>Alterar Centro de Apoio</h1>
             <h2>Informações do Centro</h2>
         </div>
-
         <form id="container">
             <div id="input_container">
-                <!--Nome-->
                 <div class="input-box">
                     <label for="nome" class="form-label">Nome do Centro de Apoio</label>
-                    <input type="text" id="nome" class="form-controll" placeholder="Insira o nome do estabelecimento">
+                    <input type="text" id="nomeCentro" class="form-controll" placeholder="Insira o nome">
                 </div>
-                <!--Telefone-->
                 <div class="input-box">
                     <label for="telefone" class="form-label">Telefone para Contato</label>
-                    <input type="text" id="telefone" class="form-controll" placeholder="(12)34567-8901">
+                    <input type="text" id="telefoneCentro" class="form-controll" placeholder="(12)34567-8901">
                 </div>
-                <!--Email-->
                 <div class="input-box">
                     <label for="email" class="form-label">Email para Contato</label>
-                    <input type="text" id="email" class="form-controll" placeholder="local@gmail.com">
+                    <input type="text" id="emailCentro" class="form-controll" placeholder="local@gmail.com">
                 </div>
-                <!--Rua-->
                 <div class="input-box">
                     <label for="rua" class="form-label">Rua</label>
-                    <input type="text" id="rua" class="form-controll" placeholder="Nome da rua">
+                    <input type="text" id="ruaCentro" class="form-controll" placeholder="Nome da rua">
                 </div>
-                <!--Logradouro-->
-                <div class="input-box">
+                 <div class="input-box">
                     <label for="logradouro" class="form-label">Logradouro</label> 
-                    <input type="text" id="logradouro" class="form-controll" placeholder="1234">
-                </div>
-                <!--Bairro-->  
+                    <input type="text" id="logradouroCentro" class="form-controll" placeholder="1234">
+                </div>  
                 <div class="input-box">
                     <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" id="bairro" class="form-controll" placeholder="Insira o nome do bairro">
+                    <input type="text" id="bairroCentro" class="form-controll" placeholder="Insira o nome do bairro">
                 </div>
-                <!--Cidade-->
                 <div class="input-box">
                     <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" id="cidade" class="form-controll" placeholder="Insira o nome da cidade">
+                    <input type="text" id="cidadeCentro" class="form-controll" placeholder="Insira o nome da cidade">
                 </div>
-                <!--Estado-->
                 <div class="input-box">
                     <label for="estado" class="form-label">Estado</label>
-                    <select name="estado" id="estado" class="selectTopziera">
+                    <select name="estado" id="estadoCentro" class="selectTopziera">
                         <option value="nulo">     </option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -120,27 +117,27 @@
                         <option value="TO">Tocantins</option>
                     </select>
                 </div>
-                <!--Horário de Abertura-->
                 <div class="input-box">
                     <label for="horaA" class="form-label">Horário de Abertura</label>
-                    <input type="time" id="horaA" class="form-controll" placeholder="07:00">
+                    <input type="time" id="horaACentro" class="form-controll" placeholder="07:00">
                 </div>
-                <!--Horário de Encerramento-->
                 <div class="input-box">
                     <label for="horaF" class="form-label">Horário de Encerramento</label>
-                    <input type="time" id="horaF" class="form-controll" placeholder="17:00">
+                    <input type="time" id="horaFCentro" class="form-controll" placeholder="17:00">
                 </div>
+                <label for="modo" class="form-label">Modo de Atendimento</label>
                 <!--Tipo de Centro-->
-                <select name="tipo" id="tipo" class="selectTopziera">
+                <select name="tipo" id="tipoCentro" class="selectTopziera">
                     <option value="nulo">     </option>
                     <option value="Casa de Acolhimento">Casa de Acolhimento</option>
                     <option value="Delegacia da Mulher">Delegacia da Mulher</option>
                     <option value="Centro de Apoio a Mulher">Centro de Apoio a Mulher</option>
                 </select>
             </div>
-            <button type="submit" class="btn-default">Adicionar</button>
+            <button type="submit" class="btn-default" onclick="alterarInfosCentro()">Alterar Centro</button>
+            <button type="submit" class="btn-default" onclick="excluirCentro()">Apagar Centro</button>
         </form>  
     </div>
-    <script src="addCentroApoio.js"></script>
+    <script src="/TemperoCaseiro1/Site/editarCentroApoio.js"></script>
 </body>
 </html>
