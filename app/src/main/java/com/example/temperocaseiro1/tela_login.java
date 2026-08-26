@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.temperocaseiro1.api.ApiClient;
 import com.example.temperocaseiro1.api.AuthApi;
 import com.example.temperocaseiro1.model.LoginRequest;
-import com.example.temperocaseiro1.model.tela_codigo_recuperacao;
+import com.example.temperocaseiro1.model.tela_recuperar_conta;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,6 +41,7 @@ public class tela_login extends AppCompatActivity {
         editEmailLogin = findViewById(R.id.editEmail);
         editSenhaLogin = findViewById(R.id.editSenha);
         btnEntrar = findViewById(R.id.btnEntrar);
+        txtEsqueceuSenha = findViewById(R.id.txtEsqueceuSenha);
 
         txtCriarConta.setOnClickListener(v -> { // quando o usuário clicar em "criar conta" executa o código abaixo
             Intent intent = new Intent(tela_login.this, tela_cadastro.class); // "estou na tela de login e quero ir para a de cadastro"
@@ -48,7 +49,7 @@ public class tela_login extends AppCompatActivity {
         });
 
         txtEsqueceuSenha.setOnClickListener(v -> {
-            Intent intent = new Intent (tela_login.this, tela_codigo_recuperacao.class);
+            Intent intent = new Intent (tela_login.this, tela_recuperar_conta.class);
             startActivity(intent);
         });
 

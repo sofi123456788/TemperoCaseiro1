@@ -6,7 +6,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://10.90.49.235:8080/"; // essa linha informa aonde está a API para conectá-la (ID e porta)
+    private static final String BASE_URL = "http://10.90.36.173:8080/"; // essa linha informa aonde está a API para conectá-la (ID e porta)
 
     private static Retrofit retrofit;
 
