@@ -20,7 +20,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
     try {
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const resposta = await fetch("http://localhost:3000/addRestaurante",{
+        const resposta = await fetch("http://localhost:3000/Adm/addRestaurante",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -1,5 +1,6 @@
 // Mostrar o nome do arquivo escolhido
-document.getElementById("documento").addEventListener("change", function () {//seleciona o arquivo
+async function guardarDocs() {
+    document.getElementById("documento").addEventListener("change", function () {//seleciona o arquivo
 
     const arquivo = this.files[0];
 
@@ -8,7 +9,29 @@ document.getElementById("documento").addEventListener("change", function () {//s
             arquivo.name;
     }
 
-});
+    });
+
+    document.getElementById("upload").addEventListener('click', async () => {
+        const file = document.getElementById("documento").files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+            try {
+                const res = await fetch(
+                    `http://localhost:3000/Docs`,
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
+                const dados = await resposta.json();
+                console.log("Documento salvo!!", res.data);
+            } catch (err) {
+            console.error("Não salvou broder", err);
+            }
+    });
+}
+
 
 
 // Cadastrar usuário
@@ -36,7 +59,7 @@ document.getElementById("form").addEventListener("submit", async (event) => {
     try {
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const resposta = await fetch("http://localhost:3000/cadastro",{
+        const resposta = await fetch("http://localhost:3000/Cadastros/cadastro",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

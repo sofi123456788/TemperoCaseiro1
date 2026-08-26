@@ -552,3 +552,12 @@ app.post("/PsiAdv/registrarAtend", async (req, res) => {
     }
 
 });
+
+
+//Rota para guardar o docs na pasta
+app.post("/Docs", upload.single("file"),(req, res) => {
+    console.log(req.file);
+    res.json({
+    mensagem: "Arquivo recebido!"
+    });
+});

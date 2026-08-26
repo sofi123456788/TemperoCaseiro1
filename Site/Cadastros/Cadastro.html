@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/stileiras/estilosLoginCadastro.css">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosLoginCadastro.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <title>Cadastro</title>
 </head>
 <body>
     <main id="form_conteiner">
-        <img src="src/stileiras/img/logoFundoBranco.png" alt="logo" class="imagem">
+        <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo" class="imagem">
         <div id="form_header">
             <h1 id="form_titulo">Criar Conta</h1>   
         </div>
@@ -74,7 +74,7 @@
                     </div>
                 </div>
                 <input type="file" id="documento" accept=".pdf,.jpg,.png" hidden>
-                <button type="button" onclick="document.getElementById('documento').click()" class="btn-default">Adicionar Arquivo</button>
+                <button id="upload" type="button" onclick="document.getElementById('documento').click()" class="btn-default">Adicionar Arquivo</button>
                 <span id="nomeArquivo"></span>
                 <div class="radio-container">
                 </div>

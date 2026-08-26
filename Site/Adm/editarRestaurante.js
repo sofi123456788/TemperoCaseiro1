@@ -2,7 +2,7 @@ async function mostrarNomeRestaurantes() {
     const listaRestaurante = document.getElementById("listaRestaurantes");
     try {
         //Manda para o server o email do usuário para pegar as demais infos
-        const resposta = await fetch(`http://localhost:3000/editarRestaurante`);
+        const resposta = await fetch(`http://localhost:3000/Adm/editarRestaurante`);
         const rests = await resposta.json();
 
         // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)

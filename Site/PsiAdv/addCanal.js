@@ -22,7 +22,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
         const email = localStorage.getItem("emailUsuario");
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
-        const resposta = await fetch(`http://localhost:3000/addCanal/${email}`,{method: "POST",
+        const resposta = await fetch(`http://localhost:3000/PsiAdv/addCanal/${email}`,{method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({nome, telefone, emailC, rua, logradouro, bairro, cidade, estado, horaA, horaF,modo})
             }

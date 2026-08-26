@@ -3,7 +3,7 @@ async function mostrarNomeCanal() {
     try {
         //Manda para o server o email do usuário para pegar as demais infos
         const email = localStorage.getItem("emailUsuario");
-        const resposta = await fetch(`http://localhost:3000/editarCanal/${email}`);
+        const resposta = await fetch(`http://localhost:3000/PsiAdv/editarCanal/${email}`);
         const canais = await resposta.json();
 
         // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)

@@ -15,7 +15,7 @@ document.getElementById("container").addEventListener("submit", async (event) =>
     try {
         console.log("Enviando dados...");
         //anda as infos para o server
-        const resposta = await fetch("http://localhost:3000/registrarAtend",{
+        const resposta = await fetch("http://localhost:3000/PsiAdv/registrarAtend",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

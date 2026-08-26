@@ -7,7 +7,7 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
 
     try {
         // Envia para o servidor
-        const resposta = await fetch("http://localhost:3000/login", {
+        const resposta = await fetch("http://localhost:3000/Cadastros/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -28,9 +28,9 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             if(dados.verifi){
                 alert("Login realizado com sucesso!");
                 if(dados.area === "Pscologia" || dados.area === "Advocacia"){
-                    window.location.href = "telaInicial.html";
+                    window.location.href = "/TemperoCaseiro1/Site/PsiAdv/telaInicial.html";
                 }else if(dados.area === "Administração"){
-                    window.location.href = "telaInicialA.html";
+                    window.location.href = "/TemperoCaseiro1/Site/Adm/telaInicialA.html";
                 }
             }else{
                 alert("Sua conta passa por verificação ou não foi aprovada.");
