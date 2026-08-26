@@ -33,11 +33,25 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
                     window.location.href = "/TemperoCaseiro1/Site/Adm/telaInicialA.html";
                 }
             }else{
-                alert("Sua conta passa por verificação ou não foi aprovada.");
+                alert("Sua conta não foi aprovada.");
+                window.location.href = "contaNaoAutorizada.html";
             }
                        
+        } else if(!resposta.ok){
+            const resposta = await fetch("http://localhost:3000/Cadastros/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, senha })
+            });
+            const dados = await resposta.json();
+            if(dados){
+                window.location.href = "aguardandoVerificacao.html";
+            }
         } else {
             alert(dados.mensagem);
+            window.location.href = "contaNaoAutorizada.html";
         }
 
     } catch (erro) {

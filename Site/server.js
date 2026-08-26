@@ -1,11 +1,27 @@
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
+const multer = require("multer");
+const path = require("path");
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'TemperoCaseiro1/Site/Docs/');
+    },
+
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage });
+
 
 //Infos. do BD
 const pool = new Pool({
@@ -37,25 +53,26 @@ app.listen(3000, () => {
 });
 
 
-//Rota para cadastro
-app.post("/Cadastros/cadastro", async (req, res) => {
+//Rota para as infos serem verificadas
+app.post("/Cadastros/cadastro", upload.single('arquivo'), async (req, res) => {
     try {
 
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
 
         const {nome_completo, telefone, email, cpf, senha, area_profissional} = req.body;
+        const documento = req.file.filename;
 
         //Mandando para o banco de dados
         await pool.query(
-            `INSERT INTO profissionais(nome_completo, telefone, email, cpf, senha, area_profissional) 
-            VALUES($1,$2,$3,$4,$5,$6)`,
-            [nome_completo, telefone, email, cpf, senha, area_profissional]
+            `INSERT INTO verificarContas(nome_completo, telefone, email, cpf, senha, area_profissional, documento) 
+            VALUES($1,$2,$3,$4,$5,$6, $7)`,
+            [nome_completo, telefone, email, cpf, senha, area_profissional, documento]
         );
 
         console.log("Cadastro Feito");
         res.json({
-            mensagem: "Cadastro realizado!"
+            mensagem: "Conta enviada para a verificação!"
         });
     } catch (error) {
         console.error(error);
@@ -92,6 +109,37 @@ app.post("/Cadastros/login", async (req, res) => {
             area: usuario.area_profissional,
             verifi: usuario.verificacao
         });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
+});
+
+
+//Rota para ver se a conta foi verificada
+//Rota para o login
+app.post("/Cadastros/login", async (req, res) => {
+    try {
+         const { email, senha } = req.body;
+
+        // consulta no banco
+        const resultado = await pool.query(
+        "SELECT * FROM verificarConta WHERE email = $1",
+        [email]);
+
+        //Guarda as infos
+        const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele email
+
+        //Faz a verificação
+        if (usuario.email !== email) {
+            return res.status(401).send("Usuário não encontrado");
+        }
+
+        res.json(true);
 
     } catch (error) {
         console.error(error);
@@ -551,13 +599,4 @@ app.post("/PsiAdv/registrarAtend", async (req, res) => {
         });
     }
 
-});
-
-
-//Rota para guardar o docs na pasta
-app.post("/Docs", upload.single("file"),(req, res) => {
-    console.log(req.file);
-    res.json({
-    mensagem: "Arquivo recebido!"
-    });
 });
