@@ -81,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
         // Botão "Receitas" do rodapé
         LinearLayout menuReceitas = findViewById(R.id.menuReceitas);
 
+        // Botão "Favoritos" do rodapé
+        LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
+
+        menuFavoritos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BoasVindasActivity.class);
+            startActivity(intent);
+        });
+
 // Ao clicar, abre a tela com todas as receitas do banco
         menuReceitas.setOnClickListener(new View.OnClickListener() {
             @Override

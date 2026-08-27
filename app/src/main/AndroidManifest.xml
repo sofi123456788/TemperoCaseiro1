@@ -23,6 +23,13 @@
         <activity android:name=".RapidasActivity" />
         <activity android:name=".DocesActivity" />
         <activity android:name=".ReceitasBD" />
+        <activity
+            android:name=".BoasVindasActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CentrosApoioActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
