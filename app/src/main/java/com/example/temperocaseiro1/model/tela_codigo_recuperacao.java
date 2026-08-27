@@ -1,6 +1,10 @@
 package com.example.temperocaseiro1.model;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,18 +13,78 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.temperocaseiro1.R;
+import com.example.temperocaseiro1.api.ApiClient;
+import com.example.temperocaseiro1.api.AuthApi;
+import com.example.temperocaseiro1.tela_login;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class tela_codigo_recuperacao extends AppCompatActivity {
+    private EditText editCodigoRecuperacao;
+    private TextView btnConfirmarEmailRecuperacao;
+    private String emailRec;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_codigo_recuperacao);
+
+        editCodigoRecuperacao = findViewById(R.id.editCodigoRecuperacao);
+        btnConfirmarEmailRecuperacao = findViewById(R.id.btnConfirmarCodigoRecuperacao);
+        emailRec = getIntent().getStringExtra("emailRecuperacao"); // recupera o email enviado pela tela anterior
+
+
+        btnConfirmarEmailRecuperacao.setOnClickListener (v -> {
+            String codigoValid = editCodigoRecuperacao.getText().toString();
+
+            if(codigoValid.trim().isEmpty()) {
+                editCodigoRecuperacao.setError("Preencha o código de recuperação");
+            } else {
+                enviarCodigoParaAPI(codigoValid);
+            }
+        });
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    public void enviarCodigoParaAPI(String codigoValid) {
+
+        ValidarCodigoRequest validarCodigoRequest = new ValidarCodigoRequest(emailRec, codigoValid); // aqui está esperando o código + email
+
+        AuthApi authApi = ApiClient.getRetrofit().create(AuthApi.class); // cria uma conexão com a API
+
+        Call<String> call = authApi.validar(validarCodigoRequest);
+
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) { // API respondeu
+                if (response.isSuccessful()) {
+                    Toast.makeText(tela_codigo_recuperacao.this, response.body(), Toast.LENGTH_SHORT).show();
+
+                    if ("Código validado com sucesso".equals(response.body())) {
+                        // próxima tela do app
+                        Intent intent = new Intent(tela_codigo_recuperacao.this, tela_login.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } else {
+                    Toast.makeText(tela_codigo_recuperacao.this, "Erro na validação", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(tela_codigo_recuperacao.this, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 }

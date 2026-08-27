@@ -3,6 +3,8 @@ package com.example.temperocaseiro1.api;
 import com.example.temperocaseiro1.model.CadastroRequest;
 import com.example.temperocaseiro1.model.LoginRequest;
 import com.example.temperocaseiro1.model.ExcluirContaRequest;
+import com.example.temperocaseiro1.model.RecEmailRequest;
+import com.example.temperocaseiro1.model.ValidarCodigoRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,4 +21,10 @@ public interface AuthApi { // define quais rotas existem na API
 
     @POST("auth/excluir")
     Call<String> excluir(@Body ExcluirContaRequest request);
+
+    @POST("auth/recuperar")
+    Call<String> recuperar(@Body RecEmailRequest request);
+
+    @POST("auth/validar")
+    Call <String> validar (@Body ValidarCodigoRequest request);
 }
