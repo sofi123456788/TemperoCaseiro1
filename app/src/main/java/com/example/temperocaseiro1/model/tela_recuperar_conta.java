@@ -15,8 +15,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.temperocaseiro1.R;
 import com.example.temperocaseiro1.api.ApiClient;
 import com.example.temperocaseiro1.api.AuthApi;
-import com.example.temperocaseiro1.tela_configuracoes;
-import com.example.temperocaseiro1.tela_login;
 
 import retrofit2.Call;
 import retrofit2.Callback;

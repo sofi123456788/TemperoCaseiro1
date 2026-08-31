@@ -68,9 +68,9 @@ public class tela_codigo_recuperacao extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(tela_codigo_recuperacao.this, response.body(), Toast.LENGTH_SHORT).show();
 
-                    if ("Código validado com sucesso".equals(response.body())) {
+                    if ("Código validado".equals(response.body())) {
                         // próxima tela do app
-                        Intent intent = new Intent(tela_codigo_recuperacao.this, tela_login.class);
+                        Intent intent = new Intent(tela_codigo_recuperacao.this, tela_redefinir_senha.class);
                         startActivity(intent);
                         finish();
                     }
