@@ -71,6 +71,10 @@ public class tela_codigo_recuperacao extends AppCompatActivity {
                     if ("Código validado".equals(response.body())) {
                         // próxima tela do app
                         Intent intent = new Intent(tela_codigo_recuperacao.this, tela_redefinir_senha.class);
+
+                        intent.putExtra("emailRecuperacao", emailRec);
+                        intent.putExtra("codigoRecuperacao", codigoValid);
+
                         startActivity(intent);
                         finish();
                     }

@@ -4,6 +4,7 @@ import com.example.temperocaseiro1.model.CadastroRequest;
 import com.example.temperocaseiro1.model.LoginRequest;
 import com.example.temperocaseiro1.model.ExcluirContaRequest;
 import com.example.temperocaseiro1.model.RecEmailRequest;
+import com.example.temperocaseiro1.model.RedefinirSenhaRequest;
 import com.example.temperocaseiro1.model.ValidarCodigoRequest;
 
 import retrofit2.Call;
@@ -27,4 +28,7 @@ public interface AuthApi { // define quais rotas existem na API
 
     @POST("auth/validar")
     Call <String> validar(@Body ValidarCodigoRequest request);
+
+    @POST("auth/alterar")
+    Call <String> alterar(@Body RedefinirSenhaRequest request);
 }
