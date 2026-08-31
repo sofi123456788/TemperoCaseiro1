@@ -67,7 +67,7 @@ public class tela_recuperar_conta extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(tela_recuperar_conta.this, response.body(), Toast.LENGTH_SHORT).show();
 
-                    if ("Email enviado com sucesso".equals(response.body())) {
+                    if ("Código de recuperação enviado com sucesso".equals(response.body())) {
                         // próxima tela do app
                         Intent intent = new Intent(tela_recuperar_conta.this, tela_codigo_recuperacao.class);
                         intent.putExtra("emailRecuperacao", emailRec);

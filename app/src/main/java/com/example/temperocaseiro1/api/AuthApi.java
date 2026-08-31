@@ -26,5 +26,5 @@ public interface AuthApi { // define quais rotas existem na API
     Call<String> recuperar(@Body RecEmailRequest request);
 
     @POST("auth/validar")
-    Call <String> validar (@Body ValidarCodigoRequest request);
+    Call <String> validar(@Body ValidarCodigoRequest request);
 }

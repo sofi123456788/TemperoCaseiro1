@@ -47,6 +47,10 @@
             android:name=".model.tela_codigo_recuperacao"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".model.tela_redefinir_senha"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>
