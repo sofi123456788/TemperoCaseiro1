@@ -1,7 +1,9 @@
 package com.example.temperocaseiro1;
 
+import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
+import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,6 +28,8 @@ public class CentrosApoioActivity extends AppCompatActivity {
 
     private List<CentroApoio> listaCentros = new ArrayList<>();
 
+    private List<CentroApoio> todosOsCentros = new ArrayList<>();
+
     private ApiService apiService;
 
     @Override
@@ -39,6 +43,11 @@ public class CentrosApoioActivity extends AppCompatActivity {
         // Encontra o RecyclerView da tela
         recyclerCentrosApoio = findViewById(R.id.recyclerCentrosApoio);
 
+        TextView filtroTodos = findViewById(R.id.filtroTodos);
+        TextView filtroDelegacias = findViewById(R.id.filtroDelegacias);
+        TextView filtroApoio = findViewById(R.id.filtroApoio);
+        TextView filtroSaude = findViewById(R.id.filtroSaude);
+
         // Define que os cards serão organizados verticalmente
         recyclerCentrosApoio.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -49,17 +58,44 @@ public class CentrosApoioActivity extends AppCompatActivity {
                 listaCentros,
                 centro -> {
 
-                    Toast.makeText(
+                    Intent intent = new Intent(
                             CentrosApoioActivity.this,
-                            centro.getNome(),
-                            Toast.LENGTH_SHORT
-                    ).show();
+                            ActivityDetalhesLocal.class
+                    );
 
+                    intent.putExtra("nome", centro.getNome());
+                    intent.putExtra("telefone", centro.getTelefone());
+                    intent.putExtra("rua", centro.getRua());
+                    intent.putExtra("logradouro", centro.getLogradouro());
+                    intent.putExtra("bairro", centro.getBairro());
+                    intent.putExtra("cidade", centro.getCidade());
+                    intent.putExtra("estado", centro.getEstado());
+                    intent.putExtra("horarioAbertura", centro.getHorarioAbertura());
+                    intent.putExtra("horarioFechamento", centro.getHorarioFechamento());
+                    intent.putExtra("tipo", centro.getTipo());
+
+                    startActivity(intent);
                 }
         );
 
         // Liga o Adapter ao RecyclerView
         recyclerCentrosApoio.setAdapter(adapter);
+
+        filtroTodos.setOnClickListener(v -> {
+            filtrarCentros("Todos");
+        });
+
+        filtroDelegacias.setOnClickListener(v -> {
+            filtrarCentros("Delegacia");
+        });
+
+        filtroApoio.setOnClickListener(v -> {
+            filtrarCentros("Apoio");
+        });
+
+        filtroSaude.setOnClickListener(v -> {
+            filtrarCentros("Saúde");
+        });
 
         // Cria o serviço da API
         apiService = RetrofitClient
@@ -84,9 +120,11 @@ public class CentrosApoioActivity extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
 
-                    listaCentros.clear();
+                    todosOsCentros.clear();
+                    todosOsCentros.addAll(response.body());
 
-                    listaCentros.addAll(response.body());
+                    listaCentros.clear();
+                    listaCentros.addAll(todosOsCentros);
 
                     adapter.notifyDataSetChanged();
 
@@ -107,10 +145,32 @@ public class CentrosApoioActivity extends AppCompatActivity {
 
                 Toast.makeText(
                         CentrosApoioActivity.this,
-                        "Erro ao conectar com a API.",
+                        "Erro: " + t.getMessage(),
                         Toast.LENGTH_LONG
                 ).show();
             }
         });
+    }
+    private void filtrarCentros(String tipo) {
+
+        listaCentros.clear();
+
+        if (tipo.equals("Todos")) {
+
+            listaCentros.addAll(todosOsCentros);
+
+        } else {
+
+            for (CentroApoio centro : todosOsCentros) {
+
+                if (centro.getTipo() != null &&
+                        centro.getTipo().equalsIgnoreCase(tipo)) {
+
+                    listaCentros.add(centro);
+                }
+            }
+        }
+
+        adapter.notifyDataSetChanged();
     }
 }

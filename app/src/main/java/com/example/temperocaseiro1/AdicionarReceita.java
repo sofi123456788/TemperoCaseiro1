@@ -1,6 +1,7 @@
 package com.example.temperocaseiro1;
 
 // Importa os recursos necessários do Android
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -8,6 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.temperocaseiro1.api.ApiService;
+import com.example.temperocaseiro1.api.RetrofitClient;
+import com.example.temperocaseiro1.model.Receita;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +26,7 @@ public class AdicionarReceita extends AppCompatActivity {
 
 
     // ================================
-    // DECLARAÇÃO DOS COMPONENTES DA TELA
+    // DECLARAÇÃO DOS COMPONENTES DA TELA (componentes e variaveis que serão usadas para chamar a api)
     // ================================
 
 
@@ -52,9 +60,12 @@ public class AdicionarReceita extends AppCompatActivity {
     TextView btnSalvarPublicar;
     TextView btnVoltarReceita;
 
+    // Objeto responsável por chamar os métodos da API
+    ApiService apiService;
 
 
-    // Listas que vão guardar os textos digitados
+
+    // Listas que vão guardar os textos digitados e no final essas listas serao encaminhadas pro banco de dados
 
     ArrayList<EditText> ingredientes = new ArrayList<>();
 
@@ -67,7 +78,7 @@ public class AdicionarReceita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // Liga essa Activity ao XML
-        setContentView(R.layout.activity_adicionar_receita);
+        setContentView(R.layout.activity_adicionar_receita); //parte conectada no main, para a TROCA DE TELA
 
 
         // Nome que aparece na barra superior
@@ -80,6 +91,13 @@ public class AdicionarReceita extends AppCompatActivity {
 
         // Chama o método dos cliques dos botões
         configurarBotoes();
+
+        // Cria a conexão com a API
+        apiService = RetrofitClient //O RetrofitClient é responsável por configurar a conexão entre o aplicativo e a API
+                .getRetrofitInstance()
+                .create(ApiService.class);
+        //O Retrofit lê essas anotações (@POST, @GET, etc.)
+        // e cria automaticamente o código necessário para enviar a requisição.
 
     }
 
@@ -495,15 +513,70 @@ public class AdicionarReceita extends AppCompatActivity {
 
 
 
-        // Por enquanto apenas mostramos os dados
-        // futuramente aqui entra o banco de dados
 
 
-        Toast.makeText(
-                this,
-                "Receita salva com sucesso!",
-                Toast.LENGTH_LONG
-        ).show();
+        // Cria o objeto Receita com os dados preenchidos
+        Receita receita = new Receita(
+                titulo,
+                categoria,
+                listaIngredientes,
+                listaPassos,
+                tempo,
+                porcoes,
+                1
+        );
+
+
+// Envia a receita para a API Spring Boot
+        apiService.adicionarReceita(receita)
+                .enqueue(new Callback<Receita>() {
+
+
+                    @Override
+                    public void onResponse(Call<Receita> call, Response<Receita> response) {
+
+
+                        // Verifica se a API recebeu a receita corretamente
+                        if(response.isSuccessful()){
+
+
+                            Toast.makeText(
+                                    AdicionarReceita.this,
+                                    "Receita salva com sucesso!",
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+
+                        } else {
+
+
+                            Toast.makeText(
+                                    AdicionarReceita.this,
+                                    "Erro ao salvar receita",
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+
+                        }
+
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<Receita> call, Throwable t) {
+
+
+                        Toast.makeText(
+                                AdicionarReceita.this,
+                                "Erro: " + t.getMessage(),
+                                Toast.LENGTH_LONG
+                        ).show();
+
+
+                    }
+
+
+                });
 
 
 

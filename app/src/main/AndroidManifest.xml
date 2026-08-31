@@ -28,6 +28,10 @@
             android:exported="false" />
 
         <activity
+            android:name=".ActivityDetalhesLocal"
+            android:exported="false" />
+
+        <activity
             android:name=".CentrosApoioActivity"
             android:exported="false" />
 

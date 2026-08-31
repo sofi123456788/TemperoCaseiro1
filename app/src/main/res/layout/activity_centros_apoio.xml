@@ -9,20 +9,36 @@
     <!-- CABEÇALHO -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center_vertical"
+        android:layout_height="52dp"
         android:orientation="horizontal"
-        android:paddingStart="18dp"
+        android:gravity="center_vertical"
+        android:paddingStart="14dp"
         android:paddingEnd="18dp">
+
+        <TextView
+            android:id="@+id/btnVoltar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:text="‹"
+            android:textColor="#222222"
+            android:textSize="32sp"
+            android:clickable="true"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Centros de apoio"
+            android:gravity="center"
+            android:text="Centro de apoio"
             android:textColor="#222222"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
 
     </LinearLayout>
 
@@ -119,6 +135,18 @@
         android:textSize="11sp"
         android:textStyle="bold" />
 
+    <!-- IMAGEM DO MAPA -->
+    <ImageView
+        android:id="@+id/imagemMapa"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/mapa"
+        android:contentDescription="Mapa dos centros de apoio" />
+
     <!-- LISTA VINDO DO BANCO -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCentrosApoio"
@@ -145,5 +173,112 @@
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         android:textStyle="bold" />
+
+    <!-- RODAPÉ -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="#FFFFFF"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <!-- INÍCIO -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_home"
+                android:contentDescription="Início" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Início"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <!-- CHAT -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_chat"
+                android:contentDescription="Chat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Chat"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <!-- APOIO -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_apoio"
+                android:contentDescription="Apoio" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Apoio"
+                android:textColor="#4D6B24"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- MAIS -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/ic_mais"
+                android:contentDescription="Mais" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Mais"
+                android:textColor="#333333"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
