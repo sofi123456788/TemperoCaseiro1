@@ -9,12 +9,18 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const fs = require("fs");
+
+const PASTA_DOCUMENTOS = path.join(__dirname, "..", "Docs");
+
+if (!fs.existsSync(PASTA_DOCUMENTOS)) {
+    fs.mkdirSync(PASTA_DOCUMENTOS, { recursive: true });
+}
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'TemperoCaseiro1/Site/Docs/');
+        cb(null, PASTA_DOCUMENTOS);
     },
-
     filename: (req, file, cb) => {
         cb(null, Date.now() + path.extname(file.originalname));
     }
@@ -53,15 +59,30 @@ app.listen(3000, () => {
 });
 
 
+//Rota para guardar o docs na pagina
+app.post("/Docs", upload.single("documento"), (req, res) => {
+
+    if (!req.file) {
+        return res.status(400).json({
+            erro: "Arquivo não enviado"
+        });
+    }
+
+    res.json({
+        filename: req.file.filename
+    });
+
+});
+
+
 //Rota para as infos serem verificadas
-app.post("/Cadastros/cadastro", upload.single('arquivo'), async (req, res) => {
+app.post("/Cadastros/cadastro", async (req, res) => {
     try {
 
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
 
-        const {nome_completo, telefone, email, cpf, senha, area_profissional} = req.body;
-        const documento = req.file.filename;
+        const {nome_completo, telefone, email, cpf, senha, area_profissional, documento} = req.body;
 
         //Mandando para o banco de dados
         await pool.query(
@@ -74,6 +95,7 @@ app.post("/Cadastros/cadastro", upload.single('arquivo'), async (req, res) => {
         res.json({
             mensagem: "Conta enviada para a verificação!"
         });
+        console.log("enviou a mensagem");
     } catch (error) {
         console.error(error);
         res.status(500).json({

@@ -74,14 +74,11 @@
                     </div>
                 </div>
                 <!--Entrada do documento-->
-                <input type="file" id="documento" accept=".pdf,.jpg,.png" name="arquivo">
-                <button type="button" onclick="document.getElementById('documento').click()" class="btn-default">Adicionar Arquivo</button>
+                <input type="file" id="documento" name="documento" accept=".pdf,.jpg,.png" required>
+                <!--<button type="button" onclick="document.getElementById('documento').click()" class="btn-default">Adicionar Arquivo</button>-->
                 <span id="nomeArquivo"></span>
-                <div class="radio-container"></div>
-                </div>
-                
-            </div>
-            <button type="submit" class="btn-default" onclick="enviarInfos()">Criar Conta</button>
+                <button type="submit" class="btn-default">Criar Conta</button>
+            </div>    
         </form>
 
     </main>
