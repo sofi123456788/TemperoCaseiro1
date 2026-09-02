@@ -33,7 +33,7 @@
             </button>
 
             <!--Solicitações-->
-            <button onclick="window.location.href='solicitações.html'">
+            <button onclick="window.location.href='solicitacoes.html'">
                 <img src="/TemperoCaseiro1/Site/src/stileiras/img/solicitacoes.png" alt="solicitacoes">
                 <span>Solicitações</span>
             </button>
@@ -42,14 +42,50 @@
 
     </aside>
 
-    <!-- Conteúdo principal -->
     <!--Lista de canais-->
-    <aside class="sidebarLista">
-        <h1 id="form_titulo">Escolha o canal</h1>
-        <ul id="listaRestaurantes" onclick="pegarInfosRestaurantes(event)"></ul>
-    </aside>
+        <aside class="sidebarLista">
+            <h1 id="form_titulo">Qual conta deseja avaliar?</h1>
+            <ul id="listaSolicitacoes" onclick="pegarInfosUser(event)"></ul>
+        </aside>
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+        <h1>Bem-Vindo(a) a tela de avaliação de Contas!</h1>
 
+        <section class="cardsP">
+            <h2>Informações</h2>
+            <div class="cardP">
+                <div class="info identificacao">
+                    <span>Nome:</span>
+                    <p id="nome"></p>
+                </div>
 
+                <div class="info identificacao">
+                    <span>CPF:</span>
+                    <p id="cpf"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Email:</span>
+                    <p id="email"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Telefone:</span>
+                    <p id="telefone"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Área Profissional:</span>
+                    <p id="area"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="acoesP">
+            <button onclick="abrirDocumento()">Vizualizar Diploma</button>
+            <button onclick="avaliar()">Finalizar Avaliação</button>
+        </section>
+    </main>
     
     <script src="solicitacoes.js"></script>
 </body>

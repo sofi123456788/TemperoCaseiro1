@@ -26,7 +26,7 @@ async function pegarInfosRestaurantes(event) {
         idRestauranteSelecionado = idRestaurante;
 
         //Manda para o banco para pegar as infos
-        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}`);
+        const resposta = await fetch(`http://localhost:3000/Adm/editarRestaurante/${idRestaurante}`);
 
         if (!resposta.ok) {
             throw new Error(`Erro HTTP: ${resposta.status}`);
@@ -71,7 +71,7 @@ async function alterarInfosRestaurante(event) {
         console.log("Enviando dados...");
         //Manda as infos coletadas para o server
         const idRestaurante = idRestauranteSelecionado;
-        const resposta = await fetch(`http://localhost:3000/editarRestaurante/${idRestaurante}`,{
+        const resposta = await fetch(`http://localhost:3000/Adm/editarRestaurante/${idRestaurante}`,{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -110,7 +110,7 @@ async function excluirRestaurante() {
         //Pega o id e manda para o server
         const idRestaurante = idRestauranteSelecionado;
 
-        const requisicao = await fetch(`http://localhost:3000/excluirRestaurante/${idRestaurante}`,{method: "DELETE"});
+        const requisicao = await fetch(`http://localhost:3000/Adm/excluirRestaurante/${idRestaurante}`,{method: "DELETE"});
 
         const mensagem = await requisicao.text();
 

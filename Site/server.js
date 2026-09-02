@@ -1,3 +1,4 @@
+//---------------Configuração do BD e funcionalidade de upload
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -11,6 +12,7 @@ app.use(express.json());
 
 const fs = require("fs");
 
+//Configuração dos trem do Docs
 const PASTA_DOCUMENTOS = path.join(__dirname, "..", "Docs");
 
 if (!fs.existsSync(PASTA_DOCUMENTOS)) {
@@ -59,6 +61,7 @@ app.listen(3000, () => {
 });
 
 
+//-------------------- Verificação ---------------------
 //Rota para guardar o docs na pagina
 app.post("/Docs", upload.single("documento"), (req, res) => {
 
@@ -74,8 +77,143 @@ app.post("/Docs", upload.single("documento"), (req, res) => {
 
 });
 
+//Rota para pegar o arquivo
+app.get("/Docs/:nomeArquivo", (req, res) => {
+    const nomeArquivo = req.params.nomeArquivo;
 
-//Rota para as infos serem verificadas
+    // Impede acessar arquivos fora da pasta Docs (ex: ../../server.js)
+    if (nomeArquivo.includes("..") || nomeArquivo.includes("/") || nomeArquivo.includes("\\")) {
+        return res.status(400).json({ mensagem: "Nome de arquivo inválido." });
+    }
+
+    const caminhoArquivo = path.join(PASTA_DOCUMENTOS, nomeArquivo);
+
+    res.sendFile(caminhoArquivo, (erro) => {
+        if (erro) {
+            console.error("Erro ao enviar documento:", erro);
+            res.status(404).json({ mensagem: "Documento não encontrado." });
+        }
+    });
+});
+
+//Pegar os nomes das contas
+app.get("/Adm/solicitacoes", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query(`SELECT id, nome_completo FROM verificarcontas`);
+        
+        //Guarda as infos no array list
+        const users = resultado.rows;
+        res.json(users)
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos do usuário 
+app.get("/Adm/solicitacoes/:idUser", async (req, res) => {
+    try {
+        const id = req.params.idUser;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM verificarcontas WHERE id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Restaurante não encontrado"
+            });
+        }
+
+        //Guarda as infos no array list
+        const userEscolhido = resultado.rows[0];
+
+        return res.json(userEscolhido);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para atualizar as tabelas
+app.post("/Adm/solicitacoes", async (req, res) => {
+    try {
+        await pool.query("BEGIN");
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO profissionais(nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao) 
+            VALUES($1,$2,$3,$4,$5,$6, $7, $8)`,
+            [nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao]
+        );
+
+        console.log("Conta realocada");
+        res.json({
+            mensagem: "Conta realocada!"
+        });
+
+        await pool.query(
+            "DELETE FROM verificarcontas WHERE email = $1",
+            [email]
+        );
+
+        await pool.query("COMMIT");
+
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+    
+});
+
+
+//-------------------- Login Cadastro e Perfil ---------------------
+//Rota para o login
+app.post("/Cadastros/login", async (req, res) => {
+    try {
+         const { email, senha } = req.body;
+
+        // consulta no banco
+        const resultado = await pool.query(
+        "SELECT * FROM profissionais WHERE email = $1",
+        [email]);
+
+    
+
+        //Guarda as infos
+        const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele email
+
+        //Faz a verificação
+        if (usuario.email !== email) {
+            return res.status(401).send("Usuário não encontrado");
+        }else if (usuario.senha !== senha) {
+            return res.status(401).send("Senha incorreta");
+        }
+
+        res.json({
+            id: usuario.id,
+            area: usuario.area_profissional,
+            verifi: usuario.verificacao
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+
+});
+
+
+//Rota para o Cadastro
 app.post("/Cadastros/cadastro", async (req, res) => {
     try {
 
@@ -106,75 +244,8 @@ app.post("/Cadastros/cadastro", async (req, res) => {
 });
 
 
-//Rota para o login
-app.post("/Cadastros/login", async (req, res) => {
-    try {
-         const { email, senha } = req.body;
-
-        // consulta no banco
-        const resultado = await pool.query(
-        "SELECT * FROM profissionais WHERE email = $1",
-        [email]);
-
-        //Guarda as infos
-        const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele email
-
-        //Faz a verificação
-        if (usuario.email !== email) {
-            return res.status(401).send("Usuário não encontrado");
-        }else if (usuario.senha !== senha) {
-            return res.status(401).send("Senha incorreta");
-        }
-
-        res.json({
-            id: usuario.id,
-            area: usuario.area_profissional,
-            verifi: usuario.verificacao
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            mensagem: "Erro no servidor"
-        });
-    }
-
-});
-
-
-//Rota para ver se a conta foi verificada
-//Rota para o login
-app.post("/Cadastros/login", async (req, res) => {
-    try {
-         const { email, senha } = req.body;
-
-        // consulta no banco
-        const resultado = await pool.query(
-        "SELECT * FROM verificarConta WHERE email = $1",
-        [email]);
-
-        //Guarda as infos
-        const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele email
-
-        //Faz a verificação
-        if (usuario.email !== email) {
-            return res.status(401).send("Usuário não encontrado");
-        }
-
-        res.json(true);
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            mensagem: "Erro no servidor"
-        });
-    }
-
-});
-
-
 //Pega todas as infos do usuário para a página do perfil
-app.get("/Cadastros/perfil/:email", async (req, res) => {
+app.get("/perfil/:email", async (req, res) => {
     try {
         const email = req.params.email;
         const resultado = await pool.query("SELECT * FROM profissionais WHERE email = $1",[email]);
@@ -196,7 +267,7 @@ app.get("/Cadastros/perfil/:email", async (req, res) => {
 });
 
 
-//Rota para alterar o Canal de Apoio
+//--------------------- Edição Canal ----------------------
 //Pega só o nome
 app.get("/PsiAdv/editarCanal/:email", async (req, res) => {
     try {
@@ -254,7 +325,7 @@ app.put("/PsiAdv/editarCanal/:idC", async (req, res) =>{
 });
 
 
-//Rota para alterar Centro de apoio
+//--------------------- Edição Centro ----------------------
 //Pega só o nome
 app.get("/editarCentroApoio", async (req, res) => {
     try {
@@ -312,7 +383,7 @@ app.put("/editarCentroApoio/:idCentro", async (req, res) =>{
 });
 
 
-//Rota para alterar Restaurantes
+//--------------------- Edição Restaurante ----------------------
 //Pega só o nome
 app.get("/Adm/editarRestaurante", async (req, res) => {
     try {
@@ -375,6 +446,7 @@ app.put("/Adm/editarRestaurante/:idRestaurante", async (req, res) =>{
 });
 
 
+//--------------------- Deletar infos ----------------------
 //Rota para Deletar Conta
 app.delete("/excluirConta/:id", async (req, res) => {
 
@@ -406,8 +478,6 @@ app.delete("/excluirConta/:id", async (req, res) => {
     }
 });
 
-
-//Rotas para deletar as infos:
 //Rota para deletar Canal de apoio
 app.delete("/PsiAdv/excluirCanal/:idCanal", async (req, res) => {
 
@@ -499,6 +569,7 @@ app.delete("/Adm/excluirRestaurante/:idRestaurante", async (req, res) => {
 });
 
 
+//--------------------- Adicionar infos ----------------------
 //Rota para Adicionar Restaurante
 app.post("/Adm/addRestaurante", async (req, res) => {
     try {

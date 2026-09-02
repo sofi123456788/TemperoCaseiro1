@@ -73,7 +73,7 @@ async function deslogar() {
         //Limpa todas as infos pegas
         localStorage.clear();
         //Volta para a tela de login
-        window.location.href = "index.html";
+        window.location.href = "/TemperoCaseiro1/Site/Cadastros/index.html";
     } catch (erro) {
         console.error(erro);
         alert("Não foi possível conectar ao servidor.");

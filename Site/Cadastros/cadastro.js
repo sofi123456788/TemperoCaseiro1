@@ -77,8 +77,8 @@ form.addEventListener("submit", async (event) => {
             texto = await cadastroResposta.json();
         } catch (parseErro) {
             console.error("Resposta do servidor não é um JSON válido:", parseErro);
-            alert("O servidor retornou uma resposta inesperada. Veja o console para detalhes.");
-            return;
+            //alert("O servidor retornou uma resposta inesperada. Veja o console para detalhes.");
+            //return;
         }
 
         console.log("Resposta do servidor:", texto);

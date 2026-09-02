@@ -81,6 +81,9 @@ body{
 /* LISTAS */
 
 .sidebarLista{
+    height: 100vh;       /* trava a altura no tamanho da tela */
+    overflow: hidden;    /* impede que ela mesma cause scroll na página */
+    overflow-y: auto;
     width: 360px;
     margin-top: 135px;
     background-color: #c9bba5;
