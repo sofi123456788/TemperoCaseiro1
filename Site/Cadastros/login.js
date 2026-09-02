@@ -27,7 +27,7 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             // Vai para a tela inicial Respectiva a área
             if(dados.verifi){
                 alert("Login realizado com sucesso!");
-                if(dados.area === "Pscologia" || dados.area === "Advocacia"){
+                if(dados.area === "Psicologia" || dados.area === "Advocacia"){
                     window.location.href = "/TemperoCaseiro1/Site/PsiAdv/telaInicial.html";
                 }else if(dados.area === "Administração"){
                     window.location.href = "/TemperoCaseiro1/Site/Adm/telaInicialA.html";

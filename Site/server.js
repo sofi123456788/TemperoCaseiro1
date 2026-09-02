@@ -1,4 +1,4 @@
-//---------------Configuração do BD e funcionalidade de upload
+//--------------- Configuração do BD e funcionalidade de upload -----------------
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
