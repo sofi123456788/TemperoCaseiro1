@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         // Botão "Favoritos" do rodapé
         LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
 
+        // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
         Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
-
         Runnable abrirTela = () -> { // ação executada após os 4 segundos determinados
             Intent intent = new Intent(MainActivity.this, BoasVindasActivity.class);
             startActivity(intent);
