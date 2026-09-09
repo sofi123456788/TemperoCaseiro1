@@ -2,6 +2,9 @@ package com.example.temperocaseiro1;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.view.View;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.MotionEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -84,10 +91,28 @@ public class MainActivity extends AppCompatActivity {
         // Botão "Favoritos" do rodapé
         LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
 
-        menuFavoritos.setOnClickListener(v -> {
+        Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
+
+        Runnable abrirTela = () -> { // ação executada após os 4 segundos determinados
             Intent intent = new Intent(MainActivity.this, BoasVindasActivity.class);
             startActivity(intent);
+        };
+        menuFavoritos.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    handler.postDelayed(abrirTela, 4000);
+                    return true;
+
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler.removeCallbacks(abrirTela);
+                    return true;
+            }
+
+            return false;
         });
+
 
 // Ao clicar, abre a tela com todas as receitas do banco
         menuReceitas.setOnClickListener(new View.OnClickListener() {
