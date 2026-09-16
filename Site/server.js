@@ -111,6 +111,7 @@ app.get("/Adm/solicitacoes", async (req, res) => {
     }
 });
 
+
 //Rota para pegar as infos do usuário 
 app.get("/Adm/solicitacoes/:idUser", async (req, res) => {
     try {
@@ -142,13 +143,13 @@ app.post("/Adm/solicitacoes", async (req, res) => {
         console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
         console.log(req.body);
 
-        const {nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao} = req.body;
+        const {nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao, idadm} = req.body;
 
         //Mandando para o banco de dados
         await pool.query(
-            `INSERT INTO profissionais(nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao) 
-            VALUES($1,$2,$3,$4,$5,$6, $7, $8)`,
-            [nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao]
+            `INSERT INTO profissionais(nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao, idadm) 
+            VALUES($1,$2,$3,$4,$5,$6, $7, $8, $9)`,
+            [nome_completo, telefone, email, cpf, senha, area_profissional, documento, verificacao, idadm] 
         );
 
         console.log("Conta realocada");

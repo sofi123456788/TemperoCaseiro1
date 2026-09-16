@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosG.css">
+    <title>Editar Conta</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <!--Relatórios-->
+            <button onclick="window.location.href='relatoriosA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span>
+            </button>
+
+            <!--Perfil-->
+            <button onclick="window.location.href='perfilA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+            <!--Solicitações-->
+            <button onclick="window.location.href='solicitacoes.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/solicitacoes.png" alt="solicitacoes">
+                <span>Solicitações</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Edição do Perfil-->
+    <div class="conteudo-form">
+        <div id="form_headerL">
+            <h1>Alterar Conta</h1>
+            <h2>Informações da Conta</h2>
+        </div>
+        <form id="container">
+            <div id="input_container">
+                <div class="input-box">
+                    <label for="nome" class="form-label">Nome do Usuário</label>
+                    <input type="text" id="nomeprof" class="form-controll" placeholder="Insira o nome">
+                </div>
+                <div class="input-box">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="text" id="telefoneprof" class="form-controll" placeholder="(12)34567-8901">
+                </div>
+                <div class="input-box">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="emailprof" class="form-controll" placeholder="local@gmail.com">
+                </div>
+            </div>
+            <button type="submit" class="btn-default" onclick="alterarInfosCentro()">Alterar Conta</button>
+        </form>  
+    </div>
+    <script src="/TemperoCaseiro1/Site/editarConta.js"></script>
+</body>
+</html>

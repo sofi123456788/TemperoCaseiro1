@@ -82,6 +82,7 @@ async function avaliar() {
     try {
         if(acao === "aprovar"){
             const aprov = true;
+            const id = localStorage.getItem("id");
             const resposta = await fetch(`http://localhost:3000/Adm/solicitacoes`, {
             method: "POST",
             headers: {
@@ -95,7 +96,8 @@ async function avaliar() {
                 senha: usuario.senha,
                 area_profissional: usuario.area_profissional,
                 documento: usuario.documento,
-                verificacao: aprov
+                verificacao: aprov,
+                idadm: id
             })
         
             });
