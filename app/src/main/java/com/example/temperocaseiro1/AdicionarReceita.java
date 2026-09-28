@@ -542,7 +542,7 @@ public class AdicionarReceita extends AppCompatActivity {
 
                             Toast.makeText(
                                     AdicionarReceita.this,
-                                    "Receita salva com sucesso!",
+                                    "Receita enviada! Ela ficará disponível após aprovação.",
                                     Toast.LENGTH_LONG
                             ).show();
 

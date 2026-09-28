@@ -1,83 +1,64 @@
 package com.example.temperocaseiro1.model;
 
 // Classe responsável por representar uma receita no aplicativo.
-// Ela funciona como um modelo dos dados que serão enviados para a API.
+// Ela funciona como um modelo dos dados enviados e recebidos pela API.
 public class Receita {
-
 
     // Guarda o ID da receita.
     // Esse valor é gerado pelo banco de dados quando a receita é salva.
     private Integer id;
 
-
     // Guarda o título/nome da receita.
     private String titulo;
-
 
     // Guarda a categoria da receita.
     // Exemplo: Bolos, Doces, Salgados.
     private String categoria;
 
-
     // Guarda os ingredientes da receita.
-    // Os vários ingredientes serão enviados como um único texto.
     private String ingredientes;
 
-
     // Guarda o modo de preparo da receita.
-    // Contém os passos necessários para fazer a receita.
     private String modoPreparo;
-
 
     // Guarda o tempo necessário para preparar a receita.
     private String tempoPreparo;
 
-
     // Guarda a quantidade de porções/rendimento da receita.
     private String rendimento;
 
-
     // Guarda o ID do usuário que cadastrou a receita.
-    // Esse valor será relacionado ao usuário que está logado.
     private Integer usuarioId;
 
+    // Informa se a receita foi aprovada.
+    // false = aguardando aprovação
+    // true = receita aprovada
+    private Boolean aprovada;
 
 
-    // Construtor usado para criar uma nova receita com os dados preenchidos.
-    // O ID não é recebido porque será criado automaticamente pelo banco.
+    // Construtor vazio.
+    // O Retrofit/Gson pode precisar dele para transformar
+    // os dados recebidos da API em um objeto Receita.
+    public Receita() {
+    }
+
+
+    // Construtor usado para criar uma nova receita.
     public Receita(String titulo, String categoria, String ingredientes,
                    String modoPreparo, String tempoPreparo,
                    String rendimento, Integer usuarioId) {
 
-
-        // Guarda o título recebido no atributo da classe.
         this.titulo = titulo;
-
-
-        // Guarda a categoria recebida.
         this.categoria = categoria;
-
-
-        // Guarda os ingredientes recebidos.
         this.ingredientes = ingredientes;
-
-
-        // Guarda o modo de preparo recebido.
         this.modoPreparo = modoPreparo;
-
-
-        // Guarda o tempo de preparo recebido.
         this.tempoPreparo = tempoPreparo;
-
-
-        // Guarda o rendimento recebido.
         this.rendimento = rendimento;
-
-
-        // Guarda o usuário responsável pela receita.
         this.usuarioId = usuarioId;
-    }
 
+        // Toda receita nova começa aguardando aprovação.
+        this.aprovada = false;
+    }
 
 
     // Retorna o ID da receita.
@@ -125,5 +106,17 @@ public class Receita {
     // Retorna o ID do usuário que cadastrou a receita.
     public Integer getUsuarioId() {
         return usuarioId;
+    }
+
+
+    // Retorna se a receita foi aprovada.
+    public Boolean getAprovada() {
+        return aprovada;
+    }
+
+
+    // Define se a receita foi aprovada.
+    public void setAprovada(Boolean aprovada) {
+        this.aprovada = aprovada;
     }
 }
