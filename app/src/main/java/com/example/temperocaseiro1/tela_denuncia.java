@@ -65,15 +65,22 @@ public class tela_denuncia extends AppCompatActivity {
         // verificação do tipo de seleção
         btnEnviarDenuncia.setOnClickListener(v -> {
 
-            if (tipoViolenciaSelecionada.isEmpty()) { // confere se a variável permanece vazia assim como no começo
+            // 1. Verificar se algum tipo de violência foi selecionado
+            if (tipoViolenciaSelecionada.isEmpty()) {
                 btnEnviarDenuncia.setError("Selecione um tipo de violência");
-
-            } else {
-                String relato = editRelato.getText().toString().trim(); // caso a vítima queira desccrever o ocorrido. Ficaria como: relato = "relato da vítima"
-                // caso a vítima nn escreva nada: relato = "";
+                return;
 
             }
+            // 2. Pega o relato do usuário e transforma em String
+            String relato = editRelato.getText().toString().trim();
+
+            if (relato.isEmpty()) {
+                editRelato.setError("Descreva o que ocorreu");
+                editRelato.requestFocus();
+                return;
+            }
         });
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
