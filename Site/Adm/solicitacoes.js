@@ -69,6 +69,7 @@ async function avaliar() {
  
     const aprovar = confirm("Clique em OK para APROVAR a conta, ou Cancelar para REPROVAR.");
     const acao = aprovar ? "aprovar" : "reprovar";
+    
     //Manda para o banco para pegar as infos
     const resposta = await fetch(`http://localhost:3000/Adm/solicitacoes/${idUserSelecionado}`);
 
