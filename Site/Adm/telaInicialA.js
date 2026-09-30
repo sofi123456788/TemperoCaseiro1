@@ -18,3 +18,8 @@ document.getElementById("addC").addEventListener("click", ()=>{
 document.getElementById("editarCentro").addEventListener("click", ()=>{
     window.location.href = "editarCentroApoioA.html";
 });
+
+//Avaliar Receitas
+document.getElementById("avaliarReceita").addEventListener("click", ()=>{
+    window.location.href = "avaliarReceitas.html";
+});

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosG.css">
+    <title>Tela Inicial</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <!--Relatórios-->
+            <button onclick="window.location.href='relatoriosA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span>
+            </button>
+
+            <!--Perfil-->
+            <button onclick="window.location.href='perfilA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+            <!--Solicitações-->
+            <button onclick="window.location.href='solicitacoes.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/solicitacoes.png" alt="solicitacoes">
+                <span>Solicitações</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Lista de canais-->
+    <aside class="sidebarLista">
+        <h1 id="form_titulo">Qual receita deseja avaliar?</h1>
+        <ul id="listaReceitas" onclick="pegarInfosReceita(event)"></ul>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+        <h1>Bem-Vindo(a) a tela de avaliação de Contas!</h1>
+
+        <section class="cardsP">
+            <h2>Informações</h2>
+            <div class="cardP">
+                <div class="info identificacao">
+                    <span>Nome:</span>
+                    <p id="nome"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>CPF:</span>
+                    <p id="cpf"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Email:</span>
+                    <p id="email"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Telefone:</span>
+                    <p id="telefone"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Área Profissional:</span>
+                    <p id="area"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="acoesP">
+            <button onclick="abrirDocumento()">Vizualizar Diploma</button>
+            <button onclick="avaliar()">Finalizar Avaliação</button>
+        </section>
+
+    </main>
+    <script src="avaliarReceitas.js"></script>
+</body>
+</html>
