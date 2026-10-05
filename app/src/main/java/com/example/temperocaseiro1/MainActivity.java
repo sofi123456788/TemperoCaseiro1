@@ -17,6 +17,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -123,6 +124,48 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+
+        // ===============================
+// RESTAURANTES PRÓXIMOS
+// ===============================
+
+// Card do restaurante Trem Mineiro
+        LinearLayout cardRestaurante1 = findViewById(R.id.cardRestaurante1);
+
+        cardRestaurante1.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar o Trem Mineiro
+            intent.putExtra("restaurante", "trem");
+
+            startActivity(intent);
+        });
+
+
+// Card do restaurante Toca Gril
+        LinearLayout cardRestaurante2 = findViewById(R.id.cardRestaurante2);
+
+        cardRestaurante2.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar o Toca Gril
+            intent.putExtra("restaurante", "toca");
+
+            startActivity(intent);
+        });
+
+
+// Botão "Ver no mapa"
+        TextView txtVerMapa = findViewById(R.id.txtVerMapa);
+
+        txtVerMapa.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar os dois restaurantes
+            intent.putExtra("restaurante", "todos");
+
+            startActivity(intent);
         });
 
 

@@ -10,7 +10,7 @@ public class RetrofitClient {
 
     // Endereço base da API.
     // Quando usamos emulador Android, localhost do computador é acessado pelo seu endereço ip
-    private static final String BASE_URL = "http://10.0.0.104:8080/";
+    private static final String BASE_URL = "http://10.0.2.2:8080/";
 
 
     // Instância única do Retrofit.
