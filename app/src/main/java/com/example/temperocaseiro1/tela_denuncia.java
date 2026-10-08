@@ -36,9 +36,9 @@ public class tela_denuncia extends AppCompatActivity {
         layoutAmeaca = findViewById(R.id.layoutAmeaca);
         layoutOutra = findViewById(R.id.layoutOutra);
         btnEnviarDenuncia = findViewById(R.id.btnEnviarDenuncia);
-        editRelato = findViewById (R.id.editRelato);
+        editRelato = findViewById(R.id.editRelato);
 
-        layoutFisica.setOnClickListener(v ->{
+        layoutFisica.setOnClickListener(v -> {
             tipoViolenciaSelecionada = "fisica";
         });
 
@@ -50,7 +50,7 @@ public class tela_denuncia extends AppCompatActivity {
             tipoViolenciaSelecionada = "sexual";
         });
 
-        layoutPatrimonial.setOnClickListener( v -> {
+        layoutPatrimonial.setOnClickListener(v -> {
             tipoViolenciaSelecionada = "patrimonial";
         });
 
@@ -79,14 +79,19 @@ public class tela_denuncia extends AppCompatActivity {
                 editRelato.requestFocus();
                 return;
             }
+
         });
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+    }
+
+    public void enviarDenunciaParaAPI(String tipoViolenciaSelecionada, String relato) {
+
+
     }
 }
