@@ -42,16 +42,13 @@
             </LinearLayout>
 
             <!-- MAPA ILUSTRATIVO -->
-            <ImageView
-                android:id="@+id/imgMapa"
+            <WebView
+                android:id="@+id/webViewMapa"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/mapa"
-                android:contentDescription="Mapa ilustrativo do local" />
+                android:layout_marginTop="8dp" />
 
             <!-- CONTEÚDO -->
             <LinearLayout

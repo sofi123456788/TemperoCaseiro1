@@ -3,6 +3,8 @@
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +18,7 @@ public class ActivityDetalhesLocal extends AppCompatActivity {
     private TextView txtTelefone;
     private TextView txtFuncionamento;
     private TextView txtCategoria;
+    private WebView webViewMapa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,10 @@ public class ActivityDetalhesLocal extends AppCompatActivity {
         txtTelefone = findViewById(R.id.txtTelefone);
         txtFuncionamento = findViewById(R.id.txtFuncionamento);
         txtCategoria = findViewById(R.id.txtCategoria);
+        webViewMapa = findViewById(R.id.webViewMapa);
+
+        WebSettings configuracao = webViewMapa.getSettings();
+        configuracao.setJavaScriptEnabled(true);
 
         // Recebe o nome enviado pela tela anterior
         String nome = getIntent().getStringExtra("nome");
@@ -44,6 +51,30 @@ public class ActivityDetalhesLocal extends AppCompatActivity {
         String horarioAbertura = getIntent().getStringExtra("horarioAbertura");
         String horarioFechamento = getIntent().getStringExtra("horarioFechamento");
         String tipo = getIntent().getStringExtra("tipo");
+        String enderecoMapa = "";
+
+        if (logradouro != null && !logradouro.isEmpty()) {
+            enderecoMapa += logradouro;
+        } else if (rua != null && !rua.isEmpty()) {
+            enderecoMapa += rua;
+        }
+
+        if (bairro != null && !bairro.isEmpty()) {
+            enderecoMapa += ", " + bairro;
+        }
+
+        if (cidade != null && !cidade.isEmpty()) {
+            enderecoMapa += ", " + cidade;
+        }
+
+        if (estado != null && !estado.isEmpty()) {
+            enderecoMapa += ", " + estado;
+        }
+
+        String urlMapa = "file:///android_asset/mapa_centro.html?endereco="
+                + android.net.Uri.encode(enderecoMapa);
+
+        webViewMapa.loadUrl(urlMapa);
 
         if (nome != null && !nome.isEmpty()) {
             txtNomeLocal.setText(nome);
