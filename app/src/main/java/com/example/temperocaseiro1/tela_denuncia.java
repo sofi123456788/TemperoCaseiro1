@@ -1,5 +1,6 @@
 package com.example.temperocaseiro1;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,12 +11,15 @@ import androidx.core.view.WindowInsetsCompat;
 import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.temperocaseiro1.api.ApiClient;
 import com.example.temperocaseiro1.api.AuthApi;
 import com.example.temperocaseiro1.model.DenuciasRequest;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class tela_denuncia extends AppCompatActivity {
 
@@ -98,12 +102,36 @@ public class tela_denuncia extends AppCompatActivity {
 
     public void enviarDenunciaParaAPI(String tipoViolenciaSelecionada, String relatoViolencia) {
 
-        DenuciasRequest request = new DenuciasRequest (tipoViolencia, relatoViolencia);
+        DenuciasRequest denunciasRequest = new DenuciasRequest(tipoViolencia, relatoViolencia);
 
         AuthApi authApi = ApiClient.getRetrofit().create(AuthApi.class); // cria uma conexão com a API
 
-        Call<String> call = authApi.denuncia(Denun) // prepara uma chamada HTTP para o login do usuário
+        Call<String> call = authApi.denuncia(denunciasRequest);// prepara uma chamada HTTP para o login do usuário
 
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) { // API respondeu
+                if (response.isSuccessful()) {
+                    Toast.makeText(tela_denuncia.this, response.body(), Toast.LENGTH_SHORT).show();
 
+                    if ("Denúncia salva com sucesso".equals(response.body())) { // abrir a próxima tela do app
+                        // próxima tela do app
+                        //Intent intent = new Intent(tela_login.this, tela_configuracoes.class);
+                        //intent.putExtra("emailUsuario", email);
+                        //startActivity(intent);
+                        //finish();
+                    }
+
+                } else {
+                    Toast.makeText(tela_denuncia.this, "Erro no login", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(tela_denuncia.this, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 }
