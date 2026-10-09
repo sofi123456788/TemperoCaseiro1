@@ -7,7 +7,7 @@ public class DenuciasRequest {
      private String relatoViolencia;
 
 
-     public DenuciasRequest() {
+     public DenuciasRequest(String tipoViolencia, String relatoViolencia) {
 
      }
 
@@ -39,4 +39,4 @@ public class DenuciasRequest {
     }
 
 
-}
+

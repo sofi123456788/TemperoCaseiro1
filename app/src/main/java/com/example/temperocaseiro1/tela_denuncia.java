@@ -11,9 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.temperocaseiro1.api.ApiClient;
+import com.example.temperocaseiro1.api.AuthApi;
+import com.example.temperocaseiro1.model.DenuciasRequest;
+
+import retrofit2.Call;
+
 public class tela_denuncia extends AppCompatActivity {
 
-    private String tipoViolenciaSelecionada = "";
+    private String tipoViolencia = "";
     private LinearLayout layoutFisica;
     private LinearLayout layoutPsicologica;
     private LinearLayout layoutSexual;
@@ -39,42 +45,42 @@ public class tela_denuncia extends AppCompatActivity {
         editRelato = findViewById(R.id.editRelato);
 
         layoutFisica.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "fisica";
+            tipoViolencia = "fisica";
         });
 
         layoutPsicologica.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "psicologica";
+            tipoViolencia = "psicologica";
         });
 
         layoutSexual.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "sexual";
+            tipoViolencia = "sexual";
         });
 
         layoutPatrimonial.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "patrimonial";
+            tipoViolencia = "patrimonial";
         });
 
         layoutAmeaca.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "ameaca";
+            tipoViolencia = "ameaca";
         });
 
         layoutOutra.setOnClickListener(v -> {
-            tipoViolenciaSelecionada = "outra";
+            tipoViolencia = "outra";
         });
 
         // verificação do tipo de seleção
         btnEnviarDenuncia.setOnClickListener(v -> {
 
             // 1. Verificar se algum tipo de violência foi selecionado
-            if (tipoViolenciaSelecionada.isEmpty()) {
+            if (tipoViolencia.isEmpty()) {
                 btnEnviarDenuncia.setError("Selecione um tipo de violência");
                 return;
 
             }
             // 2. Pega o relato do usuário e transforma em String
-            String relato = editRelato.getText().toString().trim();
+            String relatoViolencia = editRelato.getText().toString().trim();
 
-            if (relato.isEmpty()) {
+            if (relatoViolencia.isEmpty()) {
                 editRelato.setError("Descreva o que ocorreu");
                 editRelato.requestFocus();
                 return;
@@ -90,7 +96,13 @@ public class tela_denuncia extends AppCompatActivity {
 
     }
 
-    public void enviarDenunciaParaAPI(String tipoViolenciaSelecionada, String relato) {
+    public void enviarDenunciaParaAPI(String tipoViolenciaSelecionada, String relatoViolencia) {
+
+        DenuciasRequest request = new DenuciasRequest (tipoViolencia, relatoViolencia);
+
+        AuthApi authApi = ApiClient.getRetrofit().create(AuthApi.class); // cria uma conexão com a API
+
+        Call<String> call = authApi.denuncia(Denun) // prepara uma chamada HTTP para o login do usuário
 
 
     }

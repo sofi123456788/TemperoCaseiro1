@@ -6,7 +6,7 @@ import com.example.temperocaseiro1.model.ExcluirContaRequest;
 import com.example.temperocaseiro1.model.RecEmailRequest;
 import com.example.temperocaseiro1.model.RedefinirSenhaRequest;
 import com.example.temperocaseiro1.model.ValidarCodigoRequest;
-import com.example.temperocaseiro1.model
+import com.example.temperocaseiro1.model.DenuciasRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -34,5 +34,5 @@ public interface AuthApi { // define quais rotas existem na API
     Call <String> alterar(@Body RedefinirSenhaRequest request);
 
     @POST("auth/denuncia")
-    Call <String> denuncia(@Body DenunciasRequest request);
+    Call <String> denuncia(@Body DenuciasRequest request);
 }
