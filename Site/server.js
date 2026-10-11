@@ -61,7 +61,7 @@ app.listen(3000, () => {
 });
 
 
-//-------------------- Verificação ---------------------
+//-------------------- Verificação de Usuário ---------------------
 //Rota para guardar o docs na pagina
 app.post("/Docs", upload.single("documento"), (req, res) => {
 
@@ -172,6 +172,23 @@ app.post("/Adm/solicitacoes", async (req, res) => {
         });
     }
     
+});
+
+
+//-------------------- Verificação de Receita ---------------------
+//Pegar os nomes das receitas
+app.get("/Adm/avaliarReceitas", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query(`SELECT id, titulo FROM receita`);
+        
+        //Guarda as infos no array list
+        const users = resultado.rows;
+        res.json(users)
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
 });
 
 
