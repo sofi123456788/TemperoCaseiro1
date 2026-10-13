@@ -125,6 +125,10 @@ public class tela_cadastro extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) { //API respondeu
                 if (response.isSuccessful()) {
                     Toast.makeText(tela_cadastro.this, response.body(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(tela_cadastro.this, tela_login.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     Toast.makeText(tela_cadastro.this, "Erro no cadastro", Toast.LENGTH_SHORT).show(); // deu erro em alguma parte do cadastro
                 }

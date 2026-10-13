@@ -1,20 +1,31 @@
 package com.example.temperocaseiro1.api;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://10.90.36.173:8080/"; // essa linha informa aonde está a API para conectá-la (ID e porta)
+    // Endereço da API Spring Boot
+    private static final String BASE_URL =
+            "http://192.168.2.142:8080/";
 
     private static Retrofit retrofit;
 
-    public static Retrofit getRetrofit() { // pegue a configuração pronta da API, preparando a comunicação entre o android studio e a API
+    public static Retrofit getRetrofit() {
 
         if (retrofit == null) {
+
+            // Configura o cliente HTTP com o interceptor JWT
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .addInterceptor(new TokenInterceptor())
+                    .build();
+
+            // Configura a comunicação com o Spring Boot
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .client(client)
                     .addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
