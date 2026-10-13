@@ -7,9 +7,10 @@ public class DenuciasRequest {
      private String relatoViolencia;
 
 
-     public DenuciasRequest(String tipoViolencia, String relatoViolencia) {
-
-     }
+    public DenuciasRequest(String tipoViolencia, String relatoViolencia) {
+        this.tipoViolencia = tipoViolencia;
+        this.relatoViolencia = relatoViolencia;
+    }
 
         public String getUsuarioDenuncia() {
             return usuarioDenuncia;

@@ -89,6 +89,7 @@ public class tela_denuncia extends AppCompatActivity {
                 editRelato.requestFocus();
                 return;
             }
+            enviarDenunciaParaAPI(tipoViolencia, relatoViolencia);
 
         });
 
