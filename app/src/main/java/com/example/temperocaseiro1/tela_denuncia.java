@@ -21,6 +21,19 @@ import com.example.temperocaseiro1.api.ApiClient;
 import com.example.temperocaseiro1.api.AuthApi;
 import com.example.temperocaseiro1.model.DenuciasRequest;
 
+import android.provider.OpenableColumns;
+import android.database.Cursor;
+import android.content.ContentResolver;
+
+import com.example.temperocaseiro1.model.DenunciaCriadaResponse;
+
+import java.io.InputStream;
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 // seletor de arquivos do próprio android
 import android.net.Uri;
 import android.widget.ImageView;
@@ -195,37 +208,197 @@ public class tela_denuncia extends AppCompatActivity {
 
     public void enviarDenunciaParaAPI(String tipoViolenciaSelecionada, String relatoViolencia) {
 
-        DenuciasRequest denunciasRequest = new DenuciasRequest(tipoViolenciaSelecionada, relatoViolencia);
+        DenuciasRequest request = new DenuciasRequest(tipoViolenciaSelecionada, relatoViolencia);
 
-        AuthApi authApi = ApiClient.getRetrofit().create(AuthApi.class); // cria uma conexão com a API
+        AuthApi api = ApiClient.getRetrofit().create(AuthApi.class);
 
-        Call<String> call = authApi.denuncia(denunciasRequest);// prepara uma chamada HTTP para o login do usuário
+        btnEnviarDenuncia.setEnabled(false);
 
-        call.enqueue(new Callback<String>() {
+        api.criarDenuncia(request).enqueue(new Callback<DenunciaCriadaResponse>() {
+
             @Override
-            public void onResponse(Call<String> call, Response<String> response) { // API respondeu
-                if (response.isSuccessful()) {
-                    Toast.makeText(tela_denuncia.this, response.body(), Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<DenunciaCriadaResponse> call, Response<DenunciaCriadaResponse> response) {
 
-                    if ("Denúncia salva com sucesso".equals(response.body())) { // abrir a próxima tela do app
-                        // próxima tela do app
-                        //Intent intent = new Intent(tela_login.this, tela_configuracoes.class);
-                        //intent.putExtra("emailUsuario", email);
-                        //startActivity(intent);
-                        //finish();
+                if (!response.isSuccessful() || response.body() == null) {
+                    btnEnviarDenuncia.setEnabled(true);
+                    Toast.makeText(tela_denuncia.this, "Erro ao criar denúncia: " + response.code(), Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                Long denunciaId = response.body().getId();
+
+                if (denunciaId == null) {
+                    btnEnviarDenuncia.setEnabled(true);
+                    Toast.makeText(tela_denuncia.this, "A API não retornou o ID da denúncia", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                java.util.ArrayList<Uri> anexos = new java.util.ArrayList<>();
+
+                if (fotoSelecionadaUri != null) {
+                    anexos.add(fotoSelecionadaUri);
+                }
+
+                if (audioSelecionadoUri != null) {
+                    anexos.add(audioSelecionadoUri);
+                }
+
+                if (videoSelecionadoUri != null) {
+                    anexos.add(videoSelecionadoUri);
+                }
+
+                enviarProximoAnexo(api, denunciaId, anexos, 0, 0);
+            }
+
+            @Override
+            public void onFailure(Call<DenunciaCriadaResponse> call, Throwable t) {
+                btnEnviarDenuncia.setEnabled(true);
+                Toast.makeText(tela_denuncia.this, "Falha ao criar denúncia: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void enviarProximoAnexo(
+            AuthApi api,
+            Long denunciaId,
+            java.util.ArrayList<Uri> anexos,
+            int indice,
+            int enviados) {
+
+        if (indice >= anexos.size()) {
+            btnEnviarDenuncia.setEnabled(true);
+
+            Toast.makeText(this,
+                    "Denúncia salva! Anexos enviados: "
+                            + enviados + "/" + anexos.size(),
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        try {
+            MultipartBody.Part parte = prepararArquivo(anexos.get(indice));
+
+            api.enviarAnexo(denunciaId, parte).enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(
+                        Call<String> call,
+                        Response<String> response) {
+
+                    int totalEnviados = enviados;
+
+                    if (response.isSuccessful()) {
+                        totalEnviados++;
+                    } else {
+                        Toast.makeText(tela_denuncia.this,
+                                "Erro no anexo " + (indice + 1)
+                                        + ": " + response.code(),
+                                Toast.LENGTH_LONG).show();
                     }
 
-                } else {
-                    Toast.makeText(tela_denuncia.this, "Erro ao enviar denúncia. Código: " + response.code(), Toast.LENGTH_SHORT).show();
+                    enviarProximoAnexo(
+                            api, denunciaId, anexos,
+                            indice + 1, totalEnviados);
                 }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(tela_denuncia.this,
+                            "Falha no anexo " + (indice + 1),
+                            Toast.LENGTH_LONG).show();
+
+                    enviarProximoAnexo(
+                            api, denunciaId, anexos,
+                            indice + 1, enviados);
+                }
+            });
+
+        } catch (Exception e) {
+            Toast.makeText(this,
+                    "Erro ao preparar anexo " + (indice + 1),
+                    Toast.LENGTH_LONG).show();
+
+            enviarProximoAnexo(
+                    api, denunciaId, anexos,
+                    indice + 1, enviados);
+        }
+    }
+
+    private MultipartBody.Part prepararArquivo(Uri uri) throws IOException {
+
+        ContentResolver resolver = getContentResolver();
+
+        String tipo = resolver.getType(uri);
+
+        if (tipo == null) {
+            tipo = "application/octet-stream";
+        }
+
+        String extensao;
+
+        switch (tipo) {
+            case "image/jpeg":
+                extensao = ".jpg";
+                break;
+            case "image/png":
+                extensao = ".png";
+                break;
+            case "image/webp":
+                extensao = ".webp";
+                break;
+            case "audio/mpeg":
+                extensao = ".mp3";
+                break;
+            case "audio/wav":
+                extensao = ".wav";
+                break;
+            case "audio/ogg":
+                extensao = ".ogg";
+                break;
+            case "audio/mp4":
+                extensao = ".m4a";
+                break;
+            case "video/mp4":
+                extensao = ".mp4";
+                break;
+            case "video/webm":
+                extensao = ".webm";
+                break;
+            case "video/3gpp":
+                extensao = ".3gp";
+                break;
+            default:
+                extensao = ".bin";
+        }
+
+        java.io.ByteArrayOutputStream buffer =
+                new java.io.ByteArrayOutputStream();
+
+        try (InputStream entrada = resolver.openInputStream(uri)) {
+            if (entrada == null) {
+                throw new IOException("Arquivo indisponível");
             }
 
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(tela_denuncia.this, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
-            }
+            byte[] bloco = new byte[8192];
+            int lidos;
 
-        });
+            while ((lidos = entrada.read(bloco)) != -1) {
+                if (buffer.size() + lidos > 15 * 1024 * 1024) {
+                    throw new IOException("Arquivo maior que 15 MB");
+                }
+                buffer.write(bloco, 0, lidos);
+            }
+        }
+
+        RequestBody corpo = RequestBody.create(
+                MediaType.parse(tipo),
+                buffer.toByteArray()
+        );
+
+        return MultipartBody.Part.createFormData(
+                "arquivo",
+                "anexo_" + System.currentTimeMillis() + extensao,
+                corpo
+        );
     }
 
     private void selecionarViolencia(String tipo, LinearLayout selecionado) {

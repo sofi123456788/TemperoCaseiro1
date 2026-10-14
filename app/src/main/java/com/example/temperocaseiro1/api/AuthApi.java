@@ -8,6 +8,12 @@ import com.example.temperocaseiro1.model.RedefinirSenhaRequest;
 import com.example.temperocaseiro1.model.ValidarCodigoRequest;
 import com.example.temperocaseiro1.model.DenuciasRequest;
 import com.example.temperocaseiro1.model.LoginResponse;
+import com.example.temperocaseiro1.model.DenunciaCriadaResponse;
+
+import okhttp3.MultipartBody;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,7 +25,8 @@ public interface AuthApi { // define quais rotas existem na API
     Call<String> cadastrar(@Body CadastroRequest request); // envia o objeto (todas as informações fornecidas pelo usuário) já no corpo da requisição
     // retrofit transforma o objeto em JSON; JSON vai no corpo da requisição; API recebe essa requisição;
 
-    @POST("auth/login") //envia o objeto (email e senha) já no corpo da requisição em forma de JSON; e a API recebe esse JSON; CadastroRequest na API transforma em DTO;
+    @POST("auth/login")
+        //envia o objeto (email e senha) já no corpo da requisição em forma de JSON; e a API recebe esse JSON; CadastroRequest na API transforma em DTO;
     Call<LoginResponse> login(@Body LoginRequest request);
 
     @POST("auth/excluir")
@@ -29,11 +36,18 @@ public interface AuthApi { // define quais rotas existem na API
     Call<String> recuperar(@Body RecEmailRequest request);
 
     @POST("auth/validar")
-    Call <String> validar(@Body ValidarCodigoRequest request);
+    Call<String> validar(@Body ValidarCodigoRequest request);
 
     @POST("auth/alterar")
-    Call <String> alterar(@Body RedefinirSenhaRequest request);
+    Call<String> alterar(@Body RedefinirSenhaRequest request);
 
     @POST("auth/denuncia")
-    Call <String> denuncia(@Body DenuciasRequest request);
+    Call<String> denuncia(@Body DenuciasRequest request);
+
+    @POST("auth/denuncia/criar")
+    Call<DenunciaCriadaResponse> criarDenuncia(@Body DenuciasRequest request);
+
+    @Multipart
+    @POST("auth/denuncia/{id}/anexos")
+    Call<String> enviarAnexo(@Path("id") Long denunciaId, @Part MultipartBody.Part arquivo);
 }
