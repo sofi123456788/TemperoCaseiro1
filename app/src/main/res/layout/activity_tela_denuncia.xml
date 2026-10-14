@@ -2,6 +2,7 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -416,6 +417,83 @@
             </LinearLayout>
 
         </LinearLayout>
+
+
+        <!-- PRÉVIA DA FOTO SELECIONADA -->
+        <ImageView
+            android:id="@+id/imgPreviaFoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="250dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="Prévia da foto selecionada"
+            android:visibility="gone" />
+
+
+        <!-- BOTÃO REMOVER FOTO -->
+        <Button
+            android:id="@+id/btnRemoverFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="Remover foto"
+            android:textAllCaps="false"
+            android:textColor="#9A3030"
+            android:backgroundTint="#F3DADA"
+            android:visibility="gone" />
+
+        <!-- ÁUDIO SELECIONADO -->
+        <TextView
+            android:id="@+id/txtAudioSelecionado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Áudio selecionado"
+            android:textColor="#526B37"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!-- REMOVER ÁUDIO -->
+        <Button
+            android:id="@+id/btnRemoverAudio"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="Remover áudio"
+            android:textAllCaps="false"
+            android:textColor="#9A3030"
+            android:backgroundTint="#F3DADA"
+            android:visibility="gone" />
+
+        <!-- PRÉVIA DO VÍDEO -->
+
+        <VideoView
+            android:id="@+id/videoPrevia"
+            android:layout_width="280dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <!-- BOTÃO REMOVER VÍDEO -->
+        <Button
+            android:id="@+id/btnRemoverVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="Remover vídeo"
+            android:textAllCaps="false"
+            android:textColor="#9A3030"
+            android:backgroundTint="#F3DADA"
+            android:visibility="gone" />
 
 
         <!-- BOTÃO -->
