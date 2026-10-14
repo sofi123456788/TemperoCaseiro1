@@ -180,7 +180,7 @@ app.post("/Adm/solicitacoes", async (req, res) => {
 app.get("/Adm/avaliarReceitas", async (req, res) => {
     try {
         //Pega as infos no bd
-        const resultado = await pool.query(`SELECT id, titulo FROM receita`);
+        const resultado = await pool.query(`SELECT id, titulo, aprovada FROM receita`);
         
         //Guarda as infos no array list
         const users = resultado.rows;

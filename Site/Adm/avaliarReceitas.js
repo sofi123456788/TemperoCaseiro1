@@ -6,20 +6,26 @@ async function pegaReceitas() {
         const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas`);
         const rests = await resposta.json();
 
-        // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)
+        console.log("Dados recebidos:", rests);
+
         listaReceita.innerHTML = '';
+
         for (let i = 0; i < rests.length; i++) {
             const receita = rests[i];
-            if(!receita.aprovada){
+
+            console.log("Receita:", receita.titulo);
+            console.log("Aprovada:", receita.aprovada);
+            console.log("Tipo:", typeof receita.aprovada);
+
+            if (!receita.aprovada) {
                 const itemLI = document.createElement('li');
                 itemLI.dataset.id = receita.id;
                 itemLI.dataset.nome = receita.titulo;
                 itemLI.textContent = `${receita.titulo}`;
                 listaReceita.appendChild(itemLI);
-            }else{
-                alert("Não há nenhuma receita a ser avaliada.");
+            } else {
+                console.log("Receita aprovada, não será exibida:", receita.titulo);
             }
-            
         }
     } catch (error) {
         alert("Não foi possível encontrar as receitas.");
@@ -93,6 +99,7 @@ async function avaliar(event) {
             if (!resposta.ok) {
                 alert("Erro na Aprovação");
             }
+            pegaReceitas();
             window.location.reload();
             alert("Receita Aprovada!");
         }else if(acao === "reprovar"){
@@ -115,6 +122,7 @@ async function avaliar(event) {
                 idDesaprovapor: id
             })
             });
+            pegaReceitas();
             window.location.reload();
             if (!resposta.ok) {
                 alert("Erro na Reprovação");
