@@ -3,7 +3,7 @@ async function pegaReceitas() {
     const listaReceita = document.getElementById("listaReceitas");
     try {
         //Manda para o server o email do usuário para pegar as demais infos
-        const resposta = await fetch(`http://localhost:3000/Adm/solicitacoes`);
+        const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas`);
         const rests = await resposta.json();
 
         // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)
@@ -13,8 +13,8 @@ async function pegaReceitas() {
             if(!receita.aprovada){
                 const itemLI = document.createElement('li');
                 itemLI.dataset.id = receita.id;
-                itemLI.dataset.nome = receita.nome_completo;
-                itemLI.textContent = `${receita.nome_completo}`;
+                itemLI.dataset.nome = receita.titulo;
+                itemLI.textContent = `${receita.titulo}`;
                 listaReceita.appendChild(itemLI);
             }else{
                 alert("Não há nenhuma receita a ser avaliada.");
@@ -43,7 +43,7 @@ async function pegarInfosReceita(event) {
 
         document.getElementById("titulo").textContent = receita.titulo;
         document.getElementById("categoria").textContent = receita.categoria;
-        document.getElementById("ingredientes").textContent = receita.infredientes;
+        document.getElementById("ingredientes").textContent = receita.ingredientes;
         document.getElementById("modo_preparo").textContent = receita.modo_preparo;
         document.getElementById("tempo_preparo").textContent = receita.tempo_preparo;
         document.getElementById("rendimento").textContent = receita.rendimento;
@@ -54,10 +54,10 @@ async function pegarInfosReceita(event) {
     
 }
 
-// Finaliza a avaliação da conta selecionada
-async function avaliar() {
+// Finaliza a avaliação da receita selecionada
+async function avaliar(event) {
     if (!idReceitaSelecionado) {
-        alert("Selecione uma conta antes de avaliar.");
+        alert("Selecione uma Receita antes de avaliar.");
         return;
     }
  
@@ -65,6 +65,7 @@ async function avaliar() {
     const acao = aprovar ? "aprovar" : "reprovar";
     
     //Manda para o banco para pegar as infos
+    const idReceita = event.target.dataset.id;
     const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas/${idReceitaSelecionado}`);
 
      if (!resposta.ok) {
@@ -78,8 +79,8 @@ async function avaliar() {
         if(acao === "aprovar"){
             const aprov = true;
             const id = localStorage.getItem("id");
-            const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas`, {
-            method: "POST",
+            const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas/${idReceitaSelecionado}`, {
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -93,10 +94,11 @@ async function avaliar() {
                 alert("Erro na Aprovação");
             }
             window.location.reload();
-            alert("Conta Aprovada!");
+            alert("Receita Aprovada!");
         }else if(acao === "reprovar"){
             const aprov = false;
-            const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas`, {
+            const id = localStorage.getItem("id");
+            const resposta = await fetch(`http://localhost:3000/Adm/avaliarReceitas/${idReceitaSelecionado}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -117,14 +119,17 @@ async function avaliar() {
             if (!resposta.ok) {
                 alert("Erro na Reprovação");
             }
-            alert("Conta Suspensa!");
+            alert("Receita Suspensa!");
         }
  
         idReceitaSelecionado = null;
-        pegaContasNaoVerificadas();
+        pegaReceitas();
  
     } catch (error) {
         console.error(error);
-        alert("Erro ao avaliar a conta.");
+        alert("Erro ao avaliar a Receita.");
     }
 }
+
+//Roda a função automáticamente
+document.addEventListener("DOMContentLoaded", pegaReceitas);

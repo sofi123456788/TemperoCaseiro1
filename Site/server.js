@@ -191,6 +191,159 @@ app.get("/Adm/avaliarReceitas", async (req, res) => {
     }
 });
 
+//Rota para pegar as infos da receita 
+app.get("/Adm/avaliarReceitas/:idReceitaSelecionado", async (req, res) => {
+    try {
+        const id = req.params.idReceitaSelecionado;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM receita WHERE id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Receita não encontrado"
+            });
+        }
+
+        //Guarda as infos no array list
+        const receitaEscolhida = resultado.rows[0];
+
+        return res.json(receitaEscolhida);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para atualizar as tabelas reprovada
+app.post("/Adm/avaliarReceitas/:idReceitaSelecionado", async (req, res) => {
+    try {
+        const id = req.params.idReceitaSelecionado;
+        await pool.query("BEGIN");
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {titulo, categoria, ingredientes, modo_preparo, tempo_preparo, rendimento, idAdcionador, aprovada, idDesaprovapor} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `INSERT INTO receitasnaoaprovada(titulo, categoria, ingredientes, modo_preparo, tempo_preparo, rendimento, idAdcionador, aprovada, idDesaprovapor) 
+            VALUES($1,$2,$3,$4,$5,$6, $7, $8, $9)`,
+            [titulo, categoria, ingredientes, modo_preparo, tempo_preparo, rendimento, idAdcionador, aprovada, idDesaprovapor] 
+        );
+
+        console.log("Receita realocada");
+        res.json({
+            mensagem: "Receita realocada!"
+        });
+
+        await pool.query(
+            "DELETE FROM receita WHERE id = $1",
+            [id]
+        );
+
+        await pool.query("COMMIT");
+
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            mensagem: "Erro no servidor"
+        });
+    }
+    
+});
+
+//Rota para atualizar as tabelas aprovada
+app.put("/Adm/avaliarReceitas/:idReceitaSelecionado", async (req, res) => {
+    try {
+        const id = req.params.idReceitaSelecionado;
+        console.log("REQUISIÇÃO RECEBIDA");//As infos foram pegas bonitinhas
+        console.log(req.body);
+
+        const {verificacao, idAprovador} = req.body;
+
+        //Mandando para o banco de dados
+        await pool.query(
+            `UPDATE receita SET aprovada = $1, idaprovador = $2 WHERE id = $3;`,
+            [verificacao, idAprovador, id] 
+        );
+
+        console.log("Receita realocada");
+
+        res.json({ mensagem: "Receita aprovada!" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ mensagem: "Erro no servidor" });
+    }
+    
+});
+
+
+//-------------------- Vizualização das denúncias ---------------------
+//Pegar os tipos das denúncias
+app.get("/PsiAdv/denuncia", async (req, res) => {
+    try {
+        //Pega as infos no bd
+        const resultado = await pool.query(`SELECT id, tipo_violencia FROM denuncias`);
+        
+        //Guarda as infos no array list
+        const users = resultado.rows;
+        res.json(users)
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos da denúncia 
+app.get("/PsiAdv/denuncia/:idDenuncia", async (req, res) => {
+    try {
+        const id = req.params.idDenuncia;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM denuncias WHERE id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Denúncia não encontrado"
+            });
+        }
+
+        //Guarda as infos no array list
+        const denunciaEscolhida = resultado.rows[0];
+
+        return res.json(denunciaEscolhida);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar as infos da vítima 
+app.get("/PsiAdv/denuncia/:idVitima", async (req, res) => {
+    try {
+        const id = req.params.idVitima;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT * FROM usuarios WHERE id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Usuário não encontrado"
+            });
+        }
+
+        //Guarda as infos no array list
+        const usuarioEscolhida = resultado.rows[0];
+
+        return res.json(usuarioEscolhida);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
 
 //-------------------- Login Cadastro e Perfil ---------------------
 //Rota para o login

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosG.css">
+    <title>Denuncia</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicialA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <!--Relatórios-->
+            <button onclick="window.location.href='relatoriosA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span>
+            </button>
+
+            <!--Perfil-->
+            <button onclick="window.location.href='perfilA.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+            <!--Solicitações-->
+            <button onclick="window.location.href='solicitacoes.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/solicitacoes.png" alt="solicitacoes">
+                <span>Solicitações</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Lista de canais-->
+    <aside class="sidebarLista">
+        <h1 id="form_titulo">Selecione uma denúncia</h1>
+        <ul id="listaDenuncias" onclick="pegaDenuncia(event)"></ul>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="conteudo">
+        <h1>Bem-Vindo(a) a tela de denúncias!</h1>
+
+        <section class="cardsP">
+            <h2>Informações</h2>
+            <div class="cardP">
+                <div class="info identificacao">
+                    <span>Nome da Vítima:</span>
+                    <p id="nome"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Tipo de violência:</span>
+                    <p id="tipo_violencia"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Relato:</span>
+                    <p id="relato"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Data da denúncia:</span>
+                    <p id="data_denuncia"></p>
+                </div>
+
+                <div class="info identificacao">
+                    <span>Status:</span>
+                    <p id="status"></p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="acoesP">
+            <button onclick="avaliar(event)">Finalizar Avaliação</button>
+        </section>
+
+    </main>
+    <script src="denuncia.js"></script>
+</body>
+</html>
