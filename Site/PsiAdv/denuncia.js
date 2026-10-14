@@ -4,6 +4,11 @@ async function pegaDenuncia() {
     try {
         //Manda para o server o email do usuário para pegar as demais infos
         const resposta = await fetch(`http://localhost:3000/PsiAdv/denuncia`);
+
+        if (!resposta.ok) {
+            throw new Error(`Erro HTTP: ${resposta.status}`);
+        }
+
         const rests = await resposta.json();
 
         // Limpa a lista antes de renderizar (evita duplicados se a função rodar de novo)
@@ -38,7 +43,7 @@ async function pegarInfosDenuncia(event) {
         const idVitima = vitima.usuario_id;
 
         //Manda para o banco para pegar as infos da vítima 
-        const resposta2 = await fetch(`http://localhost:3000/PsiAdv/denuncia/${idVitima}`);
+        const resposta2 = await fetch(`http://localhost:3000/PsiAdv/usuario/${idVitima}`);
 
         if (!resposta2.ok) {
             throw new Error(`Erro HTTP: ${resposta2.status}`);

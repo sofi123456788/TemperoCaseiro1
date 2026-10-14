@@ -24,3 +24,8 @@ document.getElementById("editarCentro").addEventListener("click", ()=>{
 document.getElementById("resgisA").addEventListener("click", ()=>{
     window.location.href = "registrarAtend.html";
 });
+
+//Registrar Atendimento
+document.getElementById("denuncia").addEventListener("click", ()=>{
+    window.location.href = "denuncia.html";
+});

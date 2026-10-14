@@ -321,7 +321,7 @@ app.get("/PsiAdv/denuncia/:idDenuncia", async (req, res) => {
 });
 
 //Rota para pegar as infos da vítima 
-app.get("/PsiAdv/denuncia/:idVitima", async (req, res) => {
+app.get("/PsiAdv/usuario/:idVitima", async (req, res) => {
     try {
         const id = req.params.idVitima;
         //Pega as infos no bd
