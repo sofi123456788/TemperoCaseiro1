@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fundo da tela -->
+    <ImageView
+        android:id="@+id/imgFundoConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/cadastro_background"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/imgLogoConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_tempero"
+        android:scaleType="fitCenter"
+        android:contentDescription="Logo Tempero Caseiro"
+        app:layout_constraintWidth_percent="0.48"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/txtTituloConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Configurações"
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/imgLogoConfiguracoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.82"
+        android:layout_marginTop="32dp" />
+
+    <!-- Texto explicativo -->
+    <TextView
+        android:id="@+id/txtDescricaoConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Gerencie as opções da sua conta."
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloConfiguracoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_marginTop="28dp" />
+
+    <!-- Botão excluir conta -->
+    <Button
+        android:id="@+id/btnAbrirExcluirConta"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Excluir conta"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        app:layout_constraintTop_toBottomOf="@id/txtDescricaoConfiguracoes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_marginTop="70dp" />
+
+    <!-- Botão voltar -->
+    <Button
+        android:id="@+id/btnVoltarConfiguracoes"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Voltar"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        app:layout_constraintTop_toBottomOf="@id/btnAbrirExcluirConta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_marginTop="24dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

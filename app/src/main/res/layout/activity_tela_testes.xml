@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Fundo da tela -->
+    <ImageView
+        android:id="@+id/imgFundoTestes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/cadastro_background"
+        android:scaleType="fitXY"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Logo Tempero Caseiro -->
+    <ImageView
+        android:id="@+id/imgLogoTestes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/logo_tempero"
+        android:scaleType="fitCenter"
+        android:contentDescription="Logo Tempero Caseiro"
+        app:layout_constraintWidth_percent="0.38"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="115dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/txtTituloTestes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Painel de Testes"
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/imgLogoTestes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.82" />
+
+    <!-- Descrição -->
+    <TextView
+        android:id="@+id/txtDescricaoTestes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Acesse as funcionalidades em desenvolvimento."
+        android:textAlignment="center"
+        android:textColor="#4F5A1F"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloTestes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78" />
+
+    <!-- Botão registrar denúncia -->
+    <Button
+        android:id="@+id/btnTestarDenuncia"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Registrar denúncia"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/txtDescricaoTestes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78" />
+
+    <!-- Botão excluir conta -->
+    <Button
+        android:id="@+id/btnTestarExclusao"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Excluir conta"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/btnTestarDenuncia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78" />
+
+    <!-- Botão sair da sessão -->
+    <Button
+        android:id="@+id/btnSairTestes"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:text="Sair da sessão"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#56611E"
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/btnTestarExclusao"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.78" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
