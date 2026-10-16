@@ -1,0 +1,174 @@
+package com.example.temperocaseiro1;
+
+import android.os.Bundle;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.MotionEvent;
+import android.widget.ImageView;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import android.widget.LinearLayout;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import android.view.View;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.MotionEvent;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+        ImageView imgBolo = findViewById(R.id.imgBoloCenoura);
+        ImageView imgBrigadeiro = findViewById(R.id.imgBrigadeiro);
+        ImageView imgPaoDeQueijo = findViewById(R.id.imgPaoDeQueijo);
+        imgBolo.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ReceitaBoloCenouraActivity.class);
+            startActivity(intent);
+        });
+
+        imgBrigadeiro.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ReceitaBrigadeiroActivity.class);
+            startActivity(intent);
+        });
+
+        imgPaoDeQueijo.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ReceitaPaoDeQueijoActivity.class);
+            startActivity(intent);
+        });
+
+        // Bloco do menu Adicionar Receita
+        LinearLayout menuAdicionar = findViewById(R.id.menuAdicionar);
+        menuAdicionar.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AdicionarReceita.class);
+            startActivity(intent);
+        });
+
+        // Categoria Bolos
+        LinearLayout layoutBolos = findViewById(R.id.layoutBolos);
+        layoutBolos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BolosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Veganos
+        LinearLayout layoutVeganos = findViewById(R.id.layoutVeganos);
+        layoutVeganos.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, VeganosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Salgados
+        LinearLayout layoutSalgados = findViewById(R.id.layoutSalgados);
+        layoutSalgados.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SalgadosActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Rápidas
+        LinearLayout layoutRapidas = findViewById(R.id.layoutRapidas);
+        layoutRapidas.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RapidasActivity.class);
+            startActivity(intent);
+        });
+
+        // Categoria Doces
+        LinearLayout layoutDoces = findViewById(R.id.layoutDoces);
+        layoutDoces.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DocesActivity.class);
+            startActivity(intent);
+        });
+
+        // Botão "Receitas" do rodapé
+        LinearLayout menuReceitas = findViewById(R.id.menuReceitas);
+
+        // Botão "Favoritos" do rodapé
+        LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
+
+        // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
+        Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
+        Runnable abrirTela = () -> { // ação executada após os 4 segundos determinados
+            Intent intent = new Intent(MainActivity.this, BoasVindasActivity.class);
+            startActivity(intent);
+        };
+        menuFavoritos.setOnTouchListener((v, event) -> {
+            switch (event.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+                    handler.postDelayed(abrirTela, 4000);
+                    return true;
+
+                case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_CANCEL:
+                    handler.removeCallbacks(abrirTela);
+                    return true;
+            }
+
+            return false;
+        });
+
+
+// Ao clicar, abre a tela com todas as receitas do banco
+        menuReceitas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, ReceitasBD.class);
+                startActivity(intent);
+
+            }
+        });
+
+        // ===============================
+// RESTAURANTES PRÓXIMOS
+// ===============================
+
+// Card do restaurante Trem Mineiro
+        LinearLayout cardRestaurante1 = findViewById(R.id.cardRestaurante1);
+
+        cardRestaurante1.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar o Trem Mineiro
+            intent.putExtra("restaurante", "trem");
+
+            startActivity(intent);
+        });
+
+
+// Card do restaurante Toca Gril
+        LinearLayout cardRestaurante2 = findViewById(R.id.cardRestaurante2);
+
+        cardRestaurante2.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar o Toca Gril
+            intent.putExtra("restaurante", "toca");
+
+            startActivity(intent);
+        });
+
+
+// Botão "Ver no mapa"
+        TextView txtVerMapa = findViewById(R.id.txtVerMapa);
+
+        txtVerMapa.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MapaActivity.class);
+
+            // Informa que queremos mostrar os dois restaurantes
+            intent.putExtra("restaurante", "todos");
+
+            startActivity(intent);
+        });
+
+
+
+    }
+}

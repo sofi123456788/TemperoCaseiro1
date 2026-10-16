@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <!-- Define que o arquivo usa caracteres em português -->
+    <meta charset="UTF-8">
+
+    <!-- Faz o site se adaptar ao tamanho da tela do celular -->
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <!-- Título da página -->
+    <title>Restaurantes próximos</title>
+
+
+    <!-- Importa o Leaflet, que é a biblioteca utilizada
+         para criar o mapa -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+    <style>
+
+        /* Configura a página inteira */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+
+            /* Define a fonte */
+            font-family: Arial, sans-serif;
+
+            /* Cor de fundo do aplicativo */
+            background-color: #F3E4CD;
+        }
+
+
+        /* ==============================
+           ÁREA DOS DETALHES
+           ============================== */
+
+        /* Área que mostra as informações
+           do restaurante selecionado */
+        #detalhes {
+
+            /* Começa escondida */
+            display: none;
+
+            /* Espaçamento interno */
+            padding: 15px;
+
+            /* Cor de fundo */
+            background-color: #F3E4CD;
+        }
+
+
+        /* Configuração da foto do restaurante */
+        #fotoRestaurante {
+
+            /* Ocupa toda a largura disponível */
+            width: 100%;
+
+            /* Define a altura da foto */
+            height: 210px;
+
+            /* Faz a imagem preencher o espaço
+               sem ficar deformada */
+            object-fit: cover;
+
+            /* Arredonda os cantos */
+            border-radius: 12px;
+        }
+
+
+        /* Configuração do nome do restaurante */
+        #nomeRestaurante {
+
+            /* Espaço acima do nome */
+            margin-top: 12px;
+
+            /* Espaço abaixo do nome */
+            margin-bottom: 5px;
+
+            /* Cor do texto */
+            color: #4A3428;
+
+            /* Tamanho da letra */
+            font-size: 22px;
+        }
+
+
+        /* Configuração da avaliação */
+        #avaliacaoRestaurante {
+
+            /* Tamanho da avaliação */
+            font-size: 18px;
+
+            /* Deixa o texto em negrito */
+            font-weight: bold;
+
+            /* Cor amarela */
+            color: #D89B00;
+
+            /* Espaço abaixo */
+            margin-bottom: 10px;
+        }
+
+
+        /* Configuração do endereço */
+        #enderecoRestaurante {
+
+            /* Cor do texto */
+            color: #5A4638;
+
+            /* Tamanho da letra */
+            font-size: 15px;
+
+            /* Espaçamento entre as linhas */
+            line-height: 1.4;
+        }
+
+
+        /* ==============================
+           MAPA
+           ============================== */
+
+        /* Define o tamanho do mapa */
+        #mapa {
+
+            /* Ocupa toda a largura */
+            width: 100%;
+
+            /* Altura do mapa */
+            height: 400px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     ÁREA DE DETALHES
+     ================================= -->
+
+<div id="detalhes">
+
+    <!-- Aqui será colocada a foto do restaurante -->
+    <img
+            id="fotoRestaurante"
+            src=""
+            alt="Foto do restaurante"
+    >
+
+
+    <!-- Aqui será colocado o nome do restaurante -->
+    <h2 id="nomeRestaurante"></h2>
+
+
+    <!-- Aqui será colocada a avaliação -->
+    <div id="avaliacaoRestaurante"></div>
+
+
+    <!-- Aqui será colocado o endereço -->
+    <p id="enderecoRestaurante"></p>
+
+</div>
+
+
+<!-- =================================
+     ÁREA ONDE O MAPA SERÁ MOSTRADO
+     ================================= -->
+
+<div id="mapa"></div>
+
+
+<!-- Importa a biblioteca Leaflet.
+     Ela é responsável pelo funcionamento do mapa. -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<script>
+
+
+    // ==========================================
+    // CRIA O MAPA
+    // ==========================================
+
+    // Cria o mapa dentro da div "mapa".
+    // As coordenadas indicam Ouro Branco - MG.
+    // O número 14 representa o nível inicial de zoom.
+
+    const mapa = L.map("mapa").setView(
+        [-20.5197, -43.6905],
+        14
+    );
+
+
+    // ==========================================
+    // OPENSTREETMAP
+    // ==========================================
+
+    // Adiciona o mapa do OpenStreetMap.
+    // O Leaflet utiliza esse mapa para mostrar
+    // ruas e locais.
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            maxZoom: 19,
+
+            // Informa a fonte do mapa
+            attribution:
+                "&copy; OpenStreetMap contributors"
+        }
+    ).addTo(mapa);
+
+
+    // ==========================================
+    // RESTAURANTE TREM MINEIRO
+    // ==========================================
+
+    // Cria um objeto contendo as informações
+    // do restaurante Trem Mineiro.
+
+    const tremMineiro = {
+
+        // Nome do restaurante
+        nome: "Restaurante Trem Mineiro",
+
+        // Avaliação que será exibida
+        avaliacao: "⭐ 4,6 / 5",
+
+        // Endereço do restaurante
+        endereco:
+            "📍 Av. Mariza de Souza Mendes, 893 - Soledade, Ouro Branco - MG",
+
+        // Caminho da foto que está dentro
+        // da pasta assets do aplicativo
+        foto:
+            "file:///android_asset/trem_mineiro.jpg",
+
+        // Latitude do restaurante
+        latitude:
+            -20.5185,
+
+        // Longitude do restaurante
+        longitude:
+            -43.6940
+    };
+
+
+    // ==========================================
+    // RESTAURANTE TOCA DO LEÃO
+    // ==========================================
+
+    // Cria um objeto contendo as informações
+    // do segundo restaurante.
+
+    const tocaGrill = {
+
+        // Nome do restaurante
+        nome:
+            "Toca do Leão Grill Restaurante",
+
+        // Avaliação
+        avaliacao:
+            "⭐ 4,7 / 5",
+
+        // Endereço
+        endereco:
+            "📍 Av. Patriótica, 101 - Siderurgia, Ouro Branco - MG",
+
+        // Caminho da foto dentro da pasta assets
+        foto:
+            "file:///android_asset/toca_grill.jpg",
+
+        // Latitude
+        latitude:
+            -20.5235,
+
+        // Longitude
+        longitude:
+            -43.6900
+    };
+
+
+    // ==========================================
+    // MARCADOR DO TREM MINEIRO
+    // ==========================================
+
+    // Cria um marcador no mapa utilizando
+    // a latitude e a longitude do Trem Mineiro.
+
+    const marcadorTrem = L.marker([
+
+        tremMineiro.latitude,
+        tremMineiro.longitude
+
+    ])
+
+    // Adiciona o marcador ao mapa
+    .addTo(mapa)
+
+    // Quando o marcador for clicado,
+    // mostra uma pequena janela com informações.
+    .bindPopup(
+
+        "<b>" +
+        tremMineiro.nome +
+        "</b><br>" +
+        tremMineiro.endereco
+
+    );
+
+
+    // ==========================================
+    // MARCADOR DO TOCA DO LEÃO
+    // ==========================================
+
+    // Cria o marcador do segundo restaurante.
+
+    const marcadorToca = L.marker([
+
+        tocaGrill.latitude,
+        tocaGrill.longitude
+
+    ])
+
+    // Adiciona o marcador ao mapa
+    .addTo(mapa)
+
+    // Mostra informações quando o marcador
+    // for selecionado.
+    .bindPopup(
+
+        "<b>" +
+        tocaGrill.nome +
+        "</b><br>" +
+        tocaGrill.endereco
+
+    );
+
+
+    // ==========================================
+    // FUNÇÃO PARA MOSTRAR OS DETALHES
+    // ==========================================
+
+    // Essa função recebe um restaurante
+    // e coloca suas informações na tela.
+
+    function mostrarDetalhes(restaurante) {
+
+
+        // Procura a área onde os detalhes
+        // serão mostrados.
+
+        const detalhes =
+            document.getElementById("detalhes");
+
+
+        // Procura o elemento da foto.
+
+        const foto =
+            document.getElementById("fotoRestaurante");
+
+
+        // Procura o elemento do nome.
+
+        const nome =
+            document.getElementById("nomeRestaurante");
+
+
+        // Procura o elemento da avaliação.
+
+        const avaliacao =
+            document.getElementById("avaliacaoRestaurante");
+
+
+        // Procura o elemento do endereço.
+
+        const endereco =
+            document.getElementById("enderecoRestaurante");
+
+
+        // Faz a área de detalhes aparecer.
+
+        detalhes.style.display = "block";
+
+
+        // Coloca a foto do restaurante.
+
+        foto.src = restaurante.foto;
+
+
+        // Coloca o nome do restaurante.
+
+        nome.textContent = restaurante.nome;
+
+
+        // Coloca a avaliação.
+
+        avaliacao.textContent =
+            restaurante.avaliacao;
+
+
+        // Coloca o endereço.
+
+        endereco.textContent =
+            restaurante.endereco;
+
+    }
+
+
+    // ==========================================
+    // DESCOBRE QUAL RESTAURANTE FOI SELECIONADO
+    // ==========================================
+
+    // O Android envia uma informação pela URL.
+    //
+    // Exemplo:
+    //
+    // ?restaurante=trem
+    //
+    // ou
+    //
+    // ?restaurante=toca
+    //
+    // Aqui o código pega essa informação.
+
+    const restauranteSelecionado =
+        new URLSearchParams(
+            window.location.search
+        ).get("restaurante");
+
+
+    // ==========================================
+    // SE O RESTAURANTE FOR O TREM MINEIRO
+    // ==========================================
+
+    if (restauranteSelecionado === "trem") {
+
+
+        // Mostra as informações do Trem Mineiro.
+
+        mostrarDetalhes(tremMineiro);
+
+
+        // Centraliza o mapa na localização
+        // do Trem Mineiro.
+
+        mapa.setView(
+
+            [
+                tremMineiro.latitude,
+                tremMineiro.longitude
+            ],
+
+            // Aumenta o zoom
+            17
+
+        );
+
+
+        // Remove o marcador do Toca do Leão,
+        // pois nesse caso queremos mostrar
+        // somente o Trem Mineiro.
+
+        marcadorToca.remove();
+
+
+        // Abre automaticamente as informações
+        // do Trem Mineiro no marcador.
+
+        marcadorTrem.openPopup();
+
+    }
+
+
+    // ==========================================
+    // SE O RESTAURANTE FOR O TOCA DO LEÃO
+    // ==========================================
+
+    else if (restauranteSelecionado === "toca") {
+
+
+        // Mostra as informações do Toca do Leão.
+
+        mostrarDetalhes(tocaGrill);
+
+
+        // Centraliza o mapa no Toca do Leão.
+
+        mapa.setView(
+
+            [
+                tocaGrill.latitude,
+                tocaGrill.longitude
+            ],
+
+            // Aumenta o zoom
+            17
+
+        );
+
+
+        // Remove o marcador do Trem Mineiro.
+
+        marcadorTrem.remove();
+
+
+        // Abre automaticamente as informações
+        // do Toca do Leão.
+
+        marcadorToca.openPopup();
+
+    }
+
+
+    // ==========================================
+    // SE CLICAR EM "VER NO MAPA"
+    // ==========================================
+
+  else {
+
+    // Esconde os detalhes dos restaurantes
+    document.getElementById(
+        "detalhes"
+    ).style.display = "none";
+
+
+    // Faz o mapa ocupar a tela inteira
+    document.getElementById(
+        "mapa"
+    ).style.height = "100vh";
+
+
+    // Cria um grupo com os dois restaurantes
+    const grupo =
+        L.featureGroup([
+
+            marcadorTrem,
+            marcadorToca
+
+        ]);
+
+
+    // Ajusta o mapa para mostrar
+    // os dois restaurantes
+    mapa.fitBounds(
+
+        grupo.getBounds(),
+
+        {
+            padding: [50, 50]
+        }
+
+    );
+
+
+    // Informa ao Leaflet que o tamanho
+    // do mapa mudou
+    setTimeout(function() {
+
+        mapa.invalidateSize();
+
+    }, 200);
+
+}
+
+
+</script>
+
+</body>
+
+</html>

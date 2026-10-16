@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mapa do Centro</title>
+
+    <!-- Leaflet -->
+    <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <style>
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #mapa {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div id="mapa"></div>
+
+<script>
+
+    // Cria o mapa
+    var mapa = L.map('mapa');
+
+    // Mapa do OpenStreetMap
+    L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+            maxZoom: 19,
+            attribution: '&copy; OpenStreetMap'
+        }
+    ).addTo(mapa);
+
+    // Pega o endereço enviado pelo Android
+    var parametros = new URLSearchParams(window.location.search);
+
+    var endereco = parametros.get("endereco");
+
+    // Se não recebeu endereço
+    if (!endereco) {
+
+        mapa.setView([-20.5197, -43.6905], 14);
+
+    } else {
+
+        // Codifica o endereço para fazer a busca
+        var enderecoBusca = encodeURIComponent(endereco);
+
+        // Procura o endereço no OpenStreetMap
+        fetch(
+            'https://nominatim.openstreetmap.org/search?format=json&limit=1&q='
+            + enderecoBusca
+        )
+        .then(response => response.json())
+        .then(dados => {
+
+            if (dados.length > 0) {
+
+                var latitude = parseFloat(dados[0].lat);
+                var longitude = parseFloat(dados[0].lon);
+
+                // Posiciona o mapa no endereço
+                mapa.setView(
+                    [latitude, longitude],
+                    17
+                );
+
+                // Cria o marcador
+                L.marker([
+                    latitude,
+                    longitude
+                ])
+                .addTo(mapa)
+                .bindPopup(
+                    "<b>Local de apoio</b><br>" + endereco
+                )
+                .openPopup();
+
+            } else {
+
+                // Caso não encontre o endereço
+                mapa.setView(
+                    [-20.5197, -43.6905],
+                    14
+                );
+
+                L.popup()
+                    .setLatLng([
+                        -20.5197,
+                        -43.6905
+                    ])
+                    .setContent(
+                        "Não foi possível localizar este endereço."
+                    )
+                    .openOn(mapa);
+            }
+
+        })
+        .catch(erro => {
+
+            mapa.setView(
+                [-20.5197, -43.6905],
+                14
+            );
+
+            console.log(erro);
+
+        });
+
+    }
+
+</script>
+
+</body>
+
+</html>

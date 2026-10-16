@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8F0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgReceita"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_brigadeiro"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Brigadeiro"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:textColor="#8B4513"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⏱ Tempo: 20 minutos"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🍫 Rendimento: 20 unidades"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredientes"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#A0522D"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="• 1 lata de leite condensado&#10;&#10;• 1 colher (sopa) de manteiga&#10;&#10;• 4 colheres (sopa) de chocolate em pó&#10;&#10;• Chocolate granulado para enrolar"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modo de Preparo"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="#A0522D"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Em uma panela, coloque o leite condensado, a manteiga e o chocolate em pó.&#10;&#10;2. Misture bem antes de ligar o fogo.&#10;&#10;3. Cozinhe em fogo baixo, mexendo sempre, até desgrudar do fundo da panela.&#10;&#10;4. Transfira para um prato untado com manteiga e deixe esfriar.&#10;&#10;5. Unte as mãos, faça bolinhas e passe no chocolate granulado.&#10;&#10;6. Sirva em forminhas de papel."
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"/>
+
+    </LinearLayout>
+
+</ScrollView>

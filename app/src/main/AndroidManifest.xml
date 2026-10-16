@@ -14,51 +14,83 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TemperoCaseiro1"
         android:usesCleartextTraffic="true">
+
+        <!-- TELA INICIAL DA SOFIA -->
         <activity
             android:name=".tela_login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- TELAS DA SOFIA -->
         <activity
             android:name=".tela_cadastro"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".tela_configuracoes"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".tela_excluir_conta"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".tela_conta_excluida"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".model.tela_recuperar_conta"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".model.tela_codigo_recuperacao"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".model.tela_redefinir_senha"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".tela_denuncia"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".tela_testes"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <!-- TELAS DA ANA -->
+        <activity android:name=".MainActivity" android:exported="false" />
+        <activity android:name=".ReceitaBoloCenouraActivity" android:exported="false" />
+        <activity android:name=".ReceitaBrigadeiroActivity" android:exported="false" />
+        <activity android:name=".ReceitaPaoDeQueijoActivity" android:exported="false" />
+        <activity android:name=".AdicionarReceita" android:exported="false" />
+        <activity android:name=".BolosActivity" android:exported="false" />
+        <activity android:name=".VeganosActivity" android:exported="false" />
+        <activity android:name=".SalgadosActivity" android:exported="false" />
+        <activity android:name=".RapidasActivity" android:exported="false" />
+        <activity android:name=".DocesActivity" android:exported="false" />
+        <activity android:name=".ReceitasBD" android:exported="false" />
+        <activity android:name=".BoasVindasActivity" android:exported="false" />
+        <activity android:name=".ActivityDetalhesLocal" android:exported="false" />
+        <activity android:name=".CentrosApoioActivity" android:exported="false" />
+        <activity
+            android:name=".MapaActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

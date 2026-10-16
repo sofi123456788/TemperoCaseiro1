@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF8ED"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:gravity="center_horizontal">
+
+        <!-- Ilustração -->
+        <ImageView
+            android:id="@+id/imgBoasVindas"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="Ilustração de boas-vindas"
+            android:scaleType="centerInside"
+            android:src="@drawable/img_boas_vindas" />
+
+        <!-- Título -->
+
+        <!-- Texto principal -->
+        <TextView
+            android:id="@+id/txtDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Este aplicativo também foi criado&#10;para te proteger."
+            android:textColor="#263526"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- Texto secundário -->
+        <TextView
+            android:id="@+id/txtDescricao2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Aqui você encontra ferramentas&#10;importantes de segurança e apoio,&#10;de forma sigilosa e discreta."
+            android:textColor="#263526"
+            android:textSize="17sp"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp" />
+
+        <!-- Botão de emergência -->
+        <LinearLayout
+            android:id="@+id/btnEmergencia"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/bg_opcao_boas_vindas"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_icone_boas_vindas"
+                android:gravity="center"
+                android:text="🔔"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:text="Botão de emergência"
+                android:textColor="#263526"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="#263526"
+                android:textSize="35sp" />
+
+        </LinearLayout>
+
+        <!-- Chat anônimo -->
+        <LinearLayout
+            android:id="@+id/btnChat"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_opcao_boas_vindas"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_icone_boas_vindas"
+                android:gravity="center"
+                android:text="💬"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:text="Chat anônimo"
+                android:textColor="#263526"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="#263526"
+                android:textSize="35sp" />
+
+        </LinearLayout>
+
+        <!-- Atendimento com IA -->
+        <LinearLayout
+            android:id="@+id/btnIA"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_opcao_boas_vindas"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_icone_boas_vindas"
+                android:gravity="center"
+                android:text="🤖"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:text="Atendimento com IA"
+                android:textColor="#263526"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="#263526"
+                android:textSize="35sp" />
+
+        </LinearLayout>
+
+        <!-- Centros de apoio -->
+        <LinearLayout
+            android:id="@+id/btnCentros"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_opcao_boas_vindas"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="12dp"
+            android:paddingEnd="15dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_icone_boas_vindas"
+                android:gravity="center"
+                android:text="📍"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="15dp"
+                android:text="Centros de apoio e serviços"
+                android:textColor="#263526"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="›"
+                android:textColor="#263526"
+                android:textSize="35sp" />
+
+        </LinearLayout>
+
+        <!-- Botão Entendi -->
+        <Button
+            android:id="@+id/btnEntendi"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="25dp"
+            android:text="Entendi"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_botao_entendi" />
+
+    </LinearLayout>
+
+</ScrollView>
