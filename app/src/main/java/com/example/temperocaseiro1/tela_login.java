@@ -122,7 +122,7 @@ public class tela_login extends AppCompatActivity {
                         Toast.makeText(tela_login.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
                         // Abre a próxima tela
-                        Intent intent = new Intent(tela_login.this, tela_testes.class);
+                        Intent intent = new Intent(tela_login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
 

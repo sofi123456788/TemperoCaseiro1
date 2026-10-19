@@ -9,7 +9,7 @@ public class ApiClient {
 
     // Endereço da API Spring Boot
     private static final String BASE_URL =
-            "http://192.168.2.142:8080/";
+            "http://10.90.36.176:8080/";
 
     private static Retrofit retrofit;
 
