@@ -124,8 +124,8 @@ public class tela_login extends AppCompatActivity {
 
                         // Abre a próxima tela
                         Intent intent = new Intent(tela_login.this, MainActivity.class);
-                        startActivity(intent);
                         intent.putExtra("nomeUsuario", nomeCompleto);
+                        startActivity(intent);
                         finish();
 
                     } else {
