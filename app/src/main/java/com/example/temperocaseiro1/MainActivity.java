@@ -20,12 +20,22 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView txtSaudacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        TextView txtSaudacao = findViewById(R.id.txtSaudacao);
+
+        String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
+
+        if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
+            String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
+            txtSaudacao.setText("Olá, " + primeiroNome + "!");
+        }
+        txtSaudacao = findViewById(R.id.txtSaudacao);
         ImageView imgBolo = findViewById(R.id.imgBoloCenoura);
         ImageView imgBrigadeiro = findViewById(R.id.imgBrigadeiro);
         ImageView imgPaoDeQueijo = findViewById(R.id.imgPaoDeQueijo);

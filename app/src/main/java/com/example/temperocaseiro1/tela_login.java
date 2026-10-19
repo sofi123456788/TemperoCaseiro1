@@ -113,6 +113,7 @@ public class tela_login extends AppCompatActivity {
 
                     String mensagem = resposta.getMensagem();
                     String token = resposta.getToken();
+                    String nomeCompleto = resposta.getNomeCompleto();
 
                     if ("Login realizado com sucesso".equals(mensagem) && token != null && !token.isBlank()) {
 
@@ -122,8 +123,9 @@ public class tela_login extends AppCompatActivity {
                         Toast.makeText(tela_login.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
                         // Abre a próxima tela
-                        Intent intent = new Intent(tela_login.this, tela_testes.class);
+                        Intent intent = new Intent(tela_login.this, MainActivity.class);
                         startActivity(intent);
+                        intent.putExtra("nomeUsuario", nomeCompleto);
                         finish();
 
                     } else {

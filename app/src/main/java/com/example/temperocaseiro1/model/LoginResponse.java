@@ -5,6 +5,7 @@ public class LoginResponse {
 
     private String mensagem;
     private String token;
+    private String nomeCompleto;
 
     public LoginResponse() {
     }
@@ -23,5 +24,13 @@ public class LoginResponse {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 }
