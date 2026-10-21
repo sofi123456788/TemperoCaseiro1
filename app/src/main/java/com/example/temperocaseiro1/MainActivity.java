@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        TextView txtSaudacao = findViewById(R.id.txtSaudacao);
+        txtSaudacao = findViewById(R.id.txtSaudacao);
 
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
 
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
             txtSaudacao.setText("Olá, " + primeiroNome + "!");
         }
-        txtSaudacao = findViewById(R.id.txtSaudacao);
         ImageView imgBolo = findViewById(R.id.imgBoloCenoura);
         ImageView imgBrigadeiro = findViewById(R.id.imgBrigadeiro);
         ImageView imgPaoDeQueijo = findViewById(R.id.imgPaoDeQueijo);
