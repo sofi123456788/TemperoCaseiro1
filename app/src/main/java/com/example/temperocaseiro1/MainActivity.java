@@ -19,8 +19,11 @@ import android.os.Looper;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import com.example.temperocaseiro1.model.tela_perfil;
+
 public class MainActivity extends AppCompatActivity {
     private TextView txtSaudacao;
+    private LinearLayout menuPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Botão "Favoritos" do rodapé
         LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
+        // Botão "Perfil" do rodapé
+        LinearLayout menuPerfil = findViewById(R.id.menuPerfil);
 
         // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
         Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
@@ -134,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+
+        menuPerfil.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, tela_perfil.class);
+            startActivity(intent);
         });
 
         // ===============================
