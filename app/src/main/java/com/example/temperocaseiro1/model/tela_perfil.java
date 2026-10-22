@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ import com.example.temperocaseiro1.R;
 import com.example.temperocaseiro1.ReceitasBD;
 import com.example.temperocaseiro1.tela_login;
 
+import okhttp3.Cache;
+
 public class tela_perfil extends AppCompatActivity {
 
     private LinearLayout layoutConfiguracoesPerfil;
@@ -29,6 +32,7 @@ public class tela_perfil extends AppCompatActivity {
     private LinearLayout menuAdicionar;
     private LinearLayout menuFavoritos;
     private LinearLayout menuPerfil;
+    private TextView txtSaudacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,14 @@ public class tela_perfil extends AppCompatActivity {
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_perfil);
+        txtSaudacao = findViewById(R.id.txtSaudacao);
+
+        String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
+
+        if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
+            String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
+            txtSaudacao.setText("Olá, " + primeiroNome + "!");
+        }
 
         // Configuração das margens do sistema
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -72,10 +84,18 @@ public class tela_perfil extends AppCompatActivity {
         });
 
         // Tela inicial
+
+        // Voltar para a tela inicial
+        // Voltar para a tela inicial
         menuEntrar.setOnClickListener(v -> {
+
             Intent intent = new Intent(tela_perfil.this, MainActivity.class);
+
+            intent.putExtra("nomeUsuario", nomeCompleto);
+
             startActivity(intent);
         });
+
 
         // Receitas
         menuReceitas.setOnClickListener(v -> {

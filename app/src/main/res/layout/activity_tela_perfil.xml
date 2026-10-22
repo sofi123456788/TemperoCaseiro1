@@ -48,12 +48,12 @@
                 android:textSize="55sp" />
 
             <TextView
-                android:id="@+id/txtNomePerfil"
+                android:id="@+id/txtSaudacao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Maria Silva"
+                android:text="txtSaudacao"
                 android:textColor="#322A24"
                 android:textSize="25sp"
                 android:textStyle="bold" />

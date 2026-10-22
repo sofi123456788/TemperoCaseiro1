@@ -140,10 +140,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         menuPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, tela_perfil.class);
+
+            // Passa o nome do usuário para a tela de perfil
+            intent.putExtra("nomeUsuario", nomeCompleto);
+
             startActivity(intent);
         });
+
+
 
         // ===============================
 // RESTAURANTES PRÓXIMOS
