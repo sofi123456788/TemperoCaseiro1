@@ -61,7 +61,7 @@ public class tela_perfil extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Sair da conta
+        // Sair da conta - terminar a implementação depois
         layoutSairConta.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_login.class);
 
