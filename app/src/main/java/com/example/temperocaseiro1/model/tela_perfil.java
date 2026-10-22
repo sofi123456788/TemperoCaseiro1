@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +21,7 @@ import com.example.temperocaseiro1.ReceitasBD;
 import com.example.temperocaseiro1.tela_login;
 
 public class tela_perfil extends AppCompatActivity {
+
     private LinearLayout layoutConfiguracoesPerfil;
     private LinearLayout layoutSairConta;
     private LinearLayout menuEntrar;
@@ -33,9 +33,20 @@ public class tela_perfil extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_perfil);
 
+        // Configuração das margens do sistema
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+            return insets;
+        });
+
+        // Identificação dos componentes
         layoutConfiguracoesPerfil = findViewById(R.id.layoutConfiguracoesPerfil);
         layoutSairConta = findViewById(R.id.layoutSairConta);
         menuEntrar = findViewById(R.id.menuEntrar);
@@ -44,35 +55,48 @@ public class tela_perfil extends AppCompatActivity {
         menuFavoritos = findViewById(R.id.menuFavoritos);
         menuPerfil = findViewById(R.id.menuPerfil);
 
+        // Configurações do perfil
         layoutConfiguracoesPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_configuracoes1.class);
             startActivity(intent);
         });
 
+        // Sair da conta
         layoutSairConta.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_login.class);
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
             startActivity(intent);
+            finish();
         });
 
+        // Tela inicial
         menuEntrar.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, MainActivity.class);
             startActivity(intent);
         });
 
+        // Receitas
         menuReceitas.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, ReceitasBD.class);
             startActivity(intent);
         });
+
+        // Adicionar receita
         menuAdicionar.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, AdicionarReceita.class);
+            startActivity(intent);
         });
 
-        // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
-        Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
-        Runnable abrirTela = () -> { // ação executada após os 4 segundos determinados
+        // Favoritos: pressionar durante 4 segundos
+        Handler handler = new Handler(Looper.getMainLooper());
+
+        Runnable abrirTela = () -> {
             Intent intent = new Intent(tela_perfil.this, BoasVindasActivity.class);
             startActivity(intent);
         };
+
         menuFavoritos.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {
 
@@ -87,13 +111,6 @@ public class tela_perfil extends AppCompatActivity {
             }
 
             return false;
-        });
-
-        setContentView(R.layout.activity_tela_perfil);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
         });
     }
 }
