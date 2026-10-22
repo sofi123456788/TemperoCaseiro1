@@ -14,6 +14,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.temperocaseiro1.AdicionarReceita;
 import com.example.temperocaseiro1.BoasVindasActivity;
 import com.example.temperocaseiro1.MainActivity;
 import com.example.temperocaseiro1.R;
@@ -23,6 +24,11 @@ import com.example.temperocaseiro1.tela_login;
 public class tela_perfil extends AppCompatActivity {
     private LinearLayout layoutConfiguracoesPerfil;
     private LinearLayout layoutSairConta;
+    private LinearLayout menuEntrar;
+    private LinearLayout menuReceitas;
+    private LinearLayout menuAdicionar;
+    private LinearLayout menuFavoritos;
+    private LinearLayout menuPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,11 @@ public class tela_perfil extends AppCompatActivity {
 
         layoutConfiguracoesPerfil = findViewById(R.id.layoutConfiguracoesPerfil);
         layoutSairConta = findViewById(R.id.layoutSairConta);
+        menuEntrar = findViewById(R.id.menuEntrar);
+        menuReceitas = findViewById(R.id.menuReceitas);
+        menuAdicionar = findViewById(R.id.menuAdicionar);
+        menuFavoritos = findViewById(R.id.menuFavoritos);
+        menuPerfil = findViewById(R.id.menuPerfil);
 
         layoutConfiguracoesPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_configuracoes1.class);
@@ -40,13 +51,21 @@ public class tela_perfil extends AppCompatActivity {
 
         layoutSairConta.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_login.class);
+            startActivity(intent);
         });
 
-        // Botão "Receitas" do rodapé
-        LinearLayout menuReceitas = findViewById(R.id.menuReceitas);
+        menuEntrar.setOnClickListener(v -> {
+            Intent intent = new Intent(tela_perfil.this, MainActivity.class);
+            startActivity(intent);
+        });
 
-        // Botão "Favoritos" do rodapé
-        LinearLayout menuFavoritos = findViewById(R.id.menuFavoritos);
+        menuReceitas.setOnClickListener(v -> {
+            Intent intent = new Intent(tela_perfil.this, ReceitasBD.class);
+            startActivity(intent);
+        });
+        menuAdicionar.setOnClickListener(v -> {
+            Intent intent = new Intent(tela_perfil.this, AdicionarReceita.class);
+        });
 
         // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
         Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
@@ -70,17 +89,6 @@ public class tela_perfil extends AppCompatActivity {
             return false;
         });
 
-
-// Ao clicar, abre a tela com todas as receitas do banco
-        menuReceitas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(tela_perfil.this, ReceitasBD.class);
-                startActivity(intent);
-
-            }
-        });
         setContentView(R.layout.activity_tela_perfil);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
