@@ -34,7 +34,7 @@ public class tela_perfil extends AppCompatActivity {
     private LinearLayout menuPerfil;
     private TextView txtSaudacao;
 
-    private TextView editEmail;
+    private TextView txtEmailPerfil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class tela_perfil extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_perfil);
         txtSaudacao = findViewById(R.id.txtSaudacao);
-        editEmail =  findViewById(R.id.editEmail);
+        txtEmailPerfil = findViewById(R.id.txtEmailPerfil);
 
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
         String email = getIntent().getStringExtra("emailUsuario");
@@ -54,8 +54,7 @@ public class tela_perfil extends AppCompatActivity {
         }
 
         if (email != null && !email.trim().isEmpty()) {
-                String emailusu = email.trim().split("\\s+")[0];
-                editEmail.setText(emailusu);
+            txtEmailPerfil.setText(email.trim());
         }
 
         // Configuração das margens do sistema

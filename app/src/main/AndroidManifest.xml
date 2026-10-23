@@ -119,6 +119,10 @@
             android:name=".model.tela_configuracoes1"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".tela_ajuda"
+            android:exported="false" />
+
     </application>
 
 </manifest>

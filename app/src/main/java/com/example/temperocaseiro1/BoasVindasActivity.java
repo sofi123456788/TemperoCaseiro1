@@ -22,7 +22,7 @@ public class BoasVindasActivity extends AppCompatActivity {
 
             Intent intent = new Intent(
                     BoasVindasActivity.this,
-                    CentrosApoioActivity.class
+                    tela_ajuda.class
             );
 
             startActivity(intent);

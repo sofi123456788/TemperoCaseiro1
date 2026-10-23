@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         txtSaudacao = findViewById(R.id.txtSaudacao);
 
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
+        String email = getIntent().getStringExtra("emailUsuario");
 
         if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
             String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
@@ -145,8 +146,9 @@ public class MainActivity extends AppCompatActivity {
         menuPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, tela_perfil.class);
 
-            // Passa o nome do usuário para a tela de perfil
+            // Passa o nome e o e-mail para a tela de perfil
             intent.putExtra("nomeUsuario", nomeCompleto);
+            intent.putExtra("emailUsuario", email);
 
             startActivity(intent);
         });

@@ -124,7 +124,10 @@ public class tela_login extends AppCompatActivity {
 
                         // Abre a próxima tela
                         Intent intent = new Intent(tela_login.this, MainActivity.class);
+
                         intent.putExtra("nomeUsuario", nomeCompleto);
+                        intent.putExtra("emailUsuario", email);
+
                         startActivity(intent);
                         finish();
 
