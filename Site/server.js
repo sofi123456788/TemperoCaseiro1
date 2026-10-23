@@ -344,6 +344,49 @@ app.get("/PsiAdv/usuario/:idVitima", async (req, res) => {
     }
 });
 
+//Rota para pegar o nome  
+app.get("/PsiAdv/usuario/:idDenunciaSelecionado", async (req, res) => {
+    try {
+        const id = req.params.idDenunciaSelecionado;
+        //Pega as infos no bd
+        const resultado = await pool.query("SELECT nome_arquivo FROM anexos_denuncia WHERE denuncia_id = $1", [id]);
+
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({
+                erro: "Arquivo não encontrado"
+            });
+        }
+
+        //Guarda as infos no array list
+        const documentoEscolhida = resultado.rows[0];
+
+        return res.json(documentoEscolhida);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Rota para pegar o arquivo
+app.get("/arquivos_teste/:documentoSelecionado", (req, res) => {
+    const nomeArquivo = req.params.documentoSelecionado;
+
+    // Impede acessar arquivos fora da pasta Docs (ex: ../../server.js)
+    if (nomeArquivo.includes("..") || nomeArquivo.includes("/") || nomeArquivo.includes("\\")) {
+        return res.status(400).json({ mensagem: "Nome de arquivo inválido." });
+    }
+
+    const caminhoArquivo = path.join(PASTA_DOCUMENTOS, nomeArquivo);
+
+    res.sendFile(caminhoArquivo, (erro) => {
+        if (erro) {
+            console.error("Erro ao enviar documento:", erro);
+            res.status(404).json({ mensagem: "Documento não encontrado." });
+        }
+    });
+});
+
 
 //-------------------- Login Cadastro e Perfil ---------------------
 //Rota para o login
