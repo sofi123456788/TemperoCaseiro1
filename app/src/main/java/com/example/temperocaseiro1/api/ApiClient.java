@@ -8,9 +8,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class ApiClient {
 
     // Endereço da API Spring Boot
-    private static final String BASE_URL =
-            "http://10.90.36.176:8080/";
-
+    private static final String BASE_URL = "http://10.90.36.178:8080/";
     private static Retrofit retrofit;
 
     public static Retrofit getRetrofit() {
