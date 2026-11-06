@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="24dp"
             android:paddingRight="24dp">
@@ -65,6 +65,11 @@
 
             </RelativeLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <!-- BOTÃO DE SOCORRO -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,6 +115,11 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
+
             <!-- PRIMEIRA LINHA DE CARDS -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -130,12 +140,12 @@
                     android:focusable="true">
 
                     <ImageView
-                        android:id="@+id/imgChatAnonimo"
-                        android:layout_width="36dp"
+                        android:id="@+id/imgChatAnonimo2"
+                        android:layout_width="match_parent"
                         android:layout_height="36dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/ic_chat_anonimo"
-                        android:contentDescription="Chat anônimo" />
+                        android:contentDescription="Chat anônimo"
+                        android:src="@drawable/ic_chat_anonimo" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -184,6 +194,11 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2" />
 
             <!-- SEGUNDA LINHA DE CARDS -->
             <LinearLayout
@@ -258,6 +273,11 @@
 
             </LinearLayout>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
         </LinearLayout>
     </ScrollView>
 
@@ -265,103 +285,92 @@
     <LinearLayout
         android:id="@+id/bottomMenu"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/bg_bottom_navigation"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="4dp"
         android:paddingEnd="4dp"
-        android:weightSum="5">
+        android:baselineAligned="false">
 
-        <!-- ENTRAR -->
         <LinearLayout
             android:id="@+id/menuEntrar"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="28dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="⌂"
                 android:textColor="#2C2927"
-                android:textSize="25sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
                 android:text="Entrar"
                 android:textColor="#2C2927"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- RECEITAS -->
         <LinearLayout
             android:id="@+id/menuReceitas"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
             android:clickable="true"
             android:focusable="true">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="▤"
-                android:textColor="#2C2927"
-                android:textSize="25sp" />
+            <ImageView
+                android:id="@+id/imgChatAnonimo"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Chat anônimo"
+                android:src="@drawable/ic_chat_anonimo" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Receitas"
-                android:textColor="#2C2927"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- ADICIONAR -->
-        <LinearLayout
-            android:id="@+id/menuAdicionar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:clickable="true"
-            android:focusable="true">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="⊕"
-                android:textColor="#2C2927"
-                android:textSize="27sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Adicionar"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Chat"
                 android:textColor="#2C2927"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
-        <!-- FAVORITOS -->
         <LinearLayout
             android:id="@+id/menuFavoritos"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
@@ -371,24 +380,31 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="28dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
                 android:text="♡"
                 android:textColor="#2C2927"
-                android:textSize="27sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favoritos"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Apoio"
                 android:textColor="#2C2927"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- PERFIL -->
         <LinearLayout
             android:id="@+id/menuPerfil"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
@@ -398,14 +414,19 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="☻"
+                android:minHeight="28dp"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="▤"
                 android:textColor="#2C2927"
-                android:textSize="25sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Perfil"
+                android:layout_marginTop="2dp"
+                android:gravity="center"
+                android:text="Mais"
                 android:textColor="#2C2927"
                 android:textSize="12sp"
                 android:textStyle="bold" />

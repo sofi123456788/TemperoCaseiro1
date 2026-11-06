@@ -27,6 +27,12 @@ public class tela_ajuda extends AppCompatActivity {
         btnCentrosApoio = findViewById(R.id.btnCentrosApoio);
         btnDenunciaAjuda = findViewById(R.id.btnDenunciaAjuda);
 
+        /*btnCentrosApoio.setOnClickListener(v -> {
+            Intent intent = new Intent(tela_ajuda.this, )
+        });
+
+         */
+
         btnDenunciaAjuda.setOnClickListener(v -> {
             Intent intent = new Intent(
                     tela_ajuda.this,
