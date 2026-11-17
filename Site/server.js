@@ -663,6 +663,48 @@ app.put("/Adm/editarRestaurante/:idRestaurante", async (req, res) =>{
 });
 
 
+//--------------------- Edição Perfil ----------------------
+//Pega as infos do user
+app.get("/editarPerfil/pegainfos/:idPerfil", async (req, res) => {
+    try {
+        const id = req.params.idPerfil;
+        const resultado = await pool.query("SELECT * FROM profissionais WHERE id = $1",[id]);
+
+        //Guarda as infos "pessoais"
+        const usuario = resultado.rows[0];//O 0 é por conta haver apenas 1 usuário com aquele id
+
+        //Faz a verificação
+        if (resultado.rows.length === 0) {
+            return res.status(404).json({ erro: "Usuário não encontrado" });
+        }
+
+        res.json(resultado.rows[0]);
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+//Envia as novas infos para o BD
+app.put("/editarPerfil/:idPerfil", async (req, res) =>{
+    try {
+        const id = req.params.idPerfil;
+
+        const {nomeNovo, telefoneNovo,emailNovo} = req.body;
+    
+        const resposta = await pool.query(
+            `UPDATE profissionais SET 
+            nome_completo = $1, telefone = $2, email = $3 WHERE id = $4`, 
+            [nomeNovo, telefoneNovo,emailNovo, id]);
+
+        res.json(resposta);
+    } catch (error) {
+        console.error("Erro:", error);   
+    }
+});
+
+
 //--------------------- Deletar infos ----------------------
 //Rota para Deletar Conta
 app.delete("/excluirConta/:id", async (req, res) => {

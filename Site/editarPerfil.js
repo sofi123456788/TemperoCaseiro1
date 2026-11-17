@@ -3,11 +3,11 @@ async function pegarInfosPerfil() {
         const idPerfil = localStorage.getItem("id");
 
         //Manda para o banco para pegar as infos
-        const resposta = await fetch(`http://localhost:3000/editarPerfil/${idPerfil}`);
+        const resposta = await fetch(`http://localhost:3000/editarPerfil/pegainfos/${idPerfil}`);
         const infoPerfil = await resposta.json();
 
         //Mostra as infos para o profissional
-        document.getElementById("nomePerfil").value = infoPerfil.nome;
+        document.getElementById("nomePerfil").value = infoPerfil.nome_completo;
         document.getElementById("telefonePerfil").value = infoPerfil.telefone;
         document.getElementById("emailPerfil").value = infoPerfil.email;
     
@@ -18,6 +18,7 @@ async function pegarInfosPerfil() {
 }
 
 async function alterarInfosPerfil() {
+    const idPerfil = localStorage.getItem("id");
     event.preventDefault();
 
     //Pega as infos nos campos
@@ -45,10 +46,20 @@ async function alterarInfosPerfil() {
         //Confirma que deu tudo certo
         if (resposta.ok) {
             alert("Perfil alterado com sucesso!");
-            window.location.href = "perfilA.html";
+            //Manda para o banco para pegar as infos
+            const resposta = await fetch(`http://localhost:3000/editarPerfil/pegainfos/${idPerfil}`);
+            const infoPerfil = await resposta.json();
+            if(infoPerfil.area_profissional === "Psicologia" || infoPerfil.area_profissional === "Advocacia"){
+                window.location.href = "perfil.html";
+            }else{
+                window.location.href = "perfilA.html";
+            }
+            
         }
     } catch (erro) {
         console.error("Erro:", erro);
         alert("Não foi possível realizar essas alterações!");
     }
 }
+
+document.addEventListener("DOMContentLoaded", pegarInfosPerfil);

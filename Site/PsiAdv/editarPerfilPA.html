@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosG.css">
+    <title>Editar Conta</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <button onclick="window.location.href='telaInicial.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <button onclick="window.location.href='relatorios.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span><!---->
+            </button>
+
+            <button onclick="window.location.href='mensagens.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/chat.png" alt="Mensagens">
+                <span>Mensagens</span>
+            </button>
+
+            <button onclick="window.location.href='perfil.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!--Edição do Perfil-->
+    <div class="conteudo-form">
+        <div id="form_headerL">
+            <h1>Alterar Conta</h1>
+            <h2>Informações da Conta</h2>
+        </div>
+        <form id="container">
+            <div id="input_container">
+                <div class="input-box">
+                    <label for="nome" class="form-label">Nome do Usuário</label>
+                    <input type="text" id="nomePerfil" class="form-controll" placeholder="Insira o nome">
+                </div>
+                <div class="input-box">
+                    <label for="telefone" class="form-label">Telefone</label>
+                    <input type="text" id="telefonePerfil" class="form-controll" placeholder="(12)34567-8901">
+                </div>
+                <div class="input-box">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="emailPerfil" class="form-controll" placeholder="local@gmail.com">
+                </div>
+            </div>
+            <button type="submit" class="btn-default" onclick="alterarInfosPerfil()">Alterar Conta</button>
+        </form>  
+    </div>
+    <script src="/TemperoCaseiro1/Site/editarPerfil.js"></script>
+</body>
+</html>
