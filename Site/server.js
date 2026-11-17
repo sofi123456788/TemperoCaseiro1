@@ -14,9 +14,14 @@ const fs = require("fs");
 
 //Configuração dos trem do Docs
 const PASTA_DOCUMENTOS = path.join(__dirname, "..", "Docs");
+const PASTA_DENUNCIA = path.join(__dirname, "..", "arquivos_teste/anexos");
 
 if (!fs.existsSync(PASTA_DOCUMENTOS)) {
     fs.mkdirSync(PASTA_DOCUMENTOS, { recursive: true });
+}
+
+if (!fs.existsSync(PASTA_DENUNCIA)) {
+    fs.mkdirSync(PASTA_DENUNCIA, { recursive: true });
 }
 
 const storage = multer.diskStorage({
@@ -344,12 +349,12 @@ app.get("/PsiAdv/usuario/:idVitima", async (req, res) => {
     }
 });
 
-//Rota para pegar o nome  
-app.get("/PsiAdv/usuario/:idDenunciaSelecionado", async (req, res) => {
+//Rota para pegar o nome do arquivo
+app.get("/PsiAdv/anexos_denuncia/:idDenunciaSelecionado", async (req, res) => {
     try {
         const id = req.params.idDenunciaSelecionado;
         //Pega as infos no bd
-        const resultado = await pool.query("SELECT nome_arquivo FROM anexos_denuncia WHERE denuncia_id = $1", [id]);
+        const resultado = await pool.query("SELECT * FROM anexos_denuncia WHERE denuncia_id = $1", [id]);
 
         if (resultado.rows.length === 0) {
             return res.status(404).json({
@@ -369,7 +374,7 @@ app.get("/PsiAdv/usuario/:idDenunciaSelecionado", async (req, res) => {
 });
 
 //Rota para pegar o arquivo
-app.get("/arquivos_teste/:documentoSelecionado", (req, res) => {
+app.get("/arquivos_teste/anexos/:documentoSelecionado", (req, res) => {
     const nomeArquivo = req.params.documentoSelecionado;
 
     // Impede acessar arquivos fora da pasta Docs (ex: ../../server.js)
@@ -377,7 +382,7 @@ app.get("/arquivos_teste/:documentoSelecionado", (req, res) => {
         return res.status(400).json({ mensagem: "Nome de arquivo inválido." });
     }
 
-    const caminhoArquivo = path.join(PASTA_DOCUMENTOS, nomeArquivo);
+    const caminhoArquivo = path.join(PASTA_DENUNCIA, nomeArquivo);
 
     res.sendFile(caminhoArquivo, (erro) => {
         if (erro) {
@@ -426,7 +431,6 @@ app.post("/Cadastros/login", async (req, res) => {
 
 });
 
-
 //Rota para o Cadastro
 app.post("/Cadastros/cadastro", async (req, res) => {
     try {
@@ -456,7 +460,6 @@ app.post("/Cadastros/cadastro", async (req, res) => {
     }
 
 });
-
 
 //Pega todas as infos do usuário para a página do perfil
 app.get("/perfil/:email", async (req, res) => {

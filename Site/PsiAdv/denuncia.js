@@ -53,16 +53,17 @@ async function pegarInfosDenuncia(event) {
         const vitimaNome = await resposta2.json();
 
         document.getElementById("nome").textContent = vitimaNome.nome_completo;
-        document.getElementById("email").textContent = vitimaNome.nome_completo;
+        document.getElementById("email").textContent = vitimaNome.email
+        ;
         document.getElementById("tipo_violencia").textContent = vitima.tipo_violencia;
         document.getElementById("relato").textContent = vitima.relato;
         document.getElementById("data_denuncia").textContent = vitima.data_denuncia;
         document.getElementById("status").textContent = vitima.status;
 
         //Manda para o banco para pegar as infos da vítima 
-        const resposta3 = await fetch(`http://localhost:3000/PsiAdv/usuario/${idDenunciaSelecionado}`);
-        documentoSelecionado = resposta3.nome_arquivo;
-
+        const resposta3 = await fetch(`http://localhost:3000/PsiAdv/anexos_denuncia/${idDenunciaSelecionado}`);
+        const dados = await resposta3.json()
+        documentoSelecionado = dados.nome_arquivo;
 
     } catch (error) {
         alert("Erro ao recolher informações da denúncia!")
@@ -76,7 +77,7 @@ function abrirMidia() {
         alert("Selecione uma conta antes de visualizar o documento.");
         return;
     }
-    window.open(`http://localhost:3000/arquivo_teste/${documentoSelecionado}`, "_blank");
+    window.open(`http://localhost:3000/arquivos_teste/anexos/${documentoSelecionado}`, "_blank");
 }
 
 //Roda a função automáticamente
