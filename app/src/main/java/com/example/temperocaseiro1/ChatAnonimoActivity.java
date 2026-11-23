@@ -127,9 +127,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
             );
 
             if (status >= 400) {
-                throw new Exception(
-                        json.optString("detail", "Erro HTTP " + status)
-                );
+                throw new Exception("HTTP " + status + ": " +
+                        json.optString("detail", "Serviço indisponível"));
             }
 
             return json;
@@ -159,7 +158,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 runOnUiThread(() ->
-                        txtStatus.setText("Aurora indisponível. Confira a API e a conexão USB.")
+                        txtStatus.setText("Não foi possível iniciar a conversa. " +
+                                "Confira a API, o banco de dados e a conexão USB.")
                 );
             }
         }).start();
@@ -232,9 +232,22 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 runOnUiThread(() -> {
-                    adicionarMensagem("Sistema",
-                            "Não foi possível enviar. Verifique se a Aurora está disponível.");
-                    txtStatus.setText("Falha na comunicação");
+                    String erro = e.getMessage() == null ? "" : e.getMessage();
+                    if (erro.contains("503") || erro.toLowerCase().contains("anthropic")) {
+                        adicionarMensagem("Sistema",
+                                "A conversa iniciou, mas as respostas da Aurora " +
+                                "ainda não estão disponíveis. Verifique a chave Anthropic na API.");
+                        txtStatus.setText("Atendimento IA indisponível");
+                    } else if (erro.contains("500")) {
+                        adicionarMensagem("Sistema",
+                                "O servidor encontrou um erro. Verifique o banco " +
+                                "de dados e o terminal da Aurora.");
+                        txtStatus.setText("Erro no servidor");
+                    } else {
+                        adicionarMensagem("Sistema",
+                                "Não foi possível enviar. Confira a conexão com a Aurora.");
+                        txtStatus.setText("Falha na comunicação");
+                    }
                     btnEnviar.setEnabled(true);
                 });
             }
