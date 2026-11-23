@@ -37,6 +37,7 @@ public class CentrosApoioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_centros_apoio);
+        findViewById(R.id.btnVoltar).setOnClickListener(view -> finish());
 
         setTitle("Centros de apoio");
 
