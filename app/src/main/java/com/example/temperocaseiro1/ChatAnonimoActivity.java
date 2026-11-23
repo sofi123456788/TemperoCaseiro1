@@ -212,7 +212,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                         );
                     }
 
-                    if (emergencia && mostrarAvisos()) {
+                    if (emergencia) {
                         adicionarMensagem(
                                 "Emergência",
                                 "Em perigo imediato, ligue 190."
