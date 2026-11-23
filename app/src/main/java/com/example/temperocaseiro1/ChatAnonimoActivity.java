@@ -2,6 +2,9 @@
 package com.example.temperocaseiro1;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,18 @@ public class ChatAnonimoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutChat());
         findViewById(R.id.btnVoltarChat).setOnClickListener(v -> finish());
+
+        // Botão opcional: volta à tela inicial do aparelho. Não apaga histórico.
+        View sair = findViewById(R.id.btnSaidaRapida);
+        boolean habilitado = getSharedPreferences(FerramentasSegurancaActivity.PREFS, MODE_PRIVATE)
+                .getBoolean(FerramentasSegurancaActivity.SAIDA, true);
+        sair.setVisibility(habilitado ? View.VISIBLE : View.GONE);
+        sair.setOnClickListener(v -> {
+            Intent inicio = new Intent(Intent.ACTION_MAIN);
+            inicio.addCategory(Intent.CATEGORY_HOME);
+            inicio.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(inicio);
+        });
 
         txtStatus = findViewById(R.id.txtStatusChat);
         editMensagem = findViewById(R.id.editMensagem);
@@ -190,14 +205,14 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                     adicionarMensagem("Aurora", texto);
                     txtStatus.setText("Nível: " + nivel);
 
-                    if (ajuda) {
+                    if (ajuda && mostrarAvisos()) {
                         adicionarMensagem(
                                 "Apoio",
                                 "Central de Atendimento à Mulher: 180"
                         );
                     }
 
-                    if (emergencia) {
+                    if (emergencia && mostrarAvisos()) {
                         adicionarMensagem(
                                 "Emergência",
                                 "Em perigo imediato, ligue 190."
@@ -219,6 +234,11 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    private boolean mostrarAvisos() {
+        return getSharedPreferences(FerramentasSegurancaActivity.PREFS, MODE_PRIVATE)
+                .getBoolean(FerramentasSegurancaActivity.AVISOS, true);
     }
 
     private void adicionarMensagem(String autor, String conteudo) {
