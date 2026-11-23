@@ -49,6 +49,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutChat());
+        BarrasSistema.aplicar(this);
         findViewById(R.id.btnVoltarChat).setOnClickListener(v -> finish());
 
         // Botão opcional: volta à tela inicial do aparelho. Não apaga histórico.
