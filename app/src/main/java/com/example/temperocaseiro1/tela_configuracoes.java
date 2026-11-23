@@ -19,18 +19,14 @@ public class tela_configuracoes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_configuracoes); // mostra o visual da tela de configurações
 
         btnAbrirExcluirConta = findViewById (R.id.btnAbrirExcluirConta);
         btnVoltarConfiguracoes = findViewById (R.id.btnVoltarConfiguracoes);
-        emailUsuario = getIntent().getStringExtra("emailUsuario"); // recupera o email enviado pela tela anterior
+        emailUsuario = getIntent().getStringExtra("emailUsuario");
+        if (emailUsuario == null || emailUsuario.isEmpty()) emailUsuario = com.example.temperocaseiro1.model.SessaoUsuario.getEmail(); // recupera o email enviado pela tela anterior
 
-        btnVoltarConfiguracoes.setOnClickListener(v -> {
-            Intent intent = new Intent(tela_configuracoes.this, tela_login.class);
-            startActivity(intent);
-            finish(); // fecha a tela atual e volta para a anterior
-        });
+        btnVoltarConfiguracoes.setOnClickListener(v -> finish());
 
         btnAbrirExcluirConta.setOnClickListener(v -> {
             Intent intent = new Intent(tela_configuracoes.this, tela_excluir_conta.class);
@@ -39,10 +35,6 @@ public class tela_configuracoes extends AppCompatActivity {
         });
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        BarrasSistema.aplicar(this);
     }
 }
