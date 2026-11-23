@@ -35,7 +35,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_anonimo);
+        setContentView(getLayoutChat());
+        findViewById(R.id.btnVoltarChat).setOnClickListener(v -> finish());
 
         txtStatus = findViewById(R.id.txtStatusChat);
         editMensagem = findViewById(R.id.editMensagem);
@@ -49,6 +50,11 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
         btnEnviar.setOnClickListener(v -> enviarMensagem());
     }
+
+    /** Permite que AtendimentoIAActivity utilize layout próprio e a mesma API Aurora. */
+    protected int getLayoutChat() { return R.layout.activity_chat_anonimo; }
+
+    protected String mensagemInicial() { return "Olá! Este é um espaço de acolhimento. Você pode começar contando o que gostaria de conversar."; }
 
     private JSONObject requisicao(String caminho, JSONObject dados)
             throws Exception {
@@ -122,8 +128,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(true);
                     adicionarMensagem(
                             "Aurora",
-                            "Olá! Este é um espaço de acolhimento. " +
-                            "Você pode começar contando o que gostaria de conversar."
+                            mensagemInicial()
                     );
                 });
 
