@@ -76,6 +76,7 @@ public class tela_denuncia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_denuncia);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
         findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
 
         layoutFisica = findViewById(R.id.layoutFisica);
