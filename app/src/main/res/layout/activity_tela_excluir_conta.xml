@@ -1,104 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+ android:id="@+id/main"
+ android:layout_width="match_parent"
+ android:layout_height="match_parent"
+ android:fitsSystemWindows="true"
+ android:fillViewport="true"
+ android:background="#F3E4CD">
+ <LinearLayout
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  android:paddingStart="24dp"
+  android:paddingEnd="24dp"
+  android:paddingTop="12dp"
+  android:paddingBottom="30dp">
+  <TextView
+   android:id="@+id/btnVoltarExcluir"
+   android:layout_width="wrap_content"
+   android:layout_height="48dp"
+   android:gravity="center_vertical"
+   android:text="‹  Voltar"
+   android:textSize="19sp"
+   android:textColor="#3E3935"
+   android:contentDescription="Voltar às configurações"
+   android:clickable="true"
+   android:focusable="true"/>
+  <ImageView
+   android:id="@+id/imgLogoExcluirConta"
+   android:layout_width="150dp"
+   android:layout_height="150dp"
+   android:layout_gravity="center_horizontal"
+   android:layout_marginTop="16dp"
+   android:src="@drawable/logo_tempero"
+   android:scaleType="fitCenter"
+   android:contentDescription="Logo Tempero Caseiro"/>
+  <TextView
+   android:id="@+id/txtDesejaExcluirConta"
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:layout_marginTop="12dp"
+   android:text="Excluir sua conta?"
+   android:textColor="#322A24"
+   android:textStyle="bold"
+   android:textSize="27sp"
+   android:gravity="center"/>
+  <TextView
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:layout_marginTop="10dp"
+   android:text="Antes de continuar, confira o que acontece com sua conta."
+   android:textSize="15sp"
+   android:textColor="#6D6257"
+   android:gravity="center"/>
+  <LinearLayout
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:layout_marginTop="28dp"
+   android:background="@drawable/bg_security_card"
+   android:padding="20dp"
+   android:orientation="vertical">
+   <TextView
+    android:id="@+id/txtAvisoExcluirConta"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- Fundo da tela -->
-    <ImageView
-        android:id="@+id/imgFundoExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/cadastro_background"
-        android:scaleType="fitXY"
-        android:contentDescription="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imgLogoExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/logo_tempero"
-        android:scaleType="fitCenter"
-        android:contentDescription="Logo Tempero Caseiro"
-        app:layout_constraintWidth_percent="0.52"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Título -->
-    <TextView
-        android:id="@+id/txtDesejaExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Deseja excluir sua conta?"
-        android:textAlignment="center"
-        android:textColor="#4F5A1F"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoExcluirConta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.82"
-        android:layout_marginTop="36dp" />
-
-    <!-- Aviso -->
-    <TextView
-        android:id="@+id/txtAvisoExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Isso irá excluir a sua conta para sempre!"
-        android:textAlignment="center"
-        android:textColor="#4F5A1F"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/txtDesejaExcluirConta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.72"
-        android:layout_marginTop="58dp" />
-
-    <!-- Botão excluir conta -->
-    <Button
-        android:id="@+id/btnExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:text="Excluir conta"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="#56611E"
-        app:layout_constraintTop_toBottomOf="@id/txtAvisoExcluirConta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.78"
-        android:layout_marginTop="60dp" />
-
-    <!-- Botão cancelar -->
-    <Button
-        android:id="@+id/btnCancelarExclusao"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:text="Cancelar"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="#56611E"
-        app:layout_constraintTop_toBottomOf="@id/btnExcluirConta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.78"
-        android:layout_marginTop="24dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    android:layout_height="wrap_content"
+    android:text="Atenção: ação permanente"
+    android:textSize="17sp"
+    android:textStyle="bold"
+    android:textColor="#A64C42"/>
+   <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:lineSpacingExtra="4dp"
+    android:text="• Sua conta será excluída.&#10;• Você perderá o acesso a este perfil.&#10;• A exclusão não poderá ser desfeita."
+    android:textSize="14sp"
+    android:textColor="#443A32"/>
+  </LinearLayout>
+  <Button
+   android:id="@+id/btnExcluirConta"
+   android:layout_width="match_parent"
+   android:layout_height="56dp"
+   android:layout_marginTop="28dp"
+   android:text="Excluir minha conta"
+   android:textAllCaps="false"
+   android:textStyle="bold"
+   android:textSize="16sp"
+   android:textColor="#FFFFFF"
+   android:backgroundTint="#A64C42"/>
+  <Button
+   android:id="@+id/btnCancelarExclusao"
+   android:layout_width="match_parent"
+   android:layout_height="54dp"
+   android:layout_marginTop="12dp"
+   android:text="Cancelar e voltar"
+   android:textAllCaps="false"
+   android:textStyle="bold"
+   android:textSize="16sp"
+   android:textColor="#34442E"
+   android:backgroundTint="#FFFFFF"/>
+ </LinearLayout>
+</ScrollView>
