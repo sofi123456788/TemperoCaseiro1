@@ -19,6 +19,7 @@ public class FerramentasSegurancaActivity extends AppCompatActivity {
     @Override protected void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_ferramentas_seguranca);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
         findViewById(R.id.btnVoltarSeguranca).setOnClickListener(v -> finish());
         Switch saida = findViewById(R.id.switchSaidaRapida);
         Switch avisos = findViewById(R.id.switchAvisos);

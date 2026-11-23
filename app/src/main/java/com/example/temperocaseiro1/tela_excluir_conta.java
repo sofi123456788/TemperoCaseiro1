@@ -29,19 +29,24 @@ public class tela_excluir_conta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_tela_excluir_conta); // carrega a tela de exlcluir_conta
+        setContentView(R.layout.activity_tela_excluir_conta);
+        BarrasSistema.aplicar(this);
+        findViewById(R.id.btnVoltarExcluir).setOnClickListener(v -> finish());
 
         btnExcluirConta = findViewById(R.id.btnExcluirConta);
         btnCancelarExclusao = findViewById(R.id.btnCancelarExclusao);
 
-        emailUsuario = getIntent().getStringExtra("emailUsuario"); // recupera o email enviado pela tela de configurações
+        emailUsuario = getIntent().getStringExtra("emailUsuario");
+        if (emailUsuario == null || emailUsuario.isEmpty()) {
+            emailUsuario = com.example.temperocaseiro1.model.SessaoUsuario.getEmail();
+        } // recupera o email enviado pela tela de configurações
 
         btnExcluirConta.setOnClickListener(v -> { // verifica se de fato o email foi enviado
             if (emailUsuario == null || emailUsuario.trim().isEmpty()) {
                 Toast.makeText(this, "Erro: usuário não identificado", Toast.LENGTH_SHORT).show();
             } else {
-                exclusaoAPI(emailUsuario); // caso o usuário tenha sido identificado, chamada a API
+                btnExcluirConta.setEnabled(false);
+                exclusaoAPI(emailUsuario); // somente após confirmação explícita
             }
 
         });
@@ -50,11 +55,7 @@ public class tela_excluir_conta extends AppCompatActivity {
             finish();
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
     }
     private void exclusaoAPI(String email) { // metodo que recebe o email enviado e cria um objeto requisição
 
@@ -67,11 +68,14 @@ public class tela_excluir_conta extends AppCompatActivity {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                btnExcluirConta.setEnabled(true);
                 if (response.isSuccessful()) {
                     Toast.makeText(tela_excluir_conta.this, response.body(), Toast.LENGTH_SHORT).show();
 
                     if ("Conta excluída com sucesso".equals(response.body())) {
                         Intent intent = new Intent(tela_excluir_conta.this, tela_conta_excluida.class);
+                        com.example.temperocaseiro1.model.SessaoUsuario.encerrarSessao();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }
@@ -87,6 +91,7 @@ public class tela_excluir_conta extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+                btnExcluirConta.setEnabled(true);
                 Toast.makeText(tela_excluir_conta.this, "Falha de conexão: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

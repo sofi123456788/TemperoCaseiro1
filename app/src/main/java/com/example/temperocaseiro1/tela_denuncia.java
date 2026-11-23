@@ -75,8 +75,9 @@ public class tela_denuncia extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_denuncia);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
+        findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
 
         layoutFisica = findViewById(R.id.layoutFisica);
         layoutPsicologica = findViewById(R.id.layoutPsicologica);

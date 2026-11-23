@@ -17,21 +17,17 @@ public class tela_conta_excluida extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_tela_conta_excluida); // carrega o xml da página
+        setContentView(R.layout.activity_tela_conta_excluida);
+        BarrasSistema.aplicar(this);
 
         btnRetornarInicio = findViewById(R.id.btnRetornarInicio);
 
         btnRetornarInicio.setOnClickListener(v -> {
             Intent intent = new Intent(tela_conta_excluida.this, tela_login.class);
-            //.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         });
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
     }
 }

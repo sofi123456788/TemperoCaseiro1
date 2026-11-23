@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
     android:background="#F3E4CD">
 
@@ -53,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="txtSaudacao"
+                android:text="Olá!"
                 android:textColor="#322A24"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -64,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:gravity="center"
-                android:text="maria@email.com"
+                android:text=""
                 android:textColor="#75685C"
                 android:textSize="15sp" />
 

@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 
 import com.example.temperocaseiro1.model.tela_perfil;
+import com.example.temperocaseiro1.model.SessaoUsuario;
 
 public class MainActivity extends AppCompatActivity {
     private TextView txtSaudacao;
@@ -28,18 +29,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
         txtSaudacao = findViewById(R.id.txtSaudacao);
 
 
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
         String email = getIntent().getStringExtra("emailUsuario");
+        SessaoUsuario.atualizarDadosSePresentes(nomeCompleto, email);
+        nomeCompleto = SessaoUsuario.getNomeCompleto();
+        email = SessaoUsuario.getEmail();
 
         if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
             String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
             txtSaudacao.setText("Olá, " + primeiroNome + "!");
         }
+        else { txtSaudacao.setText("Olá!"); }
         ImageView imgBolo = findViewById(R.id.imgBoloCenoura);
         ImageView imgBrigadeiro = findViewById(R.id.imgBrigadeiro);
         ImageView imgPaoDeQueijo = findViewById(R.id.imgPaoDeQueijo);
@@ -147,12 +152,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        final String nomePerfil = nomeCompleto;
+        final String emailPerfil = email;
         menuPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, tela_perfil.class);
 
             // Passa o nome e o e-mail para a tela de perfil
-            intent.putExtra("nomeUsuario", nomeCompleto);
-            intent.putExtra("emailUsuario", email);
+            intent.putExtra("nomeUsuario", nomePerfil);
+            intent.putExtra("emailUsuario", emailPerfil);
 
             startActivity(intent);
         });
@@ -203,5 +210,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String nome = SessaoUsuario.getNomeCompleto();
+        if (nome != null && !nome.trim().isEmpty()) {
+            txtSaudacao.setText("Olá, " + nome.trim().split("\\s+")[0] + "!");
+        } else {
+            txtSaudacao.setText("Olá!");
+        }
     }
 }

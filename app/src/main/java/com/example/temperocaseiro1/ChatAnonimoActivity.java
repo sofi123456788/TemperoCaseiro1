@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,8 +26,16 @@ import java.nio.charset.StandardCharsets;
 
 public class ChatAnonimoActivity extends AppCompatActivity {
 
-    // Endereco do computador visto pelo emulador Android
-    private static final String BASE_URL = "http://10.0.2.2:8000";
+    // Emulador: 10.0.2.2. Celular físico: localhost encaminhado pelo ADB.
+    // Execute no Fedora: adb reverse tcp:8000 tcp:8000
+    // O servidor Python pode continuar restrito a 127.0.0.1.
+    private static String enderecoAurora() {
+        String hardware = android.os.Build.HARDWARE.toLowerCase();
+        boolean emulador = android.os.Build.FINGERPRINT.startsWith("generic")
+                || hardware.contains("ranchu") || hardware.contains("goldfish")
+                || android.os.Build.MODEL.contains("Emulator");
+        return emulador ? "http://10.0.2.2:8000" : "http://127.0.0.1:8000";
+    }
 
     private TextView txtStatus;
     private EditText editMensagem;
@@ -39,6 +49,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutChat());
+        BarrasSistema.aplicar(this);
         findViewById(R.id.btnVoltarChat).setOnClickListener(v -> finish());
 
         // Botão opcional: volta à tela inicial do aparelho. Não apaga histórico.
@@ -61,6 +72,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
         btnEnviar.setEnabled(false);
 
+        // A mensagem inicial aparece mesmo se o servidor não estiver acessível.
+        adicionarMensagem("Aurora", mensagemInicial());
         iniciarSessao();
 
         btnEnviar.setOnClickListener(v -> enviarMensagem());
@@ -74,7 +87,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     private JSONObject requisicao(String caminho, JSONObject dados)
             throws Exception {
 
-        URL url = new URL(BASE_URL + caminho);
+        URL url = new URL(enderecoAurora() + caminho);
         HttpURLConnection conexao =
                 (HttpURLConnection) url.openConnection();
 
@@ -114,9 +127,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
             );
 
             if (status >= 400) {
-                throw new Exception(
-                        json.optString("detail", "Erro HTTP " + status)
-                );
+                throw new Exception("HTTP " + status + ": " +
+                        json.optString("detail", "Serviço indisponível"));
             }
 
             return json;
@@ -141,17 +153,13 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     txtStatus.setText("Sessão anônima ativa");
                     btnEnviar.setEnabled(true);
-                    adicionarMensagem(
-                            "Aurora",
-                            mensagemInicial()
-                    );
+
                 });
 
             } catch (Exception e) {
                 runOnUiThread(() ->
-                        txtStatus.setText(
-                                "Erro de conexão: " + e.getMessage()
-                        )
+                        txtStatus.setText("Não foi possível iniciar a conversa. " +
+                                "Confira a API, o banco de dados e a conexão USB.")
                 );
             }
         }).start();
@@ -224,12 +232,22 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 runOnUiThread(() -> {
-                    adicionarMensagem(
-                            "Sistema",
-                            "Não foi possível enviar a mensagem: " +
-                                    e.getMessage()
-                    );
-                    txtStatus.setText("Falha na comunicação");
+                    String erro = e.getMessage() == null ? "" : e.getMessage();
+                    if (erro.contains("503") || erro.toLowerCase().contains("anthropic")) {
+                        adicionarMensagem("Sistema",
+                                "O atendimento está temporariamente indisponível. " +
+                                "Tente novamente mais tarde.");
+                        txtStatus.setText("Atendimento temporariamente indisponível");
+                    } else if (erro.contains("500")) {
+                        adicionarMensagem("Sistema",
+                                "O servidor encontrou um erro. Verifique o banco " +
+                                "de dados e o terminal da Aurora.");
+                        txtStatus.setText("Erro no servidor");
+                    } else {
+                        adicionarMensagem("Sistema",
+                                "Não foi possível enviar. Confira a conexão com a Aurora.");
+                        txtStatus.setText("Falha na comunicação");
+                    }
                     btnEnviar.setEnabled(true);
                 });
             }
@@ -241,18 +259,31 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 .getBoolean(FerramentasSegurancaActivity.AVISOS, true);
     }
 
+    /** Mensagens em balões que acompanham a largura da tela. */
     private void adicionarMensagem(String autor, String conteudo) {
+        boolean doUsuario = "Você".equals(autor);
         TextView mensagem = new TextView(this);
-
         mensagem.setText(autor + ":\n" + conteudo);
-        mensagem.setTextSize(16);
+        mensagem.setTextSize(15);
         mensagem.setTextColor(Color.rgb(38, 53, 38));
-        mensagem.setPadding(14, 14, 14, 14);
 
-        containerMensagens.addView(mensagem);
+        float densidade = getResources().getDisplayMetrics().density;
+        int padding = (int)(13 * densidade);
+        mensagem.setPadding(padding, padding, padding, padding);
+        mensagem.setMaxWidth((int)(getResources().getDisplayMetrics().widthPixels * 0.82f));
 
-        scrollChat.post(() -> scrollChat.fullScroll(
-                ScrollView.FOCUS_DOWN
-        ));
+        GradientDrawable fundo = new GradientDrawable();
+        fundo.setColor(Color.parseColor(doUsuario ? "#E3EDD9" : "#FFFFFF"));
+        fundo.setCornerRadius(18 * densidade);
+        fundo.setStroke(Math.max(1, (int)densidade), Color.parseColor("#E5D9C8"));
+        mensagem.setBackground(fundo);
+
+        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        parametros.gravity = doUsuario ? Gravity.END : Gravity.START;
+        parametros.setMargins(0, 0, 0, padding);
+        containerMensagens.addView(mensagem, parametros);
+        scrollChat.post(() -> scrollChat.fullScroll(ScrollView.FOCUS_DOWN));
     }
 }
