@@ -29,12 +29,15 @@
 
                 <TextView
                     android:id="@+id/btnMenuAjuda"
+                    android:contentDescription="Voltar"
+                    android:clickable="true"
+                    android:focusable="true"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:gravity="center"
-                    android:text="☰"
+                    android:text="‹"
                     android:textSize="28sp"
                     android:textColor="#172022"/>
 
@@ -48,19 +51,6 @@
                     android:textColor="#172022"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
-
-                <!-- ÍCONE DE SEGURANÇA SUPERIOR DIREITO -->
-                <ImageView
-                    android:id="@+id/btnSeguranca"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_escudo"
-                    android:contentDescription="Segurança"
-                    android:clickable="true"
-                    android:focusable="true" />
 
 
             </RelativeLayout>

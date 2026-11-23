@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txtSaudacao = findViewById(R.id.txtSaudacao);
 
+
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
         String email = getIntent().getStringExtra("emailUsuario");
 
@@ -109,8 +110,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Ação do botão "Favoritos" para a troca de telas após precionar o botão por 4 segundos
         Handler handler = new Handler(Looper.getMainLooper()); // Permite agendar uma ação para que ocorra daqui a um tempo
-        Runnable abrirTela = () -> { // ação executada após os 4 segundos determinados
-            Intent intent = new Intent(MainActivity.this, BoasVindasActivity.class);
+        Runnable abrirTela = () -> { // acesso discreto à central de apoio
+            boolean vista = getSharedPreferences("boas_vindas", MODE_PRIVATE)
+                    .getBoolean("apresentacao_concluida", false);
+            Intent intent = new Intent(MainActivity.this,
+                    vista ? tela_ajuda.class : BoasVindasActivity.class);
             startActivity(intent);
         };
         menuFavoritos.setOnTouchListener((v, event) -> {

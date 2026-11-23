@@ -2,6 +2,9 @@
 package com.example.temperocaseiro1;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Toast;
 import android.graphics.Color;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +38,20 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_anonimo);
+        setContentView(getLayoutChat());
+        findViewById(R.id.btnVoltarChat).setOnClickListener(v -> finish());
+
+        // Botão opcional: volta à tela inicial do aparelho. Não apaga histórico.
+        View sair = findViewById(R.id.btnSaidaRapida);
+        boolean habilitado = getSharedPreferences(FerramentasSegurancaActivity.PREFS, MODE_PRIVATE)
+                .getBoolean(FerramentasSegurancaActivity.SAIDA, true);
+        sair.setVisibility(habilitado ? View.VISIBLE : View.GONE);
+        sair.setOnClickListener(v -> {
+            Intent inicio = new Intent(Intent.ACTION_MAIN);
+            inicio.addCategory(Intent.CATEGORY_HOME);
+            inicio.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(inicio);
+        });
 
         txtStatus = findViewById(R.id.txtStatusChat);
         editMensagem = findViewById(R.id.editMensagem);
@@ -49,6 +65,11 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
         btnEnviar.setOnClickListener(v -> enviarMensagem());
     }
+
+    /** Permite que AtendimentoIAActivity utilize layout próprio e a mesma API Aurora. */
+    protected int getLayoutChat() { return R.layout.activity_chat_anonimo; }
+
+    protected String mensagemInicial() { return "Olá! Este é um espaço de acolhimento. Você pode começar contando o que gostaria de conversar."; }
 
     private JSONObject requisicao(String caminho, JSONObject dados)
             throws Exception {
@@ -122,8 +143,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                     btnEnviar.setEnabled(true);
                     adicionarMensagem(
                             "Aurora",
-                            "Olá! Este é um espaço de acolhimento. " +
-                            "Você pode começar contando o que gostaria de conversar."
+                            mensagemInicial()
                     );
                 });
 
@@ -185,7 +205,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                     adicionarMensagem("Aurora", texto);
                     txtStatus.setText("Nível: " + nivel);
 
-                    if (ajuda) {
+                    if (ajuda && mostrarAvisos()) {
                         adicionarMensagem(
                                 "Apoio",
                                 "Central de Atendimento à Mulher: 180"
@@ -214,6 +234,11 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 });
             }
         }).start();
+    }
+
+    private boolean mostrarAvisos() {
+        return getSharedPreferences(FerramentasSegurancaActivity.PREFS, MODE_PRIVATE)
+                .getBoolean(FerramentasSegurancaActivity.AVISOS, true);
     }
 
     private void adicionarMensagem(String autor, String conteudo) {

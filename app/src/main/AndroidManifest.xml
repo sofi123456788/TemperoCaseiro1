@@ -20,6 +20,9 @@
         android:exported="false"
         android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name=".AtendimentoIAActivity" android:exported="false" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".FerramentasSegurancaActivity" android:exported="false" />
+
         <!-- TELA INICIAL DA SOFIA -->
         <activity
             android:name=".tela_login"
