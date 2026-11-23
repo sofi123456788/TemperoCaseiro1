@@ -20,7 +20,7 @@ public class tela_ajuda extends AppCompatActivity {
         findViewById(R.id.btnDenunciaAjuda).setOnClickListener(v -> abrir(tela_denuncia.class));
 
         // Atalhos do rodapé da central de ajuda.
-        findViewById(R.id.menuEntrar).setOnClickListener(v -> abrir(MainActivity.class));
+        findViewById(R.id.menuEntrar).setOnClickListener(v -> com.example.temperocaseiro1.model.SessaoUsuario.abrirInicio(this));
         findViewById(R.id.menuReceitas).setOnClickListener(v -> abrir(ChatAnonimoActivity.class));
         findViewById(R.id.menuFavoritos).setOnClickListener(v -> abrir(CentrosApoioActivity.class));
         findViewById(R.id.menuPerfil).setOnClickListener(v -> abrir(FerramentasSegurancaActivity.class));
