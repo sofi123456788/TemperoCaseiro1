@@ -1,62 +1,31 @@
-
 package com.example.temperocaseiro1;
 
-import android.os.Bundle;
 import android.content.Intent;
-import android.widget.LinearLayout;
-
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+/** Navegação da central de ajuda. O botão GRITE! permanece sem ação. */
 public class tela_ajuda extends AppCompatActivity {
+    private void abrir(Class<?> tela) {
+        startActivity(new Intent(this, tela));
+    }
 
-    private LinearLayout btnSocorro;
-    private LinearLayout btnChatAnonimo;
-    private LinearLayout btnAtendimentoIA;
-    private LinearLayout btnCentrosApoio;
-    private LinearLayout btnDenunciaAjuda;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    @Override protected void onCreate(Bundle estado) {
+        super.onCreate(estado);
         setContentView(R.layout.activity_ajuda);
 
-        btnSocorro = findViewById(R.id.btnSocorro);
-        btnChatAnonimo = findViewById(R.id.btnChatAnonimo);
-        btnAtendimentoIA = findViewById(R.id.btnAtendimentoIA);
-        btnCentrosApoio = findViewById(R.id.btnCentrosApoio);
-        btnDenunciaAjuda = findViewById(R.id.btnDenunciaAjuda);
+        findViewById(R.id.btnChatAnonimo).setOnClickListener(v -> abrir(ChatAnonimoActivity.class));
+        findViewById(R.id.btnAtendimentoIA).setOnClickListener(v -> abrir(AtendimentoIAActivity.class));
+        findViewById(R.id.btnCentrosApoio).setOnClickListener(v -> abrir(CentrosApoioActivity.class));
+        findViewById(R.id.btnDenunciaAjuda).setOnClickListener(v -> abrir(tela_denuncia.class));
 
-        /*btnCentrosApoio.setOnClickListener(v -> {
-            Intent intent = new Intent(tela_ajuda.this, )
-        });
+        // Atalhos do rodapé da central de ajuda.
+        findViewById(R.id.menuEntrar).setOnClickListener(v -> abrir(MainActivity.class));
+        findViewById(R.id.menuReceitas).setOnClickListener(v -> abrir(ChatAnonimoActivity.class));
+        findViewById(R.id.menuFavoritos).setOnClickListener(v -> abrir(CentrosApoioActivity.class));
+        findViewById(R.id.menuPerfil).setOnClickListener(v -> abrir(FerramentasSegurancaActivity.class));
 
-         */
-btnChatAnonimo.setOnClickListener(v -> {
-    Intent intent = new Intent(
-            tela_ajuda.this,
-            ChatAnonimoActivity.class
-    );
-    startActivity(intent);
-});
-
-btnAtendimentoIA.setOnClickListener(v -> {
-    Intent intent = new Intent(
-            tela_ajuda.this,
-            ChatAnonimoActivity.class
-    );
-    startActivity(intent);
-});
-
-        btnDenunciaAjuda.setOnClickListener(v -> {
-            Intent intent = new Intent(
-                    tela_ajuda.this,
-                    tela_denuncia.class
-            );
-            startActivity(intent);
-        });
-
-        // As outras opções serão conectadas
-        // às respectivas funcionalidades.
+        // O botão de menu retorna à tela anterior; não substitui o botão GRITE!.
+        findViewById(R.id.btnMenuAjuda).setOnClickListener(v -> finish());
     }
 }
