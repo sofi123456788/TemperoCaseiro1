@@ -1,104 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!-- Fundo da tela -->
-    <ImageView
-        android:id="@+id/imgFundoConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/cadastro_background"
-        android:scaleType="fitXY"
-        android:contentDescription="@null"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imgLogoConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/logo_tempero"
-        android:scaleType="fitCenter"
-        android:contentDescription="Logo Tempero Caseiro"
-        app:layout_constraintWidth_percent="0.48"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- Título -->
-    <TextView
-        android:id="@+id/txtTituloConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Configurações"
-        android:textAlignment="center"
-        android:textColor="#4F5A1F"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgLogoConfiguracoes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.82"
-        android:layout_marginTop="32dp" />
-
-    <!-- Texto explicativo -->
-    <TextView
-        android:id="@+id/txtDescricaoConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Gerencie as opções da sua conta."
-        android:textAlignment="center"
-        android:textColor="#4F5A1F"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/txtTituloConfiguracoes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.78"
-        android:layout_marginTop="28dp" />
-
-    <!-- Botão excluir conta -->
-    <Button
-        android:id="@+id/btnAbrirExcluirConta"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:text="Excluir conta"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="#56611E"
-        app:layout_constraintTop_toBottomOf="@id/txtDescricaoConfiguracoes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.78"
-        android:layout_marginTop="70dp" />
-
-    <!-- Botão voltar -->
-    <Button
-        android:id="@+id/btnVoltarConfiguracoes"
-        android:layout_width="0dp"
-        android:layout_height="52dp"
-        android:text="Voltar"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:backgroundTint="#56611E"
-        app:layout_constraintTop_toBottomOf="@id/btnAbrirExcluirConta"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.78"
-        android:layout_marginTop="24dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+ android:id="@+id/main" android:layout_width="match_parent" android:layout_height="match_parent"
+ android:fitsSystemWindows="true" android:fillViewport="true"
+ android:background="#F3E4CD">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+  android:orientation="vertical" android:paddingStart="24dp" android:paddingEnd="24dp"
+  android:paddingTop="12dp" android:paddingBottom="28dp">
+  <TextView android:id="@+id/btnVoltarConfiguracoes"
+   android:layout_width="wrap_content" android:layout_height="48dp"
+   android:text="‹  Voltar" android:textSize="19sp" android:textColor="#3E3935"
+   android:gravity="center_vertical" android:clickable="true" android:focusable="true"
+   android:contentDescription="Voltar"/>
+  <ImageView android:id="@+id/imgLogoConfiguracoes"
+   android:layout_width="150dp" android:layout_height="150dp"
+   android:layout_gravity="center_horizontal" android:layout_marginTop="16dp"
+   android:src="@drawable/logo_tempero" android:scaleType="fitCenter"
+   android:contentDescription="Logo Tempero Caseiro"/>
+  <TextView android:id="@+id/txtTituloConfiguracoes"
+   android:layout_width="match_parent" android:layout_height="wrap_content"
+   android:layout_marginTop="18dp" android:text="Sua conta"
+   android:textColor="#322A24" android:textStyle="bold" android:textSize="27sp"
+   android:gravity="center"/>
+  <TextView android:id="@+id/txtDescricaoConfiguracoes"
+   android:layout_width="match_parent" android:layout_height="wrap_content"
+   android:layout_marginTop="12dp" android:text="Gerencie suas preferências e o acesso ao Tempero Caseiro."
+   android:textColor="#6D6257" android:textSize="15sp" android:gravity="center"/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+   android:layout_marginTop="30dp" android:padding="20dp"
+   android:background="@drawable/bg_security_card" android:orientation="vertical">
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:text="Exclusão de conta" android:textSize="17sp"
+    android:textColor="#A64C42" android:textStyle="bold"/>
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:text="A exclusão é permanente. Você poderá revisar essa decisão antes de confirmar."
+    android:textSize="14sp" android:textColor="#62594D" android:lineSpacingExtra="3dp"/>
+  </LinearLayout>
+  <Button android:id="@+id/btnAbrirExcluirConta"
+   android:layout_width="match_parent" android:layout_height="56dp"
+   android:layout_marginTop="26dp" android:text="Solicitar exclusão de conta"
+   android:textAllCaps="false" android:textSize="16sp" android:textColor="#FFFFFF"
+   android:backgroundTint="#A64C42"/>
+ </LinearLayout>
+</ScrollView>
