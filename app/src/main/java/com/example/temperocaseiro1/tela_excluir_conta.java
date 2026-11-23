@@ -29,13 +29,15 @@ public class tela_excluir_conta extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_excluir_conta); // carrega a tela de exlcluir_conta
 
         btnExcluirConta = findViewById(R.id.btnExcluirConta);
         btnCancelarExclusao = findViewById(R.id.btnCancelarExclusao);
 
-        emailUsuario = getIntent().getStringExtra("emailUsuario"); // recupera o email enviado pela tela de configurações
+        emailUsuario = getIntent().getStringExtra("emailUsuario");
+        if (emailUsuario == null || emailUsuario.isEmpty()) {
+            emailUsuario = com.example.temperocaseiro1.model.SessaoUsuario.getEmail();
+        } // recupera o email enviado pela tela de configurações
 
         btnExcluirConta.setOnClickListener(v -> { // verifica se de fato o email foi enviado
             if (emailUsuario == null || emailUsuario.trim().isEmpty()) {
@@ -72,6 +74,8 @@ public class tela_excluir_conta extends AppCompatActivity {
 
                     if ("Conta excluída com sucesso".equals(response.body())) {
                         Intent intent = new Intent(tela_excluir_conta.this, tela_conta_excluida.class);
+                        com.example.temperocaseiro1.model.SessaoUsuario.encerrarSessao();
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }
