@@ -235,9 +235,9 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                     String erro = e.getMessage() == null ? "" : e.getMessage();
                     if (erro.contains("503") || erro.toLowerCase().contains("anthropic")) {
                         adicionarMensagem("Sistema",
-                                "A conversa iniciou, mas as respostas da Aurora " +
-                                "ainda não estão disponíveis. Verifique a chave Anthropic na API.");
-                        txtStatus.setText("Atendimento IA indisponível");
+                                "O atendimento está temporariamente indisponível. " +
+                                "Tente novamente mais tarde.");
+                        txtStatus.setText("Atendimento temporariamente indisponível");
                     } else if (erro.contains("500")) {
                         adicionarMensagem("Sistema",
                                 "O servidor encontrou um erro. Verifique o banco " +
