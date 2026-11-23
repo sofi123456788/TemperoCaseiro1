@@ -119,6 +119,7 @@ public class tela_login extends AppCompatActivity {
 
                         // Guarda o token na sessão do aplicativo
                         SessaoUsuario.salvarToken(token);
+                        SessaoUsuario.salvarDados(nomeCompleto, email);
 
                         Toast.makeText(tela_login.this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
