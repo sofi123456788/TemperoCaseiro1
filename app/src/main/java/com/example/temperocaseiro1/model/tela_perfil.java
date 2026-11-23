@@ -42,6 +42,7 @@ public class tela_perfil extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_tela_perfil);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
         txtSaudacao = findViewById(R.id.txtSaudacao);
         txtEmailPerfil = findViewById(R.id.txtEmailPerfil);
 
