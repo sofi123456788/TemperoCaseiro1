@@ -19,7 +19,8 @@ import com.example.temperocaseiro1.BoasVindasActivity;
 import com.example.temperocaseiro1.MainActivity;
 import com.example.temperocaseiro1.R;
 import com.example.temperocaseiro1.ReceitasBD;
-import com.example.temperocaseiro1.tela_login;
+import com.example.temperocaseiro1.tela_ajuda;
+import com.example.temperocaseiro1.model.SessaoUsuario;
 
 import okhttp3.Cache;
 
@@ -40,31 +41,24 @@ public class tela_perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela_perfil);
         txtSaudacao = findViewById(R.id.txtSaudacao);
         txtEmailPerfil = findViewById(R.id.txtEmailPerfil);
 
-        String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
-        String email = getIntent().getStringExtra("emailUsuario");
+        SessaoUsuario.atualizarDadosSePresentes(
+                getIntent().getStringExtra("nomeUsuario"), getIntent().getStringExtra("emailUsuario"));
+        String nomeCompleto = SessaoUsuario.getNomeCompleto();
+        String email = SessaoUsuario.getEmail();
 
         if (nomeCompleto != null && !nomeCompleto.trim().isEmpty()) {
             String primeiroNome = nomeCompleto.trim().split("\\s+")[0];
             txtSaudacao.setText("Olá, " + primeiroNome + "!");
         }
 
+        if (nomeCompleto == null || nomeCompleto.trim().isEmpty()) txtSaudacao.setText("Olá!");
         if (email != null && !email.trim().isEmpty()) {
             txtEmailPerfil.setText(email.trim());
         }
-
-        // Configuração das margens do sistema
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
-            return insets;
-        });
 
         // Identificação dos componentes
         layoutConfiguracoesPerfil = findViewById(R.id.layoutConfiguracoesPerfil);
@@ -78,31 +72,16 @@ public class tela_perfil extends AppCompatActivity {
         // Configurações do perfil
         layoutConfiguracoesPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(tela_perfil.this, tela_configuracoes1.class);
+            intent.putExtra("nomeUsuario", SessaoUsuario.getNomeCompleto());
+            intent.putExtra("emailUsuario", SessaoUsuario.getEmail());
             startActivity(intent);
         });
 
-        // Sair da conta - terminar a implementação depois
-        layoutSairConta.setOnClickListener(v -> {
-            Intent intent = new Intent(tela_perfil.this, tela_login.class);
+        // Encerra a autenticação local e impede retorno ao perfil pelo botão voltar.
+        layoutSairConta.setOnClickListener(v -> SessaoUsuario.sairDaConta(this));
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-            startActivity(intent);
-            finish();
-        });
-
-        // Tela inicial
-        // Voltar para a tela inicial
-        menuEntrar.setOnClickListener(v -> {
-
-            Intent intent = new Intent(tela_perfil.this, MainActivity.class);
-
-            intent.putExtra("nomeUsuario", nomeCompleto);
-
-            intent.putExtra("emailUsuario",email);
-
-            startActivity(intent);
-        });
+        // Centraliza o retorno à tela inicial sem perder o nome autenticado.
+        menuEntrar.setOnClickListener(v -> SessaoUsuario.abrirInicio(this));
 
 
         // Receitas
@@ -121,7 +100,9 @@ public class tela_perfil extends AppCompatActivity {
         Handler handler = new Handler(Looper.getMainLooper());
 
         Runnable abrirTela = () -> {
-            Intent intent = new Intent(tela_perfil.this, BoasVindasActivity.class);
+            Intent intent = new Intent(tela_perfil.this,
+                    getSharedPreferences("boas_vindas", MODE_PRIVATE).getBoolean("apresentacao_concluida", false)
+                            ? tela_ajuda.class : BoasVindasActivity.class);
             startActivity(intent);
         };
 
@@ -140,5 +121,6 @@ public class tela_perfil extends AppCompatActivity {
 
             return false;
         });
+        menuPerfil.setOnClickListener(v -> { /* Já estamos na tela de perfil. */ });
     }
 }
