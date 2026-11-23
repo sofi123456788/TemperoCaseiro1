@@ -13,6 +13,7 @@ public class tela_ajuda extends AppCompatActivity {
     @Override protected void onCreate(Bundle estado) {
         super.onCreate(estado);
         setContentView(R.layout.activity_ajuda);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
 
         findViewById(R.id.btnChatAnonimo).setOnClickListener(v -> abrir(ChatAnonimoActivity.class));
         findViewById(R.id.btnAtendimentoIA).setOnClickListener(v -> abrir(AtendimentoIAActivity.class));
