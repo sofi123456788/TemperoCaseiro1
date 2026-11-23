@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F3E4CD">
+    android:background="#F3E4CD"
+    android:fitsSystemWindows="true">
 
     <!-- CABEÇALHO -->
     <LinearLayout
@@ -173,112 +174,5 @@
         android:textColor="#FFFFFF"
         android:textSize="13sp"
         android:textStyle="bold" />
-
-    <!-- RODAPÉ -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:background="#FFFFFF"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <!-- INÍCIO -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Início" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Início"
-                android:textColor="#333333"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-        <!-- CHAT -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_chat"
-                android:contentDescription="Chat" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Chat"
-                android:textColor="#333333"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-        <!-- APOIO -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_apoio"
-                android:contentDescription="Apoio" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Apoio"
-                android:textColor="#4D6B24"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <!-- MAIS -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:src="@drawable/ic_mais"
-                android:contentDescription="Mais" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Mais"
-                android:textColor="#333333"
-                android:textSize="10sp" />
-
-        </LinearLayout>
-
-    </LinearLayout>
 
 </LinearLayout>
