@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
         txtSaudacao = findViewById(R.id.txtSaudacao);
 
 
