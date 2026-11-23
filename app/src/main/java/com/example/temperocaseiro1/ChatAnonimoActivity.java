@@ -245,18 +245,31 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 .getBoolean(FerramentasSegurancaActivity.AVISOS, true);
     }
 
+    /** Mensagens em balões que acompanham a largura da tela. */
     private void adicionarMensagem(String autor, String conteudo) {
+        boolean doUsuario = "Você".equals(autor);
         TextView mensagem = new TextView(this);
-
         mensagem.setText(autor + ":\n" + conteudo);
-        mensagem.setTextSize(16);
+        mensagem.setTextSize(15);
         mensagem.setTextColor(Color.rgb(38, 53, 38));
-        mensagem.setPadding(14, 14, 14, 14);
 
-        containerMensagens.addView(mensagem);
+        float densidade = getResources().getDisplayMetrics().density;
+        int padding = (int)(13 * densidade);
+        mensagem.setPadding(padding, padding, padding, padding);
+        mensagem.setMaxWidth((int)(getResources().getDisplayMetrics().widthPixels * 0.82f));
 
-        scrollChat.post(() -> scrollChat.fullScroll(
-                ScrollView.FOCUS_DOWN
-        ));
+        GradientDrawable fundo = new GradientDrawable();
+        fundo.setColor(Color.parseColor(doUsuario ? "#E3EDD9" : "#FFFFFF"));
+        fundo.setCornerRadius(18 * densidade);
+        fundo.setStroke(Math.max(1, (int)densidade), Color.parseColor("#E5D9C8"));
+        mensagem.setBackground(fundo);
+
+        LinearLayout.LayoutParams parametros = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        parametros.gravity = doUsuario ? Gravity.END : Gravity.START;
+        parametros.setMargins(0, 0, 0, padding);
+        containerMensagens.addView(mensagem, parametros);
+        scrollChat.post(() -> scrollChat.fullScroll(ScrollView.FOCUS_DOWN));
     }
 }
