@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#FFF9F2"
+    android:fitsSystemWindows="true" android:padding="16dp">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center_vertical" android:orientation="horizontal"
+        android:paddingBottom="12dp">
+        <TextView android:id="@+id/btnVoltarChat" android:layout_width="48dp"
+            android:layout_height="48dp" android:gravity="center"
+            android:text="‹" android:textSize="32sp" android:textColor="#263526"
+            android:contentDescription="Voltar à tela anterior"
+            android:clickable="true" android:focusable="true"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Atendimento com IA" android:textStyle="bold"
+            android:textColor="#263526" android:textSize="21sp"/>
+    </LinearLayout>
+    <TextView android:id="@+id/txtStatusChat" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="Conectando à Aurora..."
+        android:textColor="#526B37" android:textSize="13sp" android:paddingBottom="10dp"/>
+    <ScrollView android:id="@+id/scrollChat" android:layout_width="match_parent"
+        android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true"
+        android:background="#FFFFFF" android:padding="10dp">
+        <LinearLayout android:id="@+id/containerMensagens" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical"/>
+    </ScrollView>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:layout_marginTop="12dp">
+        <EditText android:id="@+id/editMensagem" android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_weight="1"
+            android:hint="Conte o que está acontecendo" android:inputType="textMultiLine"
+            android:minHeight="48dp" android:maxLines="4"
+            android:paddingStart="12dp" android:paddingEnd="8dp"/>
+        <Button android:id="@+id/btnEnviarMensagem" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="Enviar"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Triagem automatizada de apoio. Não substitui orientação profissional. Emergência: 190."
+        android:textColor="#526B37" android:textSize="12sp" android:gravity="center"
+        android:layout_marginTop="6dp"/>
+</LinearLayout>
