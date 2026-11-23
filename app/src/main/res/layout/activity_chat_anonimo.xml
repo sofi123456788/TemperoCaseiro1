@@ -15,6 +15,10 @@
             android:layout_weight="1" android:text="Chat anônimo" android:textStyle="bold"
             android:textColor="#263526" android:textSize="21sp"/>
     </LinearLayout>
+    <Button android:id="@+id/btnSaidaRapida"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Sair para a tela inicial" android:textAllCaps="false"
+        android:visibility="gone"/>
     <TextView android:id="@+id/txtStatusChat" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="Iniciando conversa..."
         android:textColor="#526B37" android:textSize="13sp" android:paddingBottom="10dp"/>
