@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -24,8 +26,16 @@ import java.nio.charset.StandardCharsets;
 
 public class ChatAnonimoActivity extends AppCompatActivity {
 
-    // Endereco do computador visto pelo emulador Android
-    private static final String BASE_URL = "http://10.0.2.2:8000";
+    // Emulador: 10.0.2.2. Celular físico: localhost encaminhado pelo ADB.
+    // Execute no Fedora: adb reverse tcp:8000 tcp:8000
+    // O servidor Python pode continuar restrito a 127.0.0.1.
+    private static String enderecoAurora() {
+        String hardware = android.os.Build.HARDWARE.toLowerCase();
+        boolean emulador = android.os.Build.FINGERPRINT.startsWith("generic")
+                || hardware.contains("ranchu") || hardware.contains("goldfish")
+                || android.os.Build.MODEL.contains("Emulator");
+        return emulador ? "http://10.0.2.2:8000" : "http://127.0.0.1:8000";
+    }
 
     private TextView txtStatus;
     private EditText editMensagem;
@@ -61,6 +71,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
         btnEnviar.setEnabled(false);
 
+        // A mensagem inicial aparece mesmo se o servidor não estiver acessível.
+        adicionarMensagem("Aurora", mensagemInicial());
         iniciarSessao();
 
         btnEnviar.setOnClickListener(v -> enviarMensagem());
@@ -74,7 +86,7 @@ public class ChatAnonimoActivity extends AppCompatActivity {
     private JSONObject requisicao(String caminho, JSONObject dados)
             throws Exception {
 
-        URL url = new URL(BASE_URL + caminho);
+        URL url = new URL(enderecoAurora() + caminho);
         HttpURLConnection conexao =
                 (HttpURLConnection) url.openConnection();
 
@@ -141,17 +153,12 @@ public class ChatAnonimoActivity extends AppCompatActivity {
                 runOnUiThread(() -> {
                     txtStatus.setText("Sessão anônima ativa");
                     btnEnviar.setEnabled(true);
-                    adicionarMensagem(
-                            "Aurora",
-                            mensagemInicial()
-                    );
+
                 });
 
             } catch (Exception e) {
                 runOnUiThread(() ->
-                        txtStatus.setText(
-                                "Erro de conexão: " + e.getMessage()
-                        )
+                        txtStatus.setText("Aurora indisponível. Confira a API e a conexão USB.")
                 );
             }
         }).start();
@@ -224,11 +231,8 @@ public class ChatAnonimoActivity extends AppCompatActivity {
 
             } catch (Exception e) {
                 runOnUiThread(() -> {
-                    adicionarMensagem(
-                            "Sistema",
-                            "Não foi possível enviar a mensagem: " +
-                                    e.getMessage()
-                    );
+                    adicionarMensagem("Sistema",
+                            "Não foi possível enviar. Verifique se a Aurora está disponível.");
                     txtStatus.setText("Falha na comunicação");
                     btnEnviar.setEnabled(true);
                 });
