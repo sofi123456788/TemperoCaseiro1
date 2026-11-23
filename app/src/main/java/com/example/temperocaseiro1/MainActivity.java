@@ -32,12 +32,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txtSaudacao = findViewById(R.id.txtSaudacao);
 
-        // A apresentação da área de apoio aparece apenas no primeiro acesso.
-        // A confirmação fica armazenada localmente pelo BoasVindasActivity.
-        if (!getSharedPreferences("boas_vindas", MODE_PRIVATE)
-                .getBoolean("apresentacao_concluida", false)) {
-            startActivity(new Intent(this, BoasVindasActivity.class));
-        }
 
         String nomeCompleto = getIntent().getStringExtra("nomeUsuario");
         String email = getIntent().getStringExtra("emailUsuario");
