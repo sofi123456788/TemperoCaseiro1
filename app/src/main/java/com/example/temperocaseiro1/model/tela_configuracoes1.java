@@ -20,6 +20,7 @@ public class tela_configuracoes1 extends AppCompatActivity {
     protected void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_tela_configuracoes1);
+        com.example.temperocaseiro1.BarrasSistema.aplicar(this);
 
         SessaoUsuario.atualizarDadosSePresentes(
                 getIntent().getStringExtra("nomeUsuario"),
