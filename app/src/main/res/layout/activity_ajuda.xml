@@ -49,19 +49,6 @@
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
-                <!-- ÍCONE DE SEGURANÇA SUPERIOR DIREITO -->
-                <ImageView
-                    android:id="@+id/btnSeguranca"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_escudo"
-                    android:contentDescription="Segurança"
-                    android:clickable="true"
-                    android:focusable="true" />
-
 
             </RelativeLayout>
 
