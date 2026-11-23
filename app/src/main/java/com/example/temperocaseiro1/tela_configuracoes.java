@@ -13,7 +13,7 @@ import android.content.Intent;
 public class tela_configuracoes extends AppCompatActivity {
 
     private Button btnAbrirExcluirConta;
-    private Button btnVoltarConfiguracoes;
+    private android.widget.TextView btnVoltarConfiguracoes;
     private String emailUsuario;
 
     @Override
