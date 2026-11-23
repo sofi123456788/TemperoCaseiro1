@@ -1,0 +1,233 @@
+
+package com.example.temperocaseiro1;
+
+import android.os.Bundle;
+import android.graphics.Color;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+public class ChatAnonimoActivity extends AppCompatActivity {
+
+    // Endereco do computador visto pelo emulador Android
+    private static final String BASE_URL = "http://10.0.2.2:8000";
+
+    private TextView txtStatus;
+    private EditText editMensagem;
+    private Button btnEnviar;
+    private LinearLayout containerMensagens;
+    private ScrollView scrollChat;
+
+    private String tokenSessao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat_anonimo);
+
+        txtStatus = findViewById(R.id.txtStatusChat);
+        editMensagem = findViewById(R.id.editMensagem);
+        btnEnviar = findViewById(R.id.btnEnviarMensagem);
+        containerMensagens = findViewById(R.id.containerMensagens);
+        scrollChat = findViewById(R.id.scrollChat);
+
+        btnEnviar.setEnabled(false);
+
+        iniciarSessao();
+
+        btnEnviar.setOnClickListener(v -> enviarMensagem());
+    }
+
+    private JSONObject requisicao(String caminho, JSONObject dados)
+            throws Exception {
+
+        URL url = new URL(BASE_URL + caminho);
+        HttpURLConnection conexao =
+                (HttpURLConnection) url.openConnection();
+
+        try {
+            conexao.setRequestMethod("POST");
+            conexao.setConnectTimeout(10000);
+            conexao.setReadTimeout(30000);
+            conexao.setDoOutput(true);
+            conexao.setRequestProperty(
+                    "Content-Type", "application/json; charset=UTF-8"
+            );
+
+            byte[] corpo = dados.toString()
+                    .getBytes(StandardCharsets.UTF_8);
+
+            try (OutputStream saida = conexao.getOutputStream()) {
+                saida.write(corpo);
+            }
+
+            int status = conexao.getResponseCode();
+
+            InputStream entrada = status >= 400
+                    ? conexao.getErrorStream()
+                    : conexao.getInputStream();
+
+            if (entrada == null) {
+                throw new Exception("Erro HTTP " + status);
+            }
+
+            byte[] resposta;
+            try (InputStream stream = entrada) {
+                resposta = stream.readAllBytes();
+            }
+
+            JSONObject json = new JSONObject(
+                    new String(resposta, StandardCharsets.UTF_8)
+            );
+
+            if (status >= 400) {
+                throw new Exception(
+                        json.optString("detail", "Erro HTTP " + status)
+                );
+            }
+
+            return json;
+
+        } finally {
+            conexao.disconnect();
+        }
+    }
+
+    private void iniciarSessao() {
+        txtStatus.setText("Conectando à Aurora...");
+
+        new Thread(() -> {
+            try {
+                JSONObject resposta = requisicao(
+                        "/api/anonimo/iniciar",
+                        new JSONObject()
+                );
+
+                tokenSessao = resposta.getString("token");
+
+                runOnUiThread(() -> {
+                    txtStatus.setText("Sessão anônima ativa");
+                    btnEnviar.setEnabled(true);
+                    adicionarMensagem(
+                            "Aurora",
+                            "Olá! Este é um espaço de acolhimento. " +
+                            "Você pode começar contando o que gostaria de conversar."
+                    );
+                });
+
+            } catch (Exception e) {
+                runOnUiThread(() ->
+                        txtStatus.setText(
+                                "Erro de conexão: " + e.getMessage()
+                        )
+                );
+            }
+        }).start();
+    }
+
+    private void enviarMensagem() {
+        String mensagem = editMensagem.getText().toString().trim();
+
+        if (mensagem.isEmpty() || tokenSessao == null) {
+            return;
+        }
+
+        editMensagem.setText("");
+        adicionarMensagem("Você", mensagem);
+
+        btnEnviar.setEnabled(false);
+        txtStatus.setText("Aurora está respondendo...");
+
+        new Thread(() -> {
+            try {
+                JSONObject dados = new JSONObject();
+                dados.put("token", tokenSessao);
+                dados.put("mensagem", mensagem);
+
+                JSONObject resposta = requisicao(
+                        "/api/anonimo/chat",
+                        dados
+                );
+
+                JSONObject respostaIA =
+                        resposta.getJSONObject("resposta_ia");
+
+                String texto = respostaIA.optString(
+                        "texto_resposta",
+                        "Não foi possível obter uma resposta."
+                );
+
+                String nivel = respostaIA.optString(
+                        "nivel_atual", "Verde"
+                );
+
+                boolean ajuda = respostaIA.optBoolean(
+                        "sugerir_ajuda", false
+                );
+
+                boolean emergencia = respostaIA.optBoolean(
+                        "emergencia", false
+                );
+
+                runOnUiThread(() -> {
+                    adicionarMensagem("Aurora", texto);
+                    txtStatus.setText("Nível: " + nivel);
+
+                    if (ajuda) {
+                        adicionarMensagem(
+                                "Apoio",
+                                "Central de Atendimento à Mulher: 180"
+                        );
+                    }
+
+                    if (emergencia) {
+                        adicionarMensagem(
+                                "Emergência",
+                                "Em perigo imediato, ligue 190."
+                        );
+                    }
+
+                    btnEnviar.setEnabled(true);
+                });
+
+            } catch (Exception e) {
+                runOnUiThread(() -> {
+                    adicionarMensagem(
+                            "Sistema",
+                            "Não foi possível enviar a mensagem: " +
+                                    e.getMessage()
+                    );
+                    txtStatus.setText("Falha na comunicação");
+                    btnEnviar.setEnabled(true);
+                });
+            }
+        }).start();
+    }
+
+    private void adicionarMensagem(String autor, String conteudo) {
+        TextView mensagem = new TextView(this);
+
+        mensagem.setText(autor + ":\n" + conteudo);
+        mensagem.setTextSize(16);
+        mensagem.setTextColor(Color.rgb(38, 53, 38));
+        mensagem.setPadding(14, 14, 14, 14);
+
+        containerMensagens.addView(mensagem);
+
+        scrollChat.post(() -> scrollChat.fullScroll(
+                ScrollView.FOCUS_DOWN
+        ));
+    }
+}

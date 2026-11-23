@@ -32,6 +32,21 @@ public class tela_ajuda extends AppCompatActivity {
         });
 
          */
+btnChatAnonimo.setOnClickListener(v -> {
+    Intent intent = new Intent(
+            tela_ajuda.this,
+            ChatAnonimoActivity.class
+    );
+    startActivity(intent);
+});
+
+btnAtendimentoIA.setOnClickListener(v -> {
+    Intent intent = new Intent(
+            tela_ajuda.this,
+            ChatAnonimoActivity.class
+    );
+    startActivity(intent);
+});
 
         btnDenunciaAjuda.setOnClickListener(v -> {
             Intent intent = new Intent(

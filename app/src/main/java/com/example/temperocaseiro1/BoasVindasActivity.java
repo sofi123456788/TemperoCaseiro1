@@ -18,6 +18,22 @@ public class BoasVindasActivity extends AppCompatActivity {
 
         Button btnEntendi = findViewById(R.id.btnEntendi);
 
+findViewById(R.id.btnChat).setOnClickListener(v -> {
+    Intent intent = new Intent(
+            BoasVindasActivity.this,
+            ChatAnonimoActivity.class
+    );
+    startActivity(intent);
+});
+
+findViewById(R.id.btnIA).setOnClickListener(v -> {
+    Intent intent = new Intent(
+            BoasVindasActivity.this,
+            ChatAnonimoActivity.class
+    );
+    startActivity(intent);
+});
+
         btnEntendi.setOnClickListener(v -> {
 
             Intent intent = new Intent(
