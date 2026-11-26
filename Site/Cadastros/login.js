@@ -23,6 +23,7 @@ document.getElementById("formLogin").addEventListener("submit", async (e) => {
             alert(dados.mensagem);
             localStorage.setItem("emailUsuario", email);
             localStorage.setItem("id", dados.id);
+            localStorage.setItem("area", dados.area)
 
             // Vai para a tela inicial Respectiva a área
             if(dados.verifi){

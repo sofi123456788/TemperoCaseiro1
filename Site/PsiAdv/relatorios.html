@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TemperoCaseiro1/Site/src/stileiras/estilosG.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <title>Relatórios</title>
+</head>
+<body>
+    <!-- Menu lateral -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="/TemperoCaseiro1/Site/src/stileiras/img/logoFundoBranco.png" alt="logo">
+        </div>
+        <nav class="menu-lateral"><!--Navegação-->
+            <!--Tela inicial-->
+            <button onclick="window.location.href='telaInicial.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/home.png" alt="Home">
+                <span>Início</span>
+            </button>
+
+            <!--Relatórios-->
+            <button onclick="window.location.href='relatorios.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/Grafico.png" alt="Relatórios">
+                <span>Relatórios</span>
+            </button>
+
+            <!--Mensagens-->
+            <button onclick="window.location.href='mensagens.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/chat.png" alt="Mensagens">
+                <span>Mensagens</span>
+            </button>
+
+            <!--Perfil-->
+            <button onclick="window.location.href='perfil.html'">
+                <img src="/TemperoCaseiro1/Site/src/stileiras/img/perfil.png" alt="Perfil">
+                <span>Perfil</span>
+            </button>
+        </nav>
+
+    </aside>
+
+    <main class="conteudo">
+        <h1>Bem-Vinda a área de relatórios!</h1>
+
+        <!-- Filtro de período + botão PDF -->
+        <div class="filtroLinha">
+            <div>
+                <h2>O que deseja ver?</h2>
+                <div class="filtros">
+                    <label><input type="radio" name="periodo" value="mes" checked> Esse mês</label>
+                    <label><input type="radio" name="periodo" value="trimestre"> Últimos três meses</label>
+                    <label><input type="radio" name="periodo" value="ano"> Esse ano</label>
+                </div>
+            </div>
+            <div class="acoes">
+                <button onclick="window.print()">Exportar PDF</button>
+            </div>
+        </div>
+
+        <!-- Cards (mesmo padrão da tela inicial) -->
+        <div class="cards">
+            <div class="card">
+                <h2>Total de Atendimentos</h2>
+                <span id="cardTotal">0</span>
+            </div>
+            <div class="card">
+                <h2>Tempo médio por sessão</h2>
+                <span id="cardTempo">0h</span>
+            </div>
+            <div class="card">
+                <h2>Pacientes atendidos</h2>
+                <span id="cardPacientes">0</span>
+            </div>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="graficos">
+            <div class="graficoPizza">
+                <div class="pizzaWrap"><canvas id="graficoPizza"></canvas></div>
+                <ul class="legenda" id="legendaPizza"></ul>
+            </div>
+            <div class="graficoLinha">
+                <div class="linhaWrap"><canvas id="graficoLinha"></canvas></div>
+                <p class="legendaLinha"><span class="bolinha"></span> Nº de Atendimentos</p>
+            </div>
+        </div>
+    </main>
+
+    <script src="/Temperocaseiro1/site/relatorios.js"></script>
+</body>
+</html>

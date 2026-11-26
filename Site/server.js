@@ -931,11 +931,20 @@ app.post("/PsiAdv/registrarAtend", async (req, res) => {
 
         const {nome, data, tempo, consideracoes, modo} = req.body;
 
+        // Converte textos como "1h 30 min", "2h" ou "45 min" em minutos
+        function textoParaMinutos(texto) {
+            const h = /(\d+)\s*h/i.exec(texto || "");
+            const m = /(\d+)\s*min/i.exec(texto || "");
+            return (h ? parseInt(h[1]) : 0) * 60 + (m ? parseInt(m[1]) : 0);
+        }
+
+        const duracaoMinutos = textoParaMinutos(req.body.duracao);
+
         //Mandando para o banco de dados
         await pool.query(
-            `INSERT INTO atendimento(nomepaciente, dataatendimento, duracao, consideracoes, modo) 
-            VALUES($1,$2,$3,$4,$5)`,
-            [nome, data, tempo, consideracoes, modo]
+            `INSERT INTO atendimento(nomepaciente, dataatendimento, duracao, consideracoes, modo, duracao_minutos) 
+            VALUES($1, $2, $3, $4, $5, $6)`,
+            [nome, data, tempo, consideracoes, modo, duracaoMinutos]
         );
 
         //Avisa para o usuário que funcionou
@@ -951,4 +960,118 @@ app.post("/PsiAdv/registrarAtend", async (req, res) => {
         });
     }
 
+});
+
+
+//----------------- Gráficos ----------------
+// Rota para pegar as infos dos relatórios (cards e gráficos)
+app.get("/PsiAdv/relatorios", async (req, res) => {
+    try {
+        // Período -> desde quando filtrar e como agrupar o gráfico de linha.
+        // Esses valores vêm desta lista fixa (nunca direto do usuário), por isso é seguro usar na query.
+        const periodos = {
+            mes:       { inicio: "date_trunc('month', CURRENT_DATE)",  agrupar: "day"   },
+            trimestre: { inicio: "CURRENT_DATE - INTERVAL '3 months'", agrupar: "week"  },
+            ano:       { inicio: "date_trunc('year', CURRENT_DATE)",   agrupar: "month" }
+        };
+
+        const periodo = periodos[req.query.periodo] ? req.query.periodo : "mes";
+        const { inicio, agrupar } = periodos[periodo];
+
+        const filtro = `dataatendimento >= ${inicio}`;
+
+        //Pega as infos no bd
+        const [resumo, modos, serie] = await Promise.all([
+            pool.query(`
+                SELECT
+                    COUNT(*)::int                                  AS total,
+                    COALESCE(ROUND(AVG(duracao_minutos)), 0)::int  AS tempo_medio_min,
+                    COUNT(DISTINCT nomepaciente)::int              AS pacientes
+                FROM atendimento
+                WHERE ${filtro}`),
+            pool.query(`
+                SELECT COALESCE(modo, 'Não informado') AS categoria, COUNT(*)::int AS total
+                FROM atendimento
+                WHERE ${filtro}
+                GROUP BY categoria
+                ORDER BY total DESC`),
+            pool.query(`
+                SELECT to_char(date_trunc('${agrupar}', dataatendimento), 'YYYY-MM-DD') AS ponto,
+                       COUNT(*)::int AS total
+                FROM atendimento
+                WHERE ${filtro}
+                GROUP BY ponto
+                ORDER BY ponto`)
+        ]);
+
+        return res.json({
+            periodo: periodo,
+            agrupamento: agrupar,
+            total: resumo.rows[0].total,
+            tempoMedioMin: resumo.rows[0].tempo_medio_min,
+            pacientes: resumo.rows[0].pacientes,
+            porCategoria: modos.rows,
+            serie: serie.rows
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
+});
+
+app.get("/Adm/relatorios", async (req, res) => {
+    try {
+        // Período -> desde quando filtrar e como agrupar o gráfico de linha.
+        // Esses valores vêm desta lista fixa (nunca direto do usuário), por isso é seguro usar na query.
+        const periodos = {
+            mes:       { inicio: "date_trunc('month', CURRENT_DATE)",  agrupar: "day"   },
+            trimestre: { inicio: "CURRENT_DATE - INTERVAL '3 months'", agrupar: "week"  },
+            ano:       { inicio: "date_trunc('year', CURRENT_DATE)",   agrupar: "month" }
+        };
+
+        const periodo = periodos[req.query.periodo] ? req.query.periodo : "mes";
+        const { inicio, agrupar } = periodos[periodo];
+
+        const filtroDenuncias = `data_denuncia >= ${inicio}`;
+        const filtroUsuarios  = `criado_em >= ${inicio}`;
+
+
+        //Pega as infos no bd
+        const [restaurantes, profissionais, usuarios, tiposDenuncia, serie] = await Promise.all([
+            pool.query(`
+                SELECT COUNT(nome)::int AS total FROM restaurantes;`),
+            pool.query(`
+                SELECT COUNT(nome_completo)::int AS total FROM profissionais WHERE verificacao = true`),
+            pool.query(`
+                SELECT COUNT(nome_completo)::int AS total FROM usuarios`),
+            pool.query(`
+                SELECT COALESCE(tipo_violencia, 'Não informado') AS categoria, COUNT(tipo_violencia)::int AS total
+                FROM denuncias
+                WHERE ${filtroDenuncias}
+                GROUP BY categoria
+                ORDER BY total DESC`),
+            pool.query(`
+                SELECT to_char(date_trunc('${agrupar}', criado_em), 'YYYY-MM-DD') AS ponto,
+                       COUNT(*)::int AS total
+                FROM usuarios
+                WHERE ${filtroUsuarios}
+                GROUP BY ponto
+                ORDER BY ponto`)
+        ]);
+
+        return res.json({
+            periodo: periodo,
+            agrupamento: agrupar,
+            restaurantes: restaurantes.rows[0].total,
+            profissionais: profissionais.rows[0].total,
+            usuarios: usuarios.rows[0].total,
+            porCategoria: tiposDenuncia.rows,
+            serie: serie.rows
+        });
+
+    } catch (erro) {
+        console.error(erro);
+        res.status(500).send("Erro no servidor");
+    }
 });
